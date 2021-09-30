@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+struct Auth {
+    let emailOrNumber: String?
+    let password: String?
+    let nickname: String?
+    let location: String?
+    let recommendationCode: String?
+}
