@@ -11,7 +11,6 @@ import SnapKit
 class LoginViewController: UIViewController {
 
     //MARK: Property
-    var authModel: Auth?
     
     lazy var logo: UILabel = {
         let label = UILabel()
@@ -98,11 +97,7 @@ class LoginViewController: UIViewController {
         testSwitch.thumbTintColor = .systemIndigo
         return testSwitch
     }()
-    
-    lazy var gesture: UITapGestureRecognizer = {
-        let gesture = UITapGestureRecognizer(target: self, action: nil)
-        return gesture
-    }()
+
     
     //MARK: Method
     func logoConfig() {
@@ -156,6 +151,27 @@ class LoginViewController: UIViewController {
         return textField
     }
     
+    func emailStringCheck(string: String) -> Bool {
+        let pattern = "^[A-z|0-9]*(@)[A-z]*(\\.)[A-z]*"
+        let regex = try? NSRegularExpression(pattern: pattern)
+        
+        guard let result = regex?.firstMatch(in: string, options: [], range: NSRange(location: 0, length: string.count)) else { return false }
+        
+        print(result)
+        
+        return true
+    }
+    
+    func phoneNumberStringCheck(string: String) -> Bool {
+        let pattern = "^01([0-9])([0-9]{3,4})([0-9]{4})$"
+        let regex = try? NSRegularExpression(pattern: pattern)
+        guard let result = regex?.firstMatch(in: string, options: [], range: NSRange(location: 0, length: string.count))
+        else { return false }
+        
+        print(result)
+        return true
+    }
+    
     //MARK: objc function
     @objc func signIn(_ button: UIButton) {
         let data = Auth(emailOrNumber: emailOrNumber.text, password: password.text, nickname: nickname.text, location: location.text, recommendationCode: recommendationCode.text)
@@ -166,6 +182,13 @@ class LoginViewController: UIViewController {
             let button = UIAlertAction(title: "확인", style: .default, handler: nil)
             alert.addAction(button)
             return self.present(alert, animated: true, completion: nil)
+        } else {
+            if !emailStringCheck(string: data.emailOrNumber!) && !phoneNumberStringCheck(string: data.emailOrNumber!) {
+                let alert = UIAlertController(title: "오류", message: "이메일 혹은 전화번호의 형식이 올바르지 않습니다.", preferredStyle: .alert)
+                let button = UIAlertAction(title: "확인", style: .default, handler: nil)
+                alert.addAction(button)
+                return self.present(alert, animated: true, completion: nil)
+            }
         }
         
         if data.password!.count < 6 {
@@ -182,6 +205,7 @@ class LoginViewController: UIViewController {
         print("LOCATION: \(data.location ?? "")")
         print("CODE: \(data.recommendationCode ?? "")")
     }
+    
     
     //MARK: LifeCycle
     override func viewDidLoad() {
@@ -205,24 +229,5 @@ extension LoginViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         self.view.endEditing(true)
         return true
-    }
-}
-
-import SwiftUI
-struct ViewControllerRepresentable: UIViewControllerRepresentable {
-    typealias UIViewControllerType = LoginViewController // 현재 뷰 컨트롤러의 이름
-    
-    func makeUIViewController(context: Context) -> LoginViewController {
-        return LoginViewController()
-    }
-    
-    func updateUIViewController(_ uiViewController: LoginViewController, context: Context) {
-    }
-}
-
-@available(iOS 13.0.0, *)
-struct ViewPreview: PreviewProvider {
-    static var previews: some View {
-        ViewControllerRepresentable()
     }
 }

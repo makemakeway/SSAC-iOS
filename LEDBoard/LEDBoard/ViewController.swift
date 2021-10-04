@@ -84,17 +84,9 @@ class ViewController: UIViewController {
     
     //MARK: objc function
     @objc func changeColor(_ button: UIButton) {
-//        let randomNumber1 = CGFloat.random(in: 0...255)
-//        let randomNumber2 = CGFloat.random(in: 0...255)
-//        let randomNumber3 = CGFloat.random(in: 0...255)
-//
-//        self.label.textColor = UIColor(red: randomNumber1/255, green: randomNumber2/255, blue: randomNumber3/255, alpha: 1.0)
-        
         colorPicker.selectedColor = UIColor.cyan
         colorPicker.supportsAlpha = false
         self.present(colorPicker, animated: true, completion: nil)
-        
-
     }
     
     //MARK: LifeCycle
@@ -139,7 +131,8 @@ extension ViewController: UIColorPickerViewControllerDelegate {
 extension ViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         
-        // 터치한 view가 textField거나 colorChangeButton일 경우, 제스처를 반환하지않는다.
+        // 터치한 view가 textField거나 colorChangeButton일 경우,
+        // return false되어 아래에 있는 코드가 실행되지 않는다.
         if touch.view!.isDescendant(of: textField) || touch.view!.isDescendant(of: colorChangeButton) {
             return false
         }

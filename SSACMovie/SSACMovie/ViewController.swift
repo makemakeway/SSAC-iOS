@@ -21,7 +21,13 @@ class ViewController: UIViewController {
         return label
     }()
     
-    var background: UIImage!
+    lazy var backgroundView: UIImageView = {
+        let backgroundImage = UIImage(named: "background")
+        let background = UIImageView(image: backgroundImage)
+        background.contentMode = .scaleAspectFill
+        background.frame = view.frame
+        return background
+    }()
     
     lazy var playButton: UIButton = {
         let button = UIButton()
@@ -86,6 +92,14 @@ class ViewController: UIViewController {
         self.mainPoster.image = UIImage(named: "poster\(Int.random(in: 1...10))")
     }
     
+    func backgroundConfig() {
+        view.addSubview(backgroundView)
+        
+        backgroundView.snp.makeConstraints { make in
+            make.edges.equalTo(view)
+        }
+    }
+    
     
     func mainPosterConfig() {
         self.view.addSubview(mainPoster)
@@ -97,14 +111,14 @@ class ViewController: UIViewController {
         }
     }
     func logoConfig() {
-        self.mainPoster.addSubview(logo)
+        self.view.addSubview(logo)
         self.logo.text = "N"
         self.logo.font = UIFont.boldSystemFont(ofSize: 58)
         self.logo.textColor = .systemRed
         self.mainPoster.addSubview(self.logo)
         self.logo.snp.makeConstraints { make in
-            make.top.equalTo(mainPoster.snp.top).offset(20)
-            make.leading.equalTo(mainPoster.snp.leading).offset(20)
+            make.top.equalTo(view.snp.top).offset(20)
+            make.leading.equalTo(view.snp.leading).offset(20)
         }
     }
     func headerStackConfig() {
@@ -129,18 +143,18 @@ class ViewController: UIViewController {
         secondLabel.adjustsFontSizeToFitWidth = true
         thirdLabel.adjustsFontSizeToFitWidth = true
         
-        mainPoster.addSubview(hStack)
+        view.addSubview(hStack)
         hStack.addArrangedSubview(firstLabel)
         hStack.addArrangedSubview(secondLabel)
         hStack.addArrangedSubview(thirdLabel)
         
         hStack.snp.makeConstraints { make in
             make.centerY.equalTo(logo.snp.centerY)
-            make.trailing.equalTo(mainPoster.snp.trailing).offset(-20)
+            make.trailing.equalTo(view.snp.trailing).offset(-20)
         }
     }
     func footherStackConfig() {
-        mainPoster.addSubview(footerHStack)
+        view.addSubview(footerHStack)
         
         footerHStack.snp.makeConstraints { make in
             make.bottom.equalTo(mainPoster.snp.bottom)
@@ -194,10 +208,6 @@ class ViewController: UIViewController {
         footerHStack.addArrangedSubview(thirdVstack)
     }
     
-    func backgroundConfig() {
-        background = UIImage(named: "background")
-    }
-    
     //MARK: objc functions
     
     @objc func setPoster(_ button: UIButton) {
@@ -207,8 +217,7 @@ class ViewController: UIViewController {
     //MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
-        view.contentMode = .scaleToFill
+        backgroundConfig()
         mainPosterConfig()
         setPoster()
         logoConfig()
