@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import SideMenu
 
 class ViewController: UIViewController {
 
@@ -173,18 +174,21 @@ class ViewController: UIViewController {
         self.seventhButtonTitle.text = "심심해 \(UserDefaults.standard.integer(forKey: "\(seventhButtonTitle.tag)"))"
         self.eighthButtonTitle.text = "행복해 \(UserDefaults.standard.integer(forKey: "\(eighthButtonTitle.tag)"))"
         self.ninethButtonTitle.text = "행복해 \(UserDefaults.standard.integer(forKey: "\(ninethButtonTitle.tag)"))"
+        UserDefaults.standard.synchronize()
     }
     
     //MARK: objc function
     @objc func feelingButtonClicked(_ sender: UIButton) {
         let count = UserDefaults.standard.integer(forKey: "\(sender.tag)")
         UserDefaults.standard.set(count + 1, forKey: "\(sender.tag)")
-        UserDefaults.standard.synchronize()
         labelReload()
     }
     
     @objc func sideMenuClicked(_ sender: UIButton) {
-        print("side menu")
+        let menu = SideMenuNavigationController(rootViewController: SideMenuViewController())
+        menu.leftSide = true
+        
+        present(menu, animated: true, completion: nil)
     }
     
     //MARK: LifeCycle
@@ -195,6 +199,15 @@ class ViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = sideButton
         vStackConfig()
         labelReload()
+        print("ViewController viewDidLoad")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print("ViewController viewWillAppear")
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        print("ViewController viewWillDisappear")
     }
 
 

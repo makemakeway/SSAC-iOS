@@ -13,6 +13,8 @@
 		FF2FC052270D5D160049CF0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF2FC051270D5D160049CF0B /* Assets.xcassets */; };
 		FF2FC055270D5D160049CF0B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF2FC053270D5D160049CF0B /* LaunchScreen.storyboard */; };
 		FF2FC05E270D5DB20049CF0B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = FF2FC05D270D5DB20049CF0B /* SnapKit */; };
+		FF2FC061270DC69A0049CF0B /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = FF2FC060270DC69A0049CF0B /* SideMenu */; };
+		FF2FC063270DD0E70049CF0B /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2FC062270DD0E60049CF0B /* SideMenuViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +25,7 @@
 		FF2FC051270D5D160049CF0B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FF2FC054270D5D160049CF0B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FF2FC056270D5D160049CF0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FF2FC062270DD0E60049CF0B /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF2FC061270DC69A0049CF0B /* SideMenu in Frameworks */,
 				FF2FC05E270D5DB20049CF0B /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -62,6 +66,7 @@
 				FF2FC051270D5D160049CF0B /* Assets.xcassets */,
 				FF2FC053270D5D160049CF0B /* LaunchScreen.storyboard */,
 				FF2FC056270D5D160049CF0B /* Info.plist */,
+				FF2FC062270DD0E60049CF0B /* SideMenuViewController.swift */,
 			);
 			path = FeelingDiary;
 			sourceTree = "<group>";
@@ -84,6 +89,7 @@
 			name = FeelingDiary;
 			packageProductDependencies = (
 				FF2FC05D270D5DB20049CF0B /* SnapKit */,
+				FF2FC060270DC69A0049CF0B /* SideMenu */,
 			);
 			productName = FeelingDiary;
 			productReference = FF2FC045270D5D140049CF0B /* FeelingDiary.app */;
@@ -115,6 +121,7 @@
 			mainGroup = FF2FC03C270D5D130049CF0B;
 			packageReferences = (
 				FF2FC05C270D5DB20049CF0B /* XCRemoteSwiftPackageReference "SnapKit" */,
+				FF2FC05F270DC6990049CF0B /* XCRemoteSwiftPackageReference "SideMenu" */,
 			);
 			productRefGroup = FF2FC046270D5D140049CF0B /* Products */;
 			projectDirPath = "";
@@ -142,6 +149,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF2FC063270DD0E70049CF0B /* SideMenuViewController.swift in Sources */,
 				FF2FC04D270D5D140049CF0B /* ViewController.swift in Sources */,
 				FF2FC049270D5D140049CF0B /* AppDelegate.swift in Sources */,
 				FF2FC04B270D5D140049CF0B /* SceneDelegate.swift in Sources */,
@@ -364,6 +372,14 @@
 				kind = branch;
 			};
 		};
+		FF2FC05F270DC6990049CF0B /* XCRemoteSwiftPackageReference "SideMenu" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jonkykong/SideMenu.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -371,6 +387,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FF2FC05C270D5DB20049CF0B /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		FF2FC060270DC69A0049CF0B /* SideMenu */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF2FC05F270DC6990049CF0B /* XCRemoteSwiftPackageReference "SideMenu" */;
+			productName = SideMenu;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
