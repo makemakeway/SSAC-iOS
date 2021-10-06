@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     
     lazy var sideButton: UIBarButtonItem = {
         let button = UIBarButtonItem(image: UIImage(systemName: "list.bullet"), style: .plain, target: self, action: #selector(sideMenuClicked(_:)))
+        button.tintColor = .black
         
         return button
     }()
@@ -28,39 +29,58 @@ class ViewController: UIViewController {
     }()
     
     lazy var firstButtonTitle: UILabel = {
-        let label = makeCountLabel(title: "행복해", for: 0)
+        let label = UILabel()
+        label.textAlignment = .center
+        label.tag = 0
         return label
     }()
     lazy var secondButtonTitle: UILabel = {
-        let label = makeCountLabel(title: "사랑해", for: 1)
+        let label = UILabel()
+        label.textAlignment = .center
+        label.tag = 1
         return label
     }()
     lazy var thirdButtonTitle: UILabel = {
-        let label = makeCountLabel(title: "좋아해", for: 2)
+        let label = UILabel()
+        label.textAlignment = .center
+        label.tag = 2
         return label
     }()
     lazy var fourthButtonTitle: UILabel = {
-        let label = makeCountLabel(title: "당황해", for: 3)
+        let label = UILabel()
+        label.textAlignment = .center
+        label.tag = 3
         return label
     }()
     lazy var fifthButtonTitle: UILabel = {
-        let label = makeCountLabel(title: "속상해", for: 4)
+        let label = UILabel()
+        label.textAlignment = .center
+        label.tag = 4
         return label
     }()
     lazy var sixthButtonTitle: UILabel = {
-        let label = makeCountLabel(title: "우울해", for: 5)
+        let label = UILabel()
+        label.textAlignment = .center
+        label.tag = 5
         return label
     }()
     lazy var seventhButtonTitle: UILabel = {
-        let label = makeCountLabel(title: "심심해", for: 6)
+        let label = UILabel()
+        label.textAlignment = .center
+        label.tag = 6
         return label
     }()
     lazy var eighthButtonTitle: UILabel = {
-        let label = makeCountLabel(title: "지루해", for: 7)
+        let label = UILabel()
+        label.textAlignment = .center
+        label.tag = 7
         return label
     }()
     lazy var ninethButtonTitle: UILabel = {
-        let label = makeCountLabel(title: "상쾌해", for: 8)
+        let label = UILabel()
+        label.text = "행복해" + " \(UserDefaults.standard.integer(forKey: "8"))"
+        label.textAlignment = .center
+        label.tag = 8
         return label
     }()
     
@@ -72,39 +92,41 @@ class ViewController: UIViewController {
         let secondHstack = makeHstack()
         let thirdHstack = makeHstack()
         
-        firstHstack.addArrangedSubview(makeCell(title: "행복해",
-                                                image: UIImage(named: "mono_slime1")!,
-                                                buttonTag: 0))
-        firstHstack.addArrangedSubview(makeCell(title: "사랑해",
-                                                image: UIImage(named: "mono_slime2")!,
-                                                buttonTag: 1))
-        firstHstack.addArrangedSubview(makeCell(title: "좋아해",
-                                                image: UIImage(named: "mono_slime3")!,
-                                                buttonTag: 2))
-        
-        secondHstack.addArrangedSubview(makeCell(title: "당황해",
-                                                 image: UIImage(named: "mono_slime4")!,
-                                                 buttonTag: 3))
-        secondHstack.addArrangedSubview(makeCell(title: "속상해",
-                                                 image: UIImage(named: "mono_slime5")!,
-                                                 buttonTag: 4))
-        secondHstack.addArrangedSubview(makeCell(title: "우울해",
-                                                 image: UIImage(named: "mono_slime6")!,
-                                                 buttonTag: 5))
-        
-        thirdHstack.addArrangedSubview(makeCell(title: "심심해",
-                                                 image: UIImage(named: "mono_slime7")!,
-                                                buttonTag: 6))
-        thirdHstack.addArrangedSubview(makeCell(title: "지루해",
-                                                 image: UIImage(named: "mono_slime8")!,
-                                                buttonTag: 7))
-        thirdHstack.addArrangedSubview(makeCell(title: "상쾌해",
-                                                 image: UIImage(named: "mono_slime9")!,
-                                                buttonTag: 8))
-        
         vStack.addArrangedSubview(firstHstack)
+        
+        firstHstack.addArrangedSubview(makeCell(label: firstButtonTitle,
+                                                image: UIImage(named: "mono_slime1")!,
+                                                tag: 0))
+        firstHstack.addArrangedSubview(makeCell(label: secondButtonTitle,
+                                                image: UIImage(named: "mono_slime2")!,
+                                                tag: 1))
+        firstHstack.addArrangedSubview(makeCell(label: thirdButtonTitle,
+                                                image: UIImage(named: "mono_slime3")!,
+                                                tag: 2))
+        
         vStack.addArrangedSubview(secondHstack)
+        
+        secondHstack.addArrangedSubview(makeCell(label: fourthButtonTitle,
+                                                image: UIImage(named: "mono_slime4")!,
+                                                tag: 3))
+        secondHstack.addArrangedSubview(makeCell(label: fifthButtonTitle,
+                                                image: UIImage(named: "mono_slime5")!,
+                                                tag: 4))
+        secondHstack.addArrangedSubview(makeCell(label: sixthButtonTitle,
+                                                image: UIImage(named: "mono_slime6")!,
+                                                tag: 5))
+        
         vStack.addArrangedSubview(thirdHstack)
+        
+        thirdHstack.addArrangedSubview(makeCell(label: seventhButtonTitle,
+                                                image: UIImage(named: "mono_slime7")!,
+                                                tag: 6))
+        thirdHstack.addArrangedSubview(makeCell(label: eighthButtonTitle,
+                                                image: UIImage(named: "mono_slime8")!,
+                                                tag: 7))
+        thirdHstack.addArrangedSubview(makeCell(label: ninethButtonTitle,
+                                                image: UIImage(named: "mono_slime9")!,
+                                                tag: 8))
         
         vStack.snp.makeConstraints { make in
             make.center.equalTo(view.snp.center)
@@ -120,45 +142,45 @@ class ViewController: UIViewController {
         return stack
     }
     
-    func makeCell(title: String, image: UIImage, buttonTag: Int) -> UIStackView {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.distribution = .fill
-        stack.alignment = .fill
-        stack.spacing = 5
-        
+    func makeCell(label: UILabel, image: UIImage, tag: Int) -> UIStackView {
         let button = UIButton()
         button.setImage(image, for: .normal)
+        button.tag = tag
         button.addTarget(self, action: #selector(feelingButtonClicked(_:)), for: .touchUpInside)
-        button.tag = buttonTag
         
         button.snp.makeConstraints { make in
             make.width.equalTo(80)
             make.height.equalTo(80)
         }
         
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.distribution = .fill
+        stack.alignment = .fill
         
         stack.addArrangedSubview(button)
-        stack.addArrangedSubview(makeCountLabel(title: title, for: button.tag))
+        stack.addArrangedSubview(label)
         return stack
     }
     
-    func makeCountLabel(title: String, for key: Int) -> UILabel {
-        let label = UILabel()
-        label.text = title + " \(UserDefaults.standard.integer(forKey: "\(key)"))"
-        label.textAlignment = .center
-        
-        return label
-    }
-    
-    func updateLabel() {
-        
+    func labelReload() {
+        self.firstButtonTitle.text = "행복해 \(UserDefaults.standard.integer(forKey: "\(firstButtonTitle.tag)"))"
+        self.secondButtonTitle.text = "사랑해 \(UserDefaults.standard.integer(forKey: "\(secondButtonTitle.tag)"))"
+        self.thirdButtonTitle.text = "좋아해 \(UserDefaults.standard.integer(forKey: "\(thirdButtonTitle.tag)"))"
+        self.fourthButtonTitle.text = "당황해 \(UserDefaults.standard.integer(forKey: "\(fourthButtonTitle.tag)"))"
+        self.fifthButtonTitle.text = "속상해 \(UserDefaults.standard.integer(forKey: "\(fifthButtonTitle.tag)"))"
+        self.sixthButtonTitle.text = "우울해 \(UserDefaults.standard.integer(forKey: "\(sixthButtonTitle.tag)"))"
+        self.seventhButtonTitle.text = "심심해 \(UserDefaults.standard.integer(forKey: "\(seventhButtonTitle.tag)"))"
+        self.eighthButtonTitle.text = "행복해 \(UserDefaults.standard.integer(forKey: "\(eighthButtonTitle.tag)"))"
+        self.ninethButtonTitle.text = "행복해 \(UserDefaults.standard.integer(forKey: "\(ninethButtonTitle.tag)"))"
     }
     
     //MARK: objc function
     @objc func feelingButtonClicked(_ sender: UIButton) {
         let count = UserDefaults.standard.integer(forKey: "\(sender.tag)")
         UserDefaults.standard.set(count + 1, forKey: "\(sender.tag)")
+        UserDefaults.standard.synchronize()
+        labelReload()
     }
     
     @objc func sideMenuClicked(_ sender: UIButton) {
@@ -172,7 +194,7 @@ class ViewController: UIViewController {
         self.navigationItem.title = "감정 다이어리"
         self.navigationItem.leftBarButtonItem = sideButton
         vStackConfig()
-        
+        labelReload()
     }
 
 
