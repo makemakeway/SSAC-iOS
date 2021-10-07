@@ -189,16 +189,16 @@ class ViewController: UIViewController {
     }
     
     func makeCell(dday: UILabel, date: UILabel ,image: UIImageView) -> UIImageView {
+        
+        // 글자들이 잘 보이게 이미지 뷰 위에 덧씌울 뷰.
         let opacityView = UIView()
         opacityView.backgroundColor = UIColor(white: 0.3, alpha: 0.3)
         
         image.layer.cornerRadius = 10
         
-        
         image.addSubview(opacityView)
         image.addSubview(dday)
         image.addSubview(date)
-        
         
         opacityView.snp.makeConstraints { make in
             make.width.equalTo(image.snp.width)
