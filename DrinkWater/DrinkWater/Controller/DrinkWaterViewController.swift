@@ -154,6 +154,10 @@ class DrinkWaterViewController: UIViewController {
         nickname = userInfo.nickname
     }
     
+    func completeTodayDrink() {
+        self.feelingLabel.textColor = UIColor.red
+    }
+    
     //MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -169,6 +173,7 @@ class DrinkWaterViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         fetchUserInfo()
         todayDrinkingUpdate()
         feelingLabelUpdate()
