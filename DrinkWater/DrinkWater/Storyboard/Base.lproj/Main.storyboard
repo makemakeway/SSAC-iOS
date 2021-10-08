@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TVP-pg-CGF">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--물 마시기-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="DrinkWaterViewController" customModule="DrinkWater" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="tJ5-Uq-Ias">
+                                <rect key="frame" x="40" y="108" width="135.5" height="125"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="잘하셨어요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Frh-Dv-Pyq">
+                                        <rect key="frame" x="0.0" y="0.0" width="135.5" height="29"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="오늘 마신 양은" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vrv-fs-UFB">
+                                        <rect key="frame" x="0.0" y="32" width="135.5" height="29"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1200ml" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hp8-Ef-rSC">
+                                        <rect key="frame" x="0.0" y="64" width="135.5" height="38.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="목표의 57%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z8T-md-Q89">
+                                        <rect key="frame" x="0.0" y="105.5" width="135.5" height="19.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1-1" translatesAutoresizingMaskIntoConstraints="NO" id="y0Q-fz-LMU">
+                                <rect key="frame" x="60" y="253" width="294" height="294"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="y0Q-fz-LMU" secondAttribute="height" multiplier="1:1" id="2rx-sD-BB5"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="님의 하루 물 권장 섭취량은 2.1L입니다." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Emi-DU-hLo">
+                                <rect key="frame" x="40" y="811.5" width="334" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="마신 물의 양을 입력하세요!" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="40A-p3-TfU">
+                                <rect key="frame" x="60" y="567" width="294" height="42.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="3Bv-4h-3vo"/>
+                                </constraints>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NEf-wa-Khm">
+                                <rect key="frame" x="0.0" y="836" width="414" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="750" constant="60" id="dNh-h4-L4u"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <backgroundConfiguration key="background">
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </backgroundConfiguration>
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="물 마시기">
+                                            <attributes>
+                                                <font key="NSFont" size="20" name="AppleSDGothicNeo-Regular"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                    <directionalEdgeInsets key="contentInsets" top="-20" leading="0.0" bottom="0.0" trailing="0.0"/>
+                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="drinkWater:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ikg-Mc-81d"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" name="background"/>
+                        <constraints>
+                            <constraint firstItem="y0Q-fz-LMU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="60" id="37k-19-ETk"/>
+                            <constraint firstItem="NEf-wa-Khm" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="5Sy-Du-FMx"/>
+                            <constraint firstItem="y0Q-fz-LMU" firstAttribute="top" secondItem="tJ5-Uq-Ias" secondAttribute="bottom" constant="20" id="Bf1-co-u0l"/>
+                            <constraint firstItem="tJ5-Uq-Ias" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="Cdi-UF-JIJ"/>
+                            <constraint firstItem="40A-p3-TfU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="60" id="Imz-XI-obW"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="40A-p3-TfU" secondAttribute="trailing" constant="60" id="JLU-B4-DhK"/>
+                            <constraint firstItem="Emi-DU-hLo" firstAttribute="top" relation="greaterThanOrEqual" secondItem="40A-p3-TfU" secondAttribute="bottom" priority="750" constant="20" id="MBm-UR-ZaN"/>
+                            <constraint firstItem="40A-p3-TfU" firstAttribute="top" secondItem="y0Q-fz-LMU" secondAttribute="bottom" constant="20" id="TUF-Zr-qhy"/>
+                            <constraint firstItem="tJ5-Uq-Ias" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="YtK-Ki-zK1"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Emi-DU-hLo" secondAttribute="trailing" constant="40" id="cfK-gT-dfz"/>
+                            <constraint firstItem="Emi-DU-hLo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="eAP-Zg-Ja6"/>
+                            <constraint firstAttribute="trailing" secondItem="NEf-wa-Khm" secondAttribute="trailing" id="gFF-UQ-Ugj"/>
+                            <constraint firstItem="NEf-wa-Khm" firstAttribute="top" secondItem="Emi-DU-hLo" secondAttribute="bottom" constant="5" id="gdv-5j-Sji"/>
+                            <constraint firstItem="NEf-wa-Khm" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="i7w-6u-VoN"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="y0Q-fz-LMU" secondAttribute="trailing" constant="60" id="jwo-hc-GBb"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="물 마시기" id="8cY-Fm-bQf">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="arrow.clockwise" catalog="system" id="ZR9-vl-G59">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="resetButtonClicked:" destination="BYZ-38-t0r" id="SHE-ov-Mdx"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="person.circle" catalog="system" id="7Vh-QA-eaa">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <segue destination="kqv-gE-esS" kind="show" id="Sp1-5T-N7P"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="drinkTextField" destination="40A-p3-TfU" id="L1i-3Y-vKD"/>
+                        <outlet property="feelingLabel" destination="Frh-Dv-Pyq" id="uGF-ob-Lce"/>
+                        <outlet property="mainImage" destination="y0Q-fz-LMU" id="XOg-Ok-fPR"/>
+                        <outlet property="progressLabel" destination="Z8T-md-Q89" id="Ucj-Un-LeL"/>
+                        <outlet property="recommendedDrinking" destination="Emi-DU-hLo" id="7QH-Lz-TTp"/>
+                        <outlet property="todayDrinking" destination="Hp8-Ef-rSC" id="RRH-Ut-5My"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1042.0289855072465" y="109.82142857142857"/>
+        </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="WI9-8a-RhL">
+            <objects>
+                <viewController id="kqv-gE-esS" customClass="ProfileViewController" customModule="DrinkWater" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleAspectFill" id="Fhl-dl-OHJ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1-3" translatesAutoresizingMaskIntoConstraints="NO" id="eof-bk-sPw">
+                                <rect key="frame" x="132.5" y="108" width="149" height="151"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="LTf-hZ-kMj">
+                                <rect key="frame" x="30" y="289" width="354" height="129"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="닉네임을 설정해주세요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ta5-aL-dj2">
+                                        <rect key="frame" x="0.0" y="0.0" width="354" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0ph-2F-Gtb">
+                                        <rect key="frame" x="0.0" y="20" width="354" height="21"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
+                                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
+                                                <color key="value" systemColor="linkColor"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="키(cm)를 설정해주세요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sqo-f8-ai6">
+                                        <rect key="frame" x="0.0" y="44" width="354" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lVT-fM-Eat">
+                                        <rect key="frame" x="0.0" y="64" width="354" height="21"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
+                                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
+                                                <color key="value" systemColor="linkColor"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="몸무게(kg)를 설정해주세요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rQS-dP-6pK">
+                                        <rect key="frame" x="0.0" y="88" width="354" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DDG-A0-Qrr">
+                                        <rect key="frame" x="0.0" y="108" width="354" height="21"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
+                                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
+                                                <color key="value" systemColor="linkColor"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="12i-Xq-Bb4"/>
+                        <color key="backgroundColor" name="background"/>
+                        <constraints>
+                            <constraint firstItem="eof-bk-sPw" firstAttribute="top" secondItem="12i-Xq-Bb4" secondAttribute="top" constant="20" id="7s0-Gn-s7X"/>
+                            <constraint firstItem="eof-bk-sPw" firstAttribute="width" secondItem="Fhl-dl-OHJ" secondAttribute="height" multiplier="1:6" id="CzU-8W-sRe"/>
+                            <constraint firstItem="12i-Xq-Bb4" firstAttribute="trailing" secondItem="LTf-hZ-kMj" secondAttribute="trailing" constant="30" id="R3F-GN-fy3"/>
+                            <constraint firstItem="LTf-hZ-kMj" firstAttribute="leading" secondItem="12i-Xq-Bb4" secondAttribute="leading" constant="30" id="bqE-t3-ag3"/>
+                            <constraint firstItem="eof-bk-sPw" firstAttribute="centerX" secondItem="12i-Xq-Bb4" secondAttribute="centerX" id="ubj-be-BkK"/>
+                            <constraint firstItem="LTf-hZ-kMj" firstAttribute="top" secondItem="eof-bk-sPw" secondAttribute="bottom" constant="30" id="uvu-4b-DhZ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="hhQ-MU-24Y">
+                        <barButtonItem key="rightBarButtonItem" title="저장" id="EYX-z7-Pqw">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="heightTextField" destination="lVT-fM-Eat" id="qCG-SO-qab"/>
+                        <outlet property="nicknameTextField" destination="0ph-2F-Gtb" id="fjO-sX-Ukq"/>
+                        <outlet property="weightTextField" destination="DDG-A0-Qrr" id="AtM-7S-9Cv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xyq-4P-Tai" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1855" y="103"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="x1t-nZ-3L6">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TVP-pg-CGF" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xU4-be-sGz">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="88b-bm-GFS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NHS-nW-p47" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="131.8840579710145" y="109.82142857142857"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="1-1" width="152" height="151"/>
+        <image name="1-3" width="152" height="151"/>
+        <image name="arrow.clockwise" catalog="system" width="115" height="128"/>
+        <image name="person.circle" catalog="system" width="128" height="121"/>
+        <namedColor name="background">
+            <color red="0.25490196079999999" green="0.58039215690000001" blue="0.44705882349999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
