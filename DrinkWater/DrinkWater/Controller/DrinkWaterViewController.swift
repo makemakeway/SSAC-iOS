@@ -13,7 +13,7 @@ class DrinkWaterViewController: UIViewController {
     //MARK: Property
     var totalWater = 0
     var needToDrink = 2000
-    var progress: Double = 0
+    var progress: Float = 0
     var nickname = ""
     
     
@@ -107,7 +107,8 @@ class DrinkWaterViewController: UIViewController {
     }
     
     func progressUpdate() {
-        progress = Double(totalWater) / Double(needToDrink)
+        progress = Float(totalWater) / Float(needToDrink)
+        
         progressLabel.text = "목표의 \(Int((progress * 100).rounded()))%"
     }
     
@@ -136,6 +137,23 @@ class DrinkWaterViewController: UIViewController {
         recommendedDrinking.text = "\(nickname)님의 하루 물 권장 섭취량은 \(Double(Double(needToDrink) / 1000.0))L입니다."
     }
     
+    func fetchUserInfo() {
+        guard let data = UserDefaults.standard.value(forKey: "UserInfo") as? Data else {
+            print("data is missing")
+            return
+        }
+        guard let userInfo = try? PropertyListDecoder().decode(User.self, from: data) else {
+            print("Decoding Failed")
+            return
+        }
+        print(userInfo)
+        
+        self.needToDrink = (userInfo.height + userInfo.weight) * 10
+        
+        print(needToDrink)
+        nickname = userInfo.nickname
+    }
+    
     //MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -151,6 +169,7 @@ class DrinkWaterViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        fetchUserInfo()
         todayDrinkingUpdate()
         feelingLabelUpdate()
         progressUpdate()
