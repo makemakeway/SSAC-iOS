@@ -8,16 +8,26 @@
 import UIKit
 
 class DrinkWaterViewController: UIViewController {
-
+    
     
     //MARK: Property
-    var totalWater = 0
+    var totalWater = UserDefaults.standard.integer(forKey: "todayWater")
     var needToDrink = 2000
     var progress: Float = 0
     var nickname = ""
     
+    lazy var dateFormatter: DateFormatter = {
+        let df = DateFormatter()
+        df.locale = Locale(identifier: "ko-KR")
+        df.timeZone = TimeZone(identifier: "KST")
+        df.dateFormat = "yyyyMMdd"
+        return df
+    }()
+    
     
     @IBOutlet weak var feelingLabel: UILabel!
+    
+    @IBOutlet weak var constantLabel: UILabel!
     
     @IBOutlet weak var todayDrinking: UILabel!
     
@@ -29,6 +39,7 @@ class DrinkWaterViewController: UIViewController {
     
     @IBOutlet weak var progressLabel: UILabel!
     
+    @IBOutlet weak var drinkButton: UIButton!
     
     
     //MARK: Method
@@ -38,13 +49,16 @@ class DrinkWaterViewController: UIViewController {
         
         let alert = UIAlertController(title: nil, message: "오늘의 기록이 초기화됩니다. 진행하시겠습니까?", preferredStyle: .alert)
         let okButton = UIAlertAction(title: "확인", style: .default) { _ in
+            UserDefaults.standard.removeObject(forKey: "todayWater")
             self.totalWater = 0
             self.progressUpdate()
-            self.feelingLabelUpdate()
-            self.todayDrinkingUpdate()
+            self.fetchTodayWater()
             self.drinkTextField.text = ""
-            self.imageUpdate()
+            
             self.view.endEditing(true)
+            self.feelingLabelUpdate()
+            self.imageUpdate()
+            print(UserDefaults.standard.integer(forKey: "todayWater"))
         }
         let cancelButton = UIAlertAction(title: "취소", style: .default, handler: nil)
         
@@ -60,15 +74,39 @@ class DrinkWaterViewController: UIViewController {
             return
         }
         if water.isEmpty {
-            print("마신 물의 양을 입력해주세요.")
+            let alert = UIAlertController(title: nil, message: "마신 물의 양을 입력해주세요.", preferredStyle: .alert)
+            let okButton = UIAlertAction(title: "확인", style: .default, handler: nil)
+            alert.addAction(okButton)
+            present(alert, animated: true, completion: nil)
         } else {
-            totalWater += Int(water) ?? 0
-            todayDrinkingUpdate()
-            feelingLabelUpdate()
-            progressUpdate()
-            imageUpdate()
-            print("물을 \(Int(water)!) 만큼 마셨습니다. 오늘 마신 물의 양은 \(totalWater)입니다.")
+            
+            let total = totalWater + Int(water)!
+            
+            self.totalWater = total
+            UserDefaults.standard.set(total, forKey: "todayWater")
+            UserDefaults.standard.synchronize()
+            
+            self.fetchTodayWater()
+            self.progressUpdate()
+            self.feelingLabelUpdate()
+            self.imageUpdate()
+            
+            print("UserDefaults: \(UserDefaults.standard.integer(forKey: "todayWater"))")
         }
+    }
+    
+    func headerLabelsConfig() {
+        feelingLabel.font = UIFont.systemFont(ofSize: 24, weight: .medium)
+        feelingLabel.textColor = .white
+        
+        constantLabel.font = UIFont.systemFont(ofSize: 24, weight: .medium)
+        constantLabel.textColor = .white
+        
+        todayDrinking.font = UIFont.systemFont(ofSize: 32, weight: .bold)
+        todayDrinking.textColor = .white
+        
+        progressLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        progressLabel.textColor = .white
     }
     
     // 목표에 따라 이미지 뷰의 이미지 변경
@@ -102,9 +140,6 @@ class DrinkWaterViewController: UIViewController {
         }
     }
     
-    func todayDrinkingUpdate() {
-        todayDrinking.text = "\(totalWater)ml"
-    }
     
     func progressUpdate() {
         progress = Float(totalWater) / Float(needToDrink)
@@ -117,9 +152,9 @@ class DrinkWaterViewController: UIViewController {
         self.drinkTextField.keyboardType = .numberPad
     }
     
-
+    
     func feelingLabelUpdate() {
-        if totalWater == 0 {
+        if Int((progress * 100).rounded()) == 0 {
             feelingLabel.text = "목이 마르지 않으신가요?"
         }
         else if Int((progress * 100).rounded()) < 50 {
@@ -134,7 +169,7 @@ class DrinkWaterViewController: UIViewController {
     }
     
     func recommendedLabelConfig() {
-        recommendedDrinking.text = "\(nickname)님의 하루 물 권장 섭취량은 \(Double(Double(needToDrink) / 1000.0))L입니다."
+        recommendedDrinking.text = "\(nickname)님의 하루 물 권장 섭취량은 \(Double(needToDrink) / 1000.0)L입니다."
     }
     
     func fetchUserInfo() {
@@ -154,6 +189,12 @@ class DrinkWaterViewController: UIViewController {
         nickname = userInfo.nickname
     }
     
+    func fetchTodayWater() {
+        let water = UserDefaults.standard.integer(forKey: "todayWater")
+        
+        self.todayDrinking.text = String(water) + "ml"
+    }
+    
     func completeTodayDrink() {
         self.feelingLabel.textColor = UIColor.red
     }
@@ -165,6 +206,7 @@ class DrinkWaterViewController: UIViewController {
         self.navigationItem.title = "물 마시기"
         self.drinkTextField.delegate = self
         drinkTextFieldConfig()
+        headerLabelsConfig()
         
         
         let gesture = UITapGestureRecognizer()
@@ -175,14 +217,19 @@ class DrinkWaterViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchUserInfo()
-        todayDrinkingUpdate()
-        feelingLabelUpdate()
+        fetchTodayWater()
+        
         progressUpdate()
-        imageUpdate()
+        
         recommendedLabelConfig()
     }
-
-
+    
+    override func viewDidLayoutSubviews() {
+        feelingLabelUpdate()
+        imageUpdate()
+    }
+    
+    
 }
 
 //MARK: Extension
@@ -190,8 +237,15 @@ class DrinkWaterViewController: UIViewController {
 extension DrinkWaterViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        print("\(textField.text ?? "") return")
         return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        
     }
 }
 
