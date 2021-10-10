@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="tJ5-Uq-Ias">
-                                <rect key="frame" x="30" y="108" width="135.5" height="122"/>
+                                <rect key="frame" x="30" y="108" width="135" height="122"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="잘하셨어요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Frh-Dv-Pyq">
                                         <rect key="frame" x="0.0" y="0.0" width="135.5" height="29"/>
@@ -46,19 +46,19 @@
                                 </subviews>
                             </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1-1" translatesAutoresizingMaskIntoConstraints="NO" id="y0Q-fz-LMU">
-                                <rect key="frame" x="57.5" y="250" width="299" height="298.5"/>
+                                <rect key="frame" x="58" y="250" width="299" height="298"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="y0Q-fz-LMU" secondAttribute="height" multiplier="1:1" id="2rx-sD-BB5"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="님의 하루 물 권장 섭취량은 2.1L입니다." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Emi-DU-hLo">
-                                <rect key="frame" x="40" y="811.5" width="334" height="19.5"/>
+                                <rect key="frame" x="40" y="811" width="334" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="마신 물의 양을 입력하세요!" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="40A-p3-TfU">
-                                <rect key="frame" x="60" y="568.5" width="294" height="42.5"/>
+                                <rect key="frame" x="60" y="568" width="294" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="3Bv-4h-3vo"/>
                                 </constraints>
@@ -101,7 +101,6 @@
                             <constraint firstItem="tJ5-Uq-Ias" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="Cdi-UF-JIJ"/>
                             <constraint firstItem="40A-p3-TfU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="60" id="Imz-XI-obW"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="40A-p3-TfU" secondAttribute="trailing" constant="60" id="JLU-B4-DhK"/>
-                            <constraint firstItem="Emi-DU-hLo" firstAttribute="top" relation="greaterThanOrEqual" secondItem="40A-p3-TfU" secondAttribute="bottom" priority="750" constant="20" id="MBm-UR-ZaN"/>
                             <constraint firstItem="40A-p3-TfU" firstAttribute="top" secondItem="y0Q-fz-LMU" secondAttribute="bottom" constant="20" id="TUF-Zr-qhy"/>
                             <constraint firstItem="tJ5-Uq-Ias" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="YtK-Ki-zK1"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Emi-DU-hLo" secondAttribute="trailing" constant="40" id="cfK-gT-dfz"/>

@@ -16,7 +16,7 @@ class DrinkWaterViewController: UIViewController {
     var totalWater = UserDefaults.standard.integer(forKey: "todayWater")
     var needToDrink = 2000
     var progress: Float = 0
-    var nickname = ""
+    var nickname = "익명"
     var keyboardHeight: CGFloat = 0
     var mainImagePosition: CGFloat?
     
@@ -59,8 +59,6 @@ class DrinkWaterViewController: UIViewController {
             self.progressUpdate()
             self.fetchTodayWater()
             self.drinkTextField.text = ""
-            
-            self.view.endEditing(true)
             self.feelingLabelUpdate()
             self.imageUpdate()
             print("초기화 완료!")
@@ -75,7 +73,6 @@ class DrinkWaterViewController: UIViewController {
     
     // 물 마시기 버튼을 눌렀을 때
     @IBAction func drinkWater(_ sender: UIButton) {
-        print("drinkWater Call")
         guard let water = drinkTextField.text else {
             return
         }
@@ -96,13 +93,10 @@ class DrinkWaterViewController: UIViewController {
             self.progressUpdate()
             self.feelingLabelUpdate()
             self.imageUpdate()
-            
-            print("UserDefaults: \(UserDefaults.standard.integer(forKey: "todayWater"))")
         }
     }
     
     func headerLabelsConfig() {
-        print("headerLabelsConfig call")
         feelingLabel.font = UIFont.systemFont(ofSize: 24, weight: .medium)
         feelingLabel.textColor = .white
         
@@ -118,7 +112,6 @@ class DrinkWaterViewController: UIViewController {
     
     // 목표에 따라 이미지 뷰의 이미지 변경
     func imageUpdate() {
-        print("imageUpdate call")
         if Int((progress * 100).rounded()) < 30 {
             self.mainImage.image = UIImage(named: "1-1")
         }
@@ -150,7 +143,6 @@ class DrinkWaterViewController: UIViewController {
     
     
     func progressUpdate() {
-        print("progressUpdate call")
         progress = Float(totalWater) / Float(needToDrink)
         
         progressLabel.text = "목표의 \(Int((progress * 100).rounded()))%"
@@ -158,13 +150,11 @@ class DrinkWaterViewController: UIViewController {
     
     
     func drinkTextFieldConfig() {
-        print("drinkTextFieldConfig call")
         self.drinkTextField.keyboardType = .numberPad
     }
     
     
     func feelingLabelUpdate() {
-        print("feelingLabelUpdate")
         if Int((progress * 100).rounded()) == 0 {
             feelingLabel.text = "목이 마르지 않으신가요?"
             feelingLabel.textColor = .white
@@ -184,12 +174,10 @@ class DrinkWaterViewController: UIViewController {
     }
     
     func recommendedLabelConfig() {
-        print("recommendedLabelConfig")
         recommendedDrinking.text = "\(nickname)님의 하루 물 권장 섭취량은 \(Double(needToDrink) / 1000.0)L입니다."
     }
     
     func fetchUserInfo() {
-        print("fetchUserInfo")
         guard let data = UserDefaults.standard.value(forKey: "UserInfo") as? Data else {
             print("data is missing")
             return
@@ -207,14 +195,12 @@ class DrinkWaterViewController: UIViewController {
     }
     
     func fetchTodayWater() {
-        print("fetchTodayWater")
         let water = UserDefaults.standard.integer(forKey: "todayWater")
         
         self.todayDrinking.text = String(water) + "ml"
     }
     
     func completeTodayDrink() {
-        print("completeTodayDrink")
         self.feelingLabel.textColor = UIColor.red
     }
     
@@ -229,13 +215,16 @@ class DrinkWaterViewController: UIViewController {
                 print(keyboardHeight)
             }
             print("KEYBOARD APPEAR")
-            drinkTextField.frame.origin.y -= keyboardHeight
-            recommendedDrinking.frame.origin.y -= keyboardHeight
-            drinkButton.frame.origin.y -= keyboardHeight
             
             for view in self.view.subviews {
                 view.translatesAutoresizingMaskIntoConstraints = true
             }
+            
+            drinkTextField.frame.origin.y -= keyboardHeight
+            recommendedDrinking.frame.origin.y -= keyboardHeight
+            drinkButton.frame.origin.y -= keyboardHeight
+            
+            
             
             self.keyBoardState = true
         }
@@ -250,6 +239,9 @@ class DrinkWaterViewController: UIViewController {
         }
         print(keyboardHeight)
         print("KEYBOARD Hide")
+        
+        
+        
         drinkTextField.frame.origin.y += keyboardHeight
         recommendedDrinking.frame.origin.y += keyboardHeight
         drinkButton.frame.origin.y += keyboardHeight
@@ -259,7 +251,6 @@ class DrinkWaterViewController: UIViewController {
         }
         
         self.keyBoardState = false
-        
     }
     
     //MARK: LifeCycle
