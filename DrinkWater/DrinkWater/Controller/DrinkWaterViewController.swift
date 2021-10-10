@@ -11,10 +11,13 @@ class DrinkWaterViewController: UIViewController {
     
     
     //MARK: Property
+    var keyBoardState = false
     var totalWater = UserDefaults.standard.integer(forKey: "todayWater")
     var needToDrink = 2000
     var progress: Float = 0
     var nickname = ""
+    var keyboardHeight: CGFloat = 0
+    var mainImagePosition: CGFloat?
     
     lazy var dateFormatter: DateFormatter = {
         let df = DateFormatter()
@@ -58,7 +61,7 @@ class DrinkWaterViewController: UIViewController {
             self.view.endEditing(true)
             self.feelingLabelUpdate()
             self.imageUpdate()
-            print(UserDefaults.standard.integer(forKey: "todayWater"))
+            print("초기화 완료!")
         }
         let cancelButton = UIAlertAction(title: "취소", style: .default, handler: nil)
         
@@ -199,11 +202,51 @@ class DrinkWaterViewController: UIViewController {
         self.feelingLabel.textColor = UIColor.red
     }
     
+    func calculateKeyboardHeight() {
+        
+    }
+    
+    //MARK: Objc func
+    
+    @objc
+    func keyboardWillShow(_ sender: Notification) {
+        
+        
+        if let keyboardFrame: NSValue = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            keyboardHeight = keyboardRectangle.height
+            print(keyboardHeight)
+        }
+        print("KEYBOARD APPEAR")
+        drinkTextField.frame.origin.y -= keyboardHeight
+        recommendedDrinking.frame.origin.y -= keyboardHeight
+        self.keyBoardState = true
+        
+    }
+    
+    @objc
+    func keyboardWillHide(_ sender: Notification) {
+        if let keyboardFrame: NSValue = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            keyboardHeight = keyboardRectangle.height
+            
+        }
+        print(keyboardHeight)
+        print("KEYBOARD Hide")
+        drinkTextField.frame.origin.y += keyboardHeight
+        recommendedDrinking.frame.origin.y += keyboardHeight
+        self.keyBoardState = false
+        
+    }
+    
     //MARK: LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(named: "background")
         self.navigationItem.title = "물 마시기"
+        self.mainImagePosition = self.mainImage.frame.origin.y
+        
         self.drinkTextField.delegate = self
         drinkTextFieldConfig()
         headerLabelsConfig()
@@ -212,6 +255,10 @@ class DrinkWaterViewController: UIViewController {
         let gesture = UITapGestureRecognizer()
         gesture.delegate = self
         view.addGestureRecognizer(gesture)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -235,17 +282,18 @@ class DrinkWaterViewController: UIViewController {
 //MARK: Extension
 
 extension DrinkWaterViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        return true
-    }
-    
+
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        
+        UIView.animate(withDuration: 0.3) {
+            self.mainImage.frame.origin.y = -500
+        }
     }
     
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.drinkTextField.resignFirstResponder()
+        UIView.animate(withDuration: 0.3) {
+            self.mainImage.frame.origin.y = self.mainImagePosition!
+        }
     }
 }
 
@@ -254,7 +302,7 @@ extension DrinkWaterViewController: UIGestureRecognizerDelegate {
         if touch.view == self.drinkTextField {
             return false
         }
-        view.endEditing(true)
+        self.drinkTextField.resignFirstResponder()
         return true
     }
 }
