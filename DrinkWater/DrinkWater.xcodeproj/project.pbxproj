@@ -14,8 +14,8 @@
 		FF2FC0C227101E080049CF0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF2FC0C127101E080049CF0B /* Assets.xcassets */; };
 		FF2FC0C527101E080049CF0B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF2FC0C327101E080049CF0B /* LaunchScreen.storyboard */; };
 		FF2FC0D027101F100049CF0B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2FC0CF27101F100049CF0B /* ProfileViewController.swift */; };
-		FF2FC0D6271054760049CF0B /* TextFieldEffects in Frameworks */ = {isa = PBXBuildFile; productRef = FF2FC0D5271054760049CF0B /* TextFieldEffects */; };
 		FF2FC0D927105A950049CF0B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2FC0D827105A950049CF0B /* User.swift */; };
+		FF2FC0DC271321750049CF0B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = FF2FC0DB271321750049CF0B /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,7 +36,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF2FC0D6271054760049CF0B /* TextFieldEffects in Frameworks */,
+				FF2FC0DC271321750049CF0B /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,7 +124,7 @@
 			);
 			name = DrinkWater;
 			packageProductDependencies = (
-				FF2FC0D5271054760049CF0B /* TextFieldEffects */,
+				FF2FC0DB271321750049CF0B /* SnapKit */,
 			);
 			productName = DrinkWater;
 			productReference = FF2FC0B527101E050049CF0B /* DrinkWater.app */;
@@ -155,7 +155,7 @@
 			);
 			mainGroup = FF2FC0AC27101E050049CF0B;
 			packageReferences = (
-				FF2FC0D4271054760049CF0B /* XCRemoteSwiftPackageReference "TextFieldEffects" */,
+				FF2FC0DA271321750049CF0B /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = FF2FC0B627101E050049CF0B /* Products */;
 			projectDirPath = "";
@@ -410,21 +410,21 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		FF2FC0D4271054760049CF0B /* XCRemoteSwiftPackageReference "TextFieldEffects" */ = {
+		FF2FC0DA271321750049CF0B /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/raulriera/TextFieldEffects.git";
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
-				branch = master;
+				branch = develop;
 				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		FF2FC0D5271054760049CF0B /* TextFieldEffects */ = {
+		FF2FC0DB271321750049CF0B /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = FF2FC0D4271054760049CF0B /* XCRemoteSwiftPackageReference "TextFieldEffects" */;
-			productName = TextFieldEffects;
+			package = FF2FC0DA271321750049CF0B /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

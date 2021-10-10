@@ -2,11 +2,11 @@
   "object": {
     "pins": [
       {
-        "package": "TextFieldEffects",
-        "repositoryURL": "https://github.com/raulriera/TextFieldEffects.git",
+        "package": "SnapKit",
+        "repositoryURL": "https://github.com/SnapKit/SnapKit.git",
         "state": {
-          "branch": "master",
-          "revision": "6bcda6335403c228b02b04ed8ba5225460762edb",
+          "branch": "develop",
+          "revision": "466db39ee4ef32b0f7c8cd9f009aaf42f80beace",
           "version": null
         }
       }
