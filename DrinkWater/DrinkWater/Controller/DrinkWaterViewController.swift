@@ -212,13 +212,14 @@ class DrinkWaterViewController: UIViewController {
             if let keyboardFrame: NSValue = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
                 let keyboardRectangle = keyboardFrame.cgRectValue
                 keyboardHeight = keyboardRectangle.height
-                print(keyboardHeight)
             }
             print("KEYBOARD APPEAR")
             
             for view in self.view.subviews {
                 view.translatesAutoresizingMaskIntoConstraints = true
             }
+            
+            
             
             drinkTextField.frame.origin.y -= keyboardHeight
             recommendedDrinking.frame.origin.y -= keyboardHeight
