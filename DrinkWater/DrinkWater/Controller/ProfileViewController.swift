@@ -29,10 +29,12 @@ class ProfileViewController: UIViewController {
             return
         }
         guard let height = Int(heightTextField.text!) else {
+            makeAlert(message: "키는 숫자만 입력가능합니다.")
             return
         }
         
         guard let weight = Int(weightTextField.text!) else {
+            makeAlert(message: "몸무게는 숫자만 입력가능합니다.")
             return
         }
         
@@ -45,6 +47,7 @@ class ProfileViewController: UIViewController {
         else if String(weight).isEmpty {
             makeAlert(message: "몸무게를 설정해주세요.")
         }
+        
         
         let user = User(nickname: nickname, height: height, weight: weight)
         let ud = UserDefaults.standard

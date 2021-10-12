@@ -81,7 +81,15 @@ class DrinkWaterViewController: UIViewController {
             let okButton = UIAlertAction(title: "확인", style: .default, handler: nil)
             alert.addAction(okButton)
             present(alert, animated: true, completion: nil)
-        } else {
+        }
+        else if Int(water) == nil {
+            let alert = UIAlertController(title: nil, message: "숫자만 입력가능합니다.", preferredStyle: .alert)
+            let okButton = UIAlertAction(title: "확인", style: .default, handler: nil)
+            
+            alert.addAction(okButton)
+            present(alert, animated: true, completion: nil)
+        }
+        else {
             
             let total = totalWater + Int(water)!
             
@@ -204,6 +212,17 @@ class DrinkWaterViewController: UIViewController {
         self.feelingLabel.textColor = UIColor.red
     }
     
+    func mainImageAnimated() {
+        UIView.animate(withDuration: 1.5, delay: 0, options: [.repeat, .autoreverse, .beginFromCurrentState]) {
+            self.mainImage.transform = CGAffineTransform(translationX: 0, y: 0).scaledBy(x: 0.9, y: 0.9)
+        }
+    }
+    
+    func stopImageAnimate() {
+        self.mainImage.layer.removeAllAnimations()
+        self.mainImage.transform = .identity
+    }
+    
     //MARK: Objc func
     
     @objc
@@ -215,16 +234,15 @@ class DrinkWaterViewController: UIViewController {
             }
             print("KEYBOARD APPEAR")
             
-            for view in self.view.subviews {
-                view.translatesAutoresizingMaskIntoConstraints = true
-            }
-            
             
             
             drinkTextField.frame.origin.y -= keyboardHeight
             recommendedDrinking.frame.origin.y -= keyboardHeight
             drinkButton.frame.origin.y -= keyboardHeight
             
+            for view in self.view.subviews {
+                view.translatesAutoresizingMaskIntoConstraints = true
+            }
             
             
             self.keyBoardState = true
@@ -295,12 +313,14 @@ class DrinkWaterViewController: UIViewController {
         
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        stopImageAnimate()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         imageUpdate()
         feelingLabelUpdate()
+        mainImageAnimated()
     }
     
 }
