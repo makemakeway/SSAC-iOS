@@ -47,7 +47,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
     }
     
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "testCell") else {
             return UITableViewCell()
@@ -98,4 +97,20 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }
+    
+    // canEditRowAt -> IndexPath에 맞는 셀의 편집 가능 여부를 결정하는 메소드
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return indexPath.section == 2 ? false : true
+    }
+    
+    // commit editingStyle -> IndexPath와 editingStyle에 맞는 코드를 처리 가능한 메소드
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if indexPath.section == 1 && editingStyle == .delete {
+            settings[1].remove(at: indexPath.row)
+            tableView.reloadData()
+        }
+        
+    }
+    
 }
