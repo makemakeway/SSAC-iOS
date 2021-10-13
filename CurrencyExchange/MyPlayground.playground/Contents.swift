@@ -36,6 +36,4 @@ var rate = ExchangeRate(currencyRate: 1350, USD: 1, KRW: 500000)
 rate.KRW = 500000
 rate.USD = 370
 rate.currencyRate = 1100
-rate.KRW = 500000
-rate.USD = 454
 
