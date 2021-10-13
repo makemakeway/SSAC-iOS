@@ -45,6 +45,20 @@ class ShoppingViewController: UIViewController {
         
     }
     
+    @objc func checkButtonClicked(_ sender: UIButton) {
+        print("\(sender.tag)번 버튼 눌림")
+        shoppingList[sender.tag].checked.toggle()
+        
+        
+    }
+    
+    @objc func starButtonClicked(_ sender: UIButton) {
+        print("\(sender.tag)번 버튼 눌림")
+        shoppingList[sender.tag].stared.toggle()
+        
+        
+    }
+    
     
     //MARK: LifeCycle
     override func viewDidLoad() {
@@ -58,6 +72,8 @@ class ShoppingViewController: UIViewController {
     
 }
 
+
+//MARK: TableView Delegate
 extension ShoppingViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return shoppingList.count
@@ -78,6 +94,8 @@ extension ShoppingViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             cell.checkMark?.setImage(UIImage(systemName: "checkmark.square"), for: .normal)
         }
+        cell.checkMark?.tag = indexPath.row
+        cell.checkMark?.addTarget(self, action: #selector(checkButtonClicked(_:)), for: .touchUpInside)
         
         cell.shoppingLabel?.text = data.text
         
@@ -86,6 +104,8 @@ extension ShoppingViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             cell.starMark?.setImage(UIImage(systemName: "star"), for: .normal)
         }
+        cell.starMark?.tag = indexPath.row
+        cell.starMark?.addTarget(self, action: #selector(starButtonClicked(_:)), for: .touchUpInside)
         
         
         return cell
@@ -97,7 +117,6 @@ extension ShoppingViewController: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        shoppingList[indexPath.row].checked.toggle()
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -109,6 +128,7 @@ extension ShoppingViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+//MARK: TextField Delegate
 extension ShoppingViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
