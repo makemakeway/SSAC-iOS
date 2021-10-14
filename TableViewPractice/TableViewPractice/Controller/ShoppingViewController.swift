@@ -76,6 +76,7 @@ class ShoppingViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 60
         
         textField.delegate = self
         fetchList()
@@ -137,6 +138,7 @@ extension ShoppingViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
         return UITableView.automaticDimension
     }
     
