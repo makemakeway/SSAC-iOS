@@ -13,11 +13,11 @@ class ShoppingViewController: UIViewController {
     //MARK: Property
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var headerContainerView: UIView!
     
     var shoppingList: [ShoppingModel] = [] {
         didSet {
             self.tableView.reloadData()
-            print(shoppingList)
             UserDefaults.standard.setValue(try? PropertyListEncoder().encode(shoppingList), forKey: "shoppingList")
         }
     }
@@ -45,6 +45,15 @@ class ShoppingViewController: UIViewController {
         
     }
     
+    func headerContainerViewConfig() {
+        headerContainerView.layer.cornerRadius = 10
+    }
+    
+    func textFieldConfig() {
+        textField.autocorrectionType = .no
+        textField.autocapitalizationType = .none
+    }
+    
     @objc func checkButtonClicked(_ sender: UIButton) {
         print("\(sender.tag)번 버튼 눌림")
         shoppingList[sender.tag].checked.toggle()
@@ -66,8 +75,16 @@ class ShoppingViewController: UIViewController {
 
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.rowHeight = UITableView.automaticDimension
+        
         textField.delegate = self
         fetchList()
+        textFieldConfig()
+        headerContainerViewConfig()
+        
+        let gesture = UITapGestureRecognizer()
+        gesture.delegate = self
+        view.addGestureRecognizer(gesture)
     }
     
 }
@@ -79,6 +96,8 @@ extension ShoppingViewController: UITableViewDelegate, UITableViewDataSource {
         return shoppingList.count
     }
     
+    
+    //MARK: Cell Config
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ShoppingTableViewCell", for: indexPath) as? ShoppingTableViewCell else {
             
@@ -88,7 +107,7 @@ extension ShoppingViewController: UITableViewDelegate, UITableViewDataSource {
         
         let data = shoppingList[indexPath.row]
         
-        
+        //Cell CheckButton Config
         if data.checked {
             cell.checkMark?.setImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
         } else {
@@ -97,8 +116,13 @@ extension ShoppingViewController: UITableViewDelegate, UITableViewDataSource {
         cell.checkMark?.tag = indexPath.row
         cell.checkMark?.addTarget(self, action: #selector(checkButtonClicked(_:)), for: .touchUpInside)
         
-        cell.shoppingLabel?.text = data.text
         
+        //Cell Label Config
+        cell.shoppingLabel?.text = data.text
+        cell.shoppingLabel?.numberOfLines = 0
+        
+        
+        //Cell StarButton Config
         if data.stared {
             cell.starMark?.setImage(UIImage(systemName: "star.fill"), for: .normal)
         } else {
@@ -108,11 +132,12 @@ extension ShoppingViewController: UITableViewDelegate, UITableViewDataSource {
         cell.starMark?.addTarget(self, action: #selector(starButtonClicked(_:)), for: .touchUpInside)
         
         
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return UITableView.automaticDimension
     }
     
     
@@ -140,6 +165,18 @@ extension ShoppingViewController: UITextFieldDelegate {
             alert.addAction(okButton)
             present(alert, animated: true, completion: nil)
             
+        }
+        
+        return true
+    }
+}
+
+//MARK: GestureRecognizer Delegate
+
+extension ShoppingViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if touch.view != textField {
+            view.endEditing(true)
         }
         
         return true
