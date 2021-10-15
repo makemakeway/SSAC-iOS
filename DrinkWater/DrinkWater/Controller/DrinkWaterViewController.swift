@@ -20,15 +20,6 @@ class DrinkWaterViewController: UIViewController {
     var keyboardHeight: CGFloat = 0
     var mainImagePosition: CGFloat?
     
-    lazy var dateFormatter: DateFormatter = {
-        let df = DateFormatter()
-        df.locale = Locale(identifier: "ko-KR")
-        df.timeZone = TimeZone(identifier: "KST")
-        df.dateFormat = "yyyyMMdd"
-        return df
-    }()
-    
-    
     @IBOutlet weak var feelingLabel: UILabel!
     
     @IBOutlet weak var constantLabel: UILabel!
