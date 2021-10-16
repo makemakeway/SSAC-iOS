@@ -21,6 +21,7 @@
 		FFCE20B4271A674800E816F2 /* ActorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCE20B3271A674800E816F2 /* ActorViewController.swift */; };
 		FFCE20B6271A678D00E816F2 /* ActorViewControllerStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFCE20B5271A678D00E816F2 /* ActorViewControllerStoryboard.storyboard */; };
 		FFCE20B8271A950600E816F2 /* ActorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCE20B7271A950500E816F2 /* ActorTableViewCell.swift */; };
+		FFCE20BA271AEFF800E816F2 /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCE20B9271AEFF800E816F2 /* Actor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		FFCE20B3271A674800E816F2 /* ActorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorViewController.swift; sourceTree = "<group>"; };
 		FFCE20B5271A678D00E816F2 /* ActorViewControllerStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ActorViewControllerStoryboard.storyboard; sourceTree = "<group>"; };
 		FFCE20B7271A950500E816F2 /* ActorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorTableViewCell.swift; sourceTree = "<group>"; };
+		FFCE20B9271AEFF800E816F2 /* Actor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				FFA7751C27193D5500293F6B /* Movie.swift */,
+				FFCE20B9271AEFF800E816F2 /* Actor.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 				FFA7751D27193D5500293F6B /* Movie.swift in Sources */,
 				FFCE20B22719DE1100E816F2 /* MovieDetailTableViewCell.swift in Sources */,
 				FFA7750727193CCA00293F6B /* SceneDelegate.swift in Sources */,
+				FFCE20BA271AEFF800E816F2 /* Actor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

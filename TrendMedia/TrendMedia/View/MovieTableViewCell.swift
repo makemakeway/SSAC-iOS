@@ -26,6 +26,8 @@ class MovieTableViewCell: UITableViewCell {
     
     @IBOutlet weak var footerView: UIView!
     
+    @IBOutlet weak var ratingLabel: UILabel!
+    
     //MARK: Method
     
     //MARK: LifeCycle

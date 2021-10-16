@@ -24,7 +24,6 @@ class ActorViewController: UIViewController {
         configure.title = "뒤로"
         configure.image = UIImage(systemName: "chevron.left")
         configure.imagePadding = 5
-        configure.titleAlignment = .center
         configure.baseForegroundColor = .label
         
         let button = UIButton(configuration: configure, primaryAction: nil)
@@ -49,7 +48,6 @@ class ActorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "출연/제작"
-        self.view.backgroundColor = .systemGray
         self.navigationItem.leftBarButtonItem = backButton
         
         tableView.delegate = self

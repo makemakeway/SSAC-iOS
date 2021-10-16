@@ -51,6 +51,7 @@ class SearchViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.backgroundColor = UIColor(named: "AccentColor")
     }
     
 }
@@ -68,6 +69,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         let movie = movies[indexPath.row]
         
         cell.title.text = "\(movie.korTitle!)(\(movie.engTitle!))"
+        cell.title.textColor = .white
         
         cell.poster.image = UIImage(named: movie.image!)
         
@@ -75,6 +77,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.releaseDate.text = dateFormatter.string(from: movie.releaseDate!) + " | "  + "\(movie.country!)"
         
+        cell.backgroundColor = UIColor(named: "AccentColor")
         
         return cell
     }

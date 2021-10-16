@@ -10,17 +10,18 @@ import Foundation
 struct Movie: Codable {
     var engTitle: String?
     var korTitle: String?
-    var genre: String?
+    var genre: [String]
     var image: String?
     var rate: Double?
     var releaseDate: Date?
     var story: String?
     var country: String?
     var actors: [Actor]
+    var category: String?
 }
 
-struct Actor: Codable {
-    var name: String?
-    var image: String?
-    var role: String?
+enum MediaCategories: Int {
+    case drama = 0
+    case movie
+    case book
 }
