@@ -10,6 +10,11 @@ import UIKit
 class ViewController: UIViewController {
     
     var movies = [Movie]()
+    var filteredMovies = [Movie]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
 
     //MARK: Property
     lazy var searchButton: UIBarButtonItem = {
@@ -44,7 +49,19 @@ class ViewController: UIViewController {
     }
     
     @IBAction func filterButtonClicked(_ sender: UIButton) {
-        
+        switch sender.tag {
+        case 0:
+            self.filteredMovies = movies.filter({ $0.category! == "영화" })
+            print("영화 카테고리")
+        case 1:
+            self.filteredMovies = movies.filter({ $0.category! == "드라마" })
+            print("드라마 카테고리")
+        case 2:
+            self.filteredMovies = movies.filter({ $0.category! == "서적" })
+            print("서적 카테고리")
+        default:
+            return
+        }
     }
     
     
@@ -261,7 +278,8 @@ class ViewController: UIViewController {
 //MARK: Extension
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movies.count
+        
+        return filteredMovies.isEmpty ? movies.count : filteredMovies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -279,10 +297,11 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         cell.posterImage.layer.cornerRadius = 10
         cell.posterImage.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         
-        let movieData = movies[indexPath.row]
+        var movieData = movies[indexPath.row]
         
-        
-        
+        if !filteredMovies.isEmpty {
+            movieData = filteredMovies[indexPath.row]
+        }
         
         
         cell.posterImage.image = UIImage(named: movieData.image!)
