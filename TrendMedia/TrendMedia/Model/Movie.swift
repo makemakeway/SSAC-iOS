@@ -8,10 +8,12 @@
 import Foundation
 
 struct Movie: Codable {
-    var engTitle: String
-    var korTitle: String
-    var genre: String
-    var image: String
-    var rate: Double
-    var releaseDate: Date
+    var engTitle: String?
+    var korTitle: String?
+    var genre: String?
+    var image: String?
+    var rate: Double?
+    var releaseDate: Date?
+    var story: String?
+    var country: String?
 }

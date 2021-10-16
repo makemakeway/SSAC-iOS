@@ -24,7 +24,7 @@ class MovieTableViewCell: UITableViewCell {
     
     @IBOutlet weak var releaseDate: UILabel!
     
-    
+    @IBOutlet weak var footerView: UIView!
     
     //MARK: Method
     
