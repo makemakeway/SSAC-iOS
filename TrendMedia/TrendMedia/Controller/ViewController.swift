@@ -43,8 +43,25 @@ class ViewController: UIViewController {
     
     
     func fetchMockData() {
-        movies.append(Movie(engTitle: "Alice In Borderland", korTitle: "아리스 인 보더랜드", genre: "생존", image: "alice_in_borderland", rate: 3.3, releaseDate: Date(), story: "이곳은 또 다른 도쿄, 치명적인 게임의 배경. 그 세계로 세 청년이 던져진다. 무의미한 세월을 보내던 게이머와 두 친구. 선택의 여지는 없다. 살고 싶다면 싸워야 한다.", country: "JP"))
-        movies.append(Movie(engTitle: "Home Town Cha-Cha-Cha", korTitle: "갯마을 차차차", genre: "로맨스", image: "hometown_cha_cha_cha", rate: 3.9, releaseDate: Date(), story: "현실주의 치과의사 윤혜진과 만능 백수 홍반장이 짠내 사람내음 가득한 바닷마을 '공진'에서 벌이는 티키타카 로맨스를 그린 드라마.", country: "KR"))
+        movies.append(Movie(engTitle: "Alice In Borderland",
+                            korTitle: "아리스 인 보더랜드",
+                            genre: "생존",
+                            image: "alice_in_borderland",
+                            rate: 3.3,
+                            releaseDate: Date(),
+                            story: "이곳은 또 다른 도쿄, 치명적인 게임의 배경. 그 세계로 세 청년이 던져진다. 무의미한 세월을 보내던 게이머와 두 친구. 선택의 여지는 없다. 살고 싶다면 싸워야 한다.",
+                            country: "JP",
+                            actors: [Actor(name: "박연배", image: "person", role: "iOS Dev")]))
+        
+        movies.append(Movie(engTitle: "Home Town Cha-Cha-Cha",
+                            korTitle: "갯마을 차차차",
+                            genre: "로맨스",
+                            image: "hometown_cha_cha_cha",
+                            rate: 3.9,
+                            releaseDate: Date(),
+                            story: "현실주의 치과의사 윤혜진과 만능 백수 홍반장이 짠내 사람내음 가득한 바닷마을 '공진'에서 벌이는 티키타카 로맨스를 그린 드라마.",
+                            country: "KR",
+                            actors: [Actor(name: "박연배", image: "person", role: "iOS Dev")]))
     }
     
     
@@ -126,7 +143,21 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         return UIScreen.main.bounds.height * 0.6
     }
     
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        let sb = UIStoryboard(name: "ActorViewControllerStoryboard", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "ActorViewController") as! ActorViewController
+        let actors = movies[indexPath.row].actors
+        vc.actors = actors
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+        return nil
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
 }

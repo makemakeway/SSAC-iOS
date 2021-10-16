@@ -16,4 +16,11 @@ struct Movie: Codable {
     var releaseDate: Date?
     var story: String?
     var country: String?
+    var actors: [Actor]
+}
+
+struct Actor: Codable {
+    var name: String?
+    var image: String?
+    var role: String?
 }

@@ -18,6 +18,9 @@
 		FFA775222719546000293F6B /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA775212719545F00293F6B /* MovieTableViewCell.swift */; };
 		FFCE20B02719C0D500E816F2 /* SearchViewStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFCE20AF2719C0D400E816F2 /* SearchViewStoryboard.storyboard */; };
 		FFCE20B22719DE1100E816F2 /* MovieDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCE20B12719DE1100E816F2 /* MovieDetailTableViewCell.swift */; };
+		FFCE20B4271A674800E816F2 /* ActorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCE20B3271A674800E816F2 /* ActorViewController.swift */; };
+		FFCE20B6271A678D00E816F2 /* ActorViewControllerStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFCE20B5271A678D00E816F2 /* ActorViewControllerStoryboard.storyboard */; };
+		FFCE20B8271A950600E816F2 /* ActorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCE20B7271A950500E816F2 /* ActorTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,9 @@
 		FFA775212719545F00293F6B /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 		FFCE20AF2719C0D400E816F2 /* SearchViewStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchViewStoryboard.storyboard; sourceTree = "<group>"; };
 		FFCE20B12719DE1100E816F2 /* MovieDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailTableViewCell.swift; sourceTree = "<group>"; };
+		FFCE20B3271A674800E816F2 /* ActorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorViewController.swift; sourceTree = "<group>"; };
+		FFCE20B5271A678D00E816F2 /* ActorViewControllerStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ActorViewControllerStoryboard.storyboard; sourceTree = "<group>"; };
+		FFCE20B7271A950500E816F2 /* ActorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +87,7 @@
 			children = (
 				FFA7750827193CCA00293F6B /* ViewController.swift */,
 				FFA7751E27193F0C00293F6B /* SearchViewController.swift */,
+				FFCE20B3271A674800E816F2 /* ActorViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -101,6 +108,7 @@
 				FFA7750A27193CCA00293F6B /* Main.storyboard */,
 				FFA7750F27193CCD00293F6B /* LaunchScreen.storyboard */,
 				FFCE20AF2719C0D400E816F2 /* SearchViewStoryboard.storyboard */,
+				FFCE20B5271A678D00E816F2 /* ActorViewControllerStoryboard.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -118,6 +126,7 @@
 			children = (
 				FFA775212719545F00293F6B /* MovieTableViewCell.swift */,
 				FFCE20B12719DE1100E816F2 /* MovieDetailTableViewCell.swift */,
+				FFCE20B7271A950500E816F2 /* ActorTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -181,6 +190,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFCE20B02719C0D500E816F2 /* SearchViewStoryboard.storyboard in Resources */,
+				FFCE20B6271A678D00E816F2 /* ActorViewControllerStoryboard.storyboard in Resources */,
 				FFA7751127193CCD00293F6B /* LaunchScreen.storyboard in Resources */,
 				FFA7750E27193CCD00293F6B /* Assets.xcassets in Resources */,
 				FFA7750C27193CCA00293F6B /* Main.storyboard in Resources */,
@@ -195,9 +205,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFA7751F27193F0C00293F6B /* SearchViewController.swift in Sources */,
+				FFCE20B8271A950600E816F2 /* ActorTableViewCell.swift in Sources */,
 				FFA7750927193CCA00293F6B /* ViewController.swift in Sources */,
 				FFA775222719546000293F6B /* MovieTableViewCell.swift in Sources */,
 				FFA7750527193CCA00293F6B /* AppDelegate.swift in Sources */,
+				FFCE20B4271A674800E816F2 /* ActorViewController.swift in Sources */,
 				FFA7751D27193D5500293F6B /* Movie.swift in Sources */,
 				FFCE20B22719DE1100E816F2 /* MovieDetailTableViewCell.swift in Sources */,
 				FFA7750727193CCA00293F6B /* SceneDelegate.swift in Sources */,

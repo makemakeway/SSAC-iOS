@@ -42,7 +42,7 @@
                                 </scopeButtonTitles>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="LVQ-Eu-mXd">
-                                <rect key="frame" x="0.0" y="108" width="414" height="754"/>
+                                <rect key="frame" x="0.0" y="108" width="414" height="788"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MovieDetailTableViewCell" rowHeight="124" id="w1w-So-bBU" customClass="MovieDetailTableViewCell" customModule="TrendMedia" customModuleProvider="target">
@@ -109,11 +109,11 @@
                             <constraint firstItem="LVQ-Eu-mXd" firstAttribute="top" secondItem="s94-B2-rLw" secondAttribute="bottom" constant="10" id="8gO-HB-JuI"/>
                             <constraint firstItem="LVQ-Eu-mXd" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="DYc-tl-CaP"/>
                             <constraint firstItem="TyY-a2-G7D" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="HWW-Ao-JxW"/>
+                            <constraint firstAttribute="bottom" secondItem="LVQ-Eu-mXd" secondAttribute="bottom" id="Ixt-74-WzU"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="s94-B2-rLw" secondAttribute="trailing" constant="20" id="Krb-jS-wOo"/>
                             <constraint firstItem="s94-B2-rLw" firstAttribute="height" secondItem="TyY-a2-G7D" secondAttribute="height" id="OtK-ic-T3y"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="LVQ-Eu-mXd" secondAttribute="trailing" id="ax9-4x-1S2"/>
                             <constraint firstItem="TyY-a2-G7D" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.130435" id="fpd-tz-HhR"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="LVQ-Eu-mXd" secondAttribute="bottom" id="j8D-HT-jrT"/>
                             <constraint firstItem="s94-B2-rLw" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="mEd-g8-SUZ"/>
                             <constraint firstItem="TyY-a2-G7D" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="tlu-FS-e0l"/>
                         </constraints>
