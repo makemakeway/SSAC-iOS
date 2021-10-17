@@ -147,10 +147,10 @@ extension SearchViewController: UISearchBarDelegate {
 //MARK: gesture Recogniger delegate
 extension SearchViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        if touch.view != searchBar.searchTextField {
-            self.searchBar.resignFirstResponder()
+        if touch.view!.isDescendant(of: searchBar) {
             return false
         }
+        self.searchBar.resignFirstResponder()
         return true
     }
 }
