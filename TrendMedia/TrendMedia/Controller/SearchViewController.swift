@@ -104,6 +104,8 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.backgroundColor = UIColor(named: "AccentColor")
         
+        cell.selectionStyle = .none
+        
         return cell
     }
     
@@ -112,9 +114,13 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         return UIScreen.main.bounds.height * 0.2
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+    
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        print(indexPath)
+        return nil
     }
+    
+    
 }
 
 //MARK: SearchBar delegate
@@ -147,10 +153,10 @@ extension SearchViewController: UISearchBarDelegate {
 //MARK: gesture Recogniger delegate
 extension SearchViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        if touch.view!.isDescendant(of: searchBar) {
+        if !touch.view!.isDescendant(of: searchBar) {
+            self.searchBar.resignFirstResponder()
             return false
         }
-        self.searchBar.resignFirstResponder()
-        return true
+        return false
     }
 }
