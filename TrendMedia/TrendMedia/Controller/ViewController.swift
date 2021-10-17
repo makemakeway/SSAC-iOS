@@ -54,24 +54,29 @@ class ViewController: UIViewController {
         switch sender.tag {
         case 0:
             self.filteredMovies = movies.filter({ $0.category! == "영화" })
+            switchButtonImage(flimButton, "film.fill")
+            switchButtonImage(dramaButton, "tv")
+            switchButtonImage(bookButton, "book")
             print("영화 카테고리")
         case 1:
             self.filteredMovies = movies.filter({ $0.category! == "드라마" })
             print("드라마 카테고리")
+            switchButtonImage(flimButton, "film")
+            switchButtonImage(dramaButton, "tv.fill")
+            switchButtonImage(bookButton, "book")
         case 2:
             self.filteredMovies = movies.filter({ $0.category! == "서적" })
             print("서적 카테고리")
+            switchButtonImage(flimButton, "film")
+            switchButtonImage(dramaButton, "tv")
+            switchButtonImage(bookButton, "book.fill")
         default:
             return
         }
     }
     
-    func switchButtonImage(_ button: UIButton) {
-        for view in headerStackView.subviews {
-            if view == button {
-                
-            }
-        }
+    func switchButtonImage(_ button: UIButton,_ image: String) {
+        button.setImage(UIImage(systemName: image), for: .normal)
     }
     
     func fetchMockData() {
