@@ -79,12 +79,18 @@ extension ActorViewController: UITableViewDelegate, UITableViewDataSource {
         cell.profileImage.image = UIImage(systemName: data.image!)
         cell.profileImage.backgroundColor = .label
         
+        cell.selectionStyle = .none
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UIScreen.main.bounds.height * 0.15
+        return UIScreen.main.bounds.height * 0.125
+    }
+    
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        print(indexPath)
+        return nil
     }
     
 }
