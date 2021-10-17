@@ -213,6 +213,9 @@
                     </view>
                     <navigationItem key="navigationItem" title="TREND MEDIA" id="RrZ-JM-aqu"/>
                     <connections>
+                        <outlet property="bookButton" destination="Vvl-TB-r2N" id="Raf-af-WQo"/>
+                        <outlet property="dramaButton" destination="09b-I4-B4d" id="Zij-Fy-7gd"/>
+                        <outlet property="flimButton" destination="7W3-Cu-Uwn" id="dgN-wa-LVE"/>
                         <outlet property="headerStackView" destination="R6D-2G-Cmx" id="1Dj-v8-8BO"/>
                         <outlet property="tableView" destination="qlA-w6-qf9" id="clL-sw-qJb"/>
                     </connections>

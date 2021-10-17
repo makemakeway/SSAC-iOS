@@ -37,7 +37,9 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    
+    @IBOutlet weak var flimButton: UIButton!
+    @IBOutlet weak var dramaButton: UIButton!
+    @IBOutlet weak var bookButton: UIButton!
     
     //MARK: Method
     
@@ -64,6 +66,13 @@ class ViewController: UIViewController {
         }
     }
     
+    func switchButtonImage(_ button: UIButton) {
+        for view in headerStackView.subviews {
+            if view == button {
+                
+            }
+        }
+    }
     
     func fetchMockData() {
         movies.append(Movie(engTitle: "Alice In Borderland",
@@ -239,6 +248,34 @@ class ViewController: UIViewController {
                                            image: "person",
                                            role: "도부장")],
                            category: "영화"))
+        
+        movies.append(Movie(engTitle: "A Tale Dark and Grimm",
+                            korTitle: "어 테일 다크 앤드 그림",
+                            genre: ["판타지", "키즈"],
+                            image: "a_tale_dark_grimm",
+                            rate: 4.3,
+                            releaseDate: Date(),
+                            story: "헨젤과 그레텔이 그들 자신의 이야기에서 벗어나 기이하고 무서운 놀라움으로 가득 찬 구불구불하고 사악하게 재치 있는 이야기 속으로 걸어가는 과정을 따라가십시오.",
+                            country: "DE",
+                            actors: [Actor(name: "박연배",
+                                           image: "person",
+                                           role: "iOS Dev"),
+                                     Actor(name: "애덤 기드워츠",
+                                           image: "person",
+                                           role: "작가"),
+                                     Actor(name: "핸젤",
+                                           image: "person",
+                                           role: "핸젤"),
+                                     Actor(name: "그레텔",
+                                           image: "person",
+                                           role: "그레텔"),
+                                     Actor(name: "요하네스",
+                                           image: "person",
+                                           role: "요하네스"),
+                                     Actor(name: "도티",
+                                           image: "person",
+                                           role: "도티")],
+                           category: "서적"))
     }
     
     
@@ -343,8 +380,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
