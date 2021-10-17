@@ -136,10 +136,10 @@ extension SearchViewController: UISearchBarDelegate {
         if self.searchResult.isEmpty && !searchBar.text!.isEmpty {
             let alert = UIAlertController(title: nil, message: "검색 결과가 없습니다.", preferredStyle: .alert)
             let okButton = UIAlertAction(title: "확인", style: .default, handler: nil)
-            
             alert.addAction(okButton)
             present(alert, animated: true, completion: nil)
         }
+        searchBar.resignFirstResponder()
     }
     
 }
@@ -148,7 +148,7 @@ extension SearchViewController: UISearchBarDelegate {
 extension SearchViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         if touch.view != searchBar.searchTextField {
-            self.view.endEditing(true)
+            self.searchBar.resignFirstResponder()
             return false
         }
         return true

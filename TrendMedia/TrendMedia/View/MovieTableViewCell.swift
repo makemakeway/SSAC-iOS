@@ -28,6 +28,7 @@ class MovieTableViewCell: UITableViewCell {
     
     @IBOutlet weak var ratingLabel: UILabel!
     
+    
     //MARK: Method
     
     //MARK: LifeCycle

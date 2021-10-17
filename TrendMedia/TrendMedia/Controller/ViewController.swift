@@ -37,39 +37,78 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var flimButton: UIButton!
+    @IBOutlet weak var filmButton: UIButton!
     @IBOutlet weak var dramaButton: UIButton!
     @IBOutlet weak var bookButton: UIButton!
+    
+    var filmButtonPushed: Bool = false
+    var dramaButtonPushed: Bool = false
+    var bookButtonPushed: Bool = false
+    
+    
     
     //MARK: Method
     
     func headerStackViewConfig() {
         headerStackView.layer.cornerRadius = 15
-        headerStackView.layer.shadowColor = UIColor.black.cgColor
-        headerStackView.layer.shadowOpacity = 0.3
+        headerStackView.layer.shadowColor = UIColor.label.cgColor
+        headerStackView.layer.shadowOpacity = 0.7
         headerStackView.layer.shadowOffset = CGSize.zero
     }
     
     @IBAction func filterButtonClicked(_ sender: UIButton) {
         switch sender.tag {
         case 0:
-            self.filteredMovies = movies.filter({ $0.category! == "영화" })
-            switchButtonImage(flimButton, "film.fill")
-            switchButtonImage(dramaButton, "tv")
-            switchButtonImage(bookButton, "book")
-            print("영화 카테고리")
+            filmButtonPushed.toggle()
+            dramaButtonPushed = false
+            bookButtonPushed = false
+            
+            if filmButtonPushed {
+                self.filteredMovies = movies.filter({ $0.category! == "영화" })
+                switchButtonImage(filmButton, "film.fill")
+                switchButtonImage(dramaButton, "tv")
+                switchButtonImage(bookButton, "book")
+                print("영화 카테고리")
+            } else {
+                self.filteredMovies.removeAll()
+                switchButtonImage(filmButton, "film")
+                print("카테고리 해제")
+            }
+            
+            
         case 1:
-            self.filteredMovies = movies.filter({ $0.category! == "드라마" })
-            print("드라마 카테고리")
-            switchButtonImage(flimButton, "film")
-            switchButtonImage(dramaButton, "tv.fill")
-            switchButtonImage(bookButton, "book")
+            dramaButtonPushed.toggle()
+            filmButtonPushed = false
+            bookButtonPushed = false
+            
+            if dramaButtonPushed {
+                self.filteredMovies = movies.filter({ $0.category! == "드라마" })
+                print("드라마 카테고리")
+                switchButtonImage(filmButton, "film")
+                switchButtonImage(dramaButton, "tv.fill")
+                switchButtonImage(bookButton, "book")
+            } else {
+                self.filteredMovies.removeAll()
+                switchButtonImage(dramaButton, "tv")
+                print("카테고리 해제")
+            }
+            
         case 2:
-            self.filteredMovies = movies.filter({ $0.category! == "서적" })
-            print("서적 카테고리")
-            switchButtonImage(flimButton, "film")
-            switchButtonImage(dramaButton, "tv")
-            switchButtonImage(bookButton, "book.fill")
+            bookButtonPushed.toggle()
+            filmButtonPushed = false
+            dramaButtonPushed = false
+            
+            if bookButtonPushed {
+                self.filteredMovies = movies.filter({ $0.category! == "서적" })
+                print("서적 카테고리")
+                switchButtonImage(filmButton, "film")
+                switchButtonImage(dramaButton, "tv")
+                switchButtonImage(bookButton, "book.fill")
+            } else {
+                self.filteredMovies.removeAll()
+                switchButtonImage(bookButton, "book")
+                print("카테고리 해제")
+            }
         default:
             return
         }
@@ -283,6 +322,13 @@ class ViewController: UIViewController {
                            category: "서적"))
     }
     
+    func addTopBorder(with color: UIColor?, andWidth borderWidth: CGFloat, view: UIView) {
+        let border = UIView()
+        border.backgroundColor = color
+        border.autoresizingMask = [.flexibleWidth, .flexibleBottomMargin]
+        border.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: borderWidth)
+        view.addSubview(border)
+    }
     
     //MARK: Objc func
     
@@ -306,7 +352,6 @@ class ViewController: UIViewController {
         headerStackViewConfig()
         tableView.delegate = self
         tableView.dataSource = self
-        
         fetchMockData()
     }
     
@@ -330,7 +375,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         cell.containerView.layer.shadowOffset = CGSize.zero
-        cell.containerView.layer.shadowColor = UIColor.black.cgColor
+        cell.containerView.layer.shadowColor = UIColor.label.cgColor
         cell.containerView.layer.shadowOpacity = 0.5
         cell.containerView.layer.shadowRadius = 5
         cell.containerView.layer.cornerRadius = 10
@@ -365,6 +410,11 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 
         cell.ratingLabel.text = String(movieData.rate!)
         
+        let border = UIView()
+        border.backgroundColor = .label
+        border.autoresizingMask = [.flexibleWidth, .flexibleBottomMargin]
+        border.frame = CGRect(x: 0, y: 0, width: cell.footerView.frame.width - 2, height: 1)
+        cell.footerView.addSubview(border)
         
         return cell
     }
@@ -377,7 +427,13 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         let sb = UIStoryboard(name: "ActorViewControllerStoryboard", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "ActorViewController") as! ActorViewController
-        let actors = movies[indexPath.row].actors
+        var actors = movies[indexPath.row].actors
+        
+        
+        if !filteredMovies.isEmpty {
+            actors = filteredMovies[indexPath.row].actors
+        }
+        
         vc.actors = actors
         self.navigationController?.pushViewController(vc, animated: true)
         

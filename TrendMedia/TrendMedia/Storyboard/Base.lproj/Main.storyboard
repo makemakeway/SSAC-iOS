@@ -137,7 +137,7 @@
                                         <connections>
                                             <outlet property="containerView" destination="5r1-kC-5wa" id="czc-1B-bik"/>
                                             <outlet property="engTitle" destination="2Oj-xW-9eq" id="hwy-Lv-Fd4"/>
-                                            <outlet property="footerView" destination="Hf4-LJ-dUw" id="niZ-IO-7jU"/>
+                                            <outlet property="footerView" destination="Hf4-LJ-dUw" id="Q3H-dv-rm9"/>
                                             <outlet property="genreLabel" destination="Oo4-2O-wc3" id="WeN-hA-GCV"/>
                                             <outlet property="korTitle" destination="faO-pK-GS3" id="2dr-hd-31T"/>
                                             <outlet property="posterImage" destination="UeA-aq-6l3" id="XZc-rO-UWE"/>
@@ -215,7 +215,7 @@
                     <connections>
                         <outlet property="bookButton" destination="Vvl-TB-r2N" id="Raf-af-WQo"/>
                         <outlet property="dramaButton" destination="09b-I4-B4d" id="Zij-Fy-7gd"/>
-                        <outlet property="flimButton" destination="7W3-Cu-Uwn" id="dgN-wa-LVE"/>
+                        <outlet property="filmButton" destination="7W3-Cu-Uwn" id="dgN-wa-LVE"/>
                         <outlet property="headerStackView" destination="R6D-2G-Cmx" id="1Dj-v8-8BO"/>
                         <outlet property="tableView" destination="qlA-w6-qf9" id="clL-sw-qJb"/>
                     </connections>
