@@ -416,6 +416,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         border.frame = CGRect(x: 0, y: 0, width: cell.footerView.frame.width - 2, height: 1)
         cell.footerView.addSubview(border)
         
+        cell.selectionStyle = .none
+        
         return cell
     }
     
@@ -438,11 +440,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         self.navigationController?.pushViewController(vc, animated: true)
         
         return nil
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }
