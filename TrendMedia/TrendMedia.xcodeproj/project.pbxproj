@@ -24,6 +24,9 @@
 		FFCE20BA271AEFF800E816F2 /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCE20B9271AEFF800E816F2 /* Actor.swift */; };
 		FFCE20BD271D34EC00E816F2 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = FFCE20BC271D34EC00E816F2 /* Kingfisher */; };
 		FFCE20C0271D4EF200E816F2 /* LinkButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCE20BF271D4EF100E816F2 /* LinkButtonDelegate.swift */; };
+		FFCE20C3271D608500E816F2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFCE20C2271D608500E816F2 /* WebKit.framework */; };
+		FFCE20C5271D60C200E816F2 /* WebLinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCE20C4271D60C200E816F2 /* WebLinkViewController.swift */; };
+		FFCE20C7271D62DA00E816F2 /* WebLinkViewControllerStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFCE20C6271D62DA00E816F2 /* WebLinkViewControllerStoryboard.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +48,9 @@
 		FFCE20B7271A950500E816F2 /* ActorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorTableViewCell.swift; sourceTree = "<group>"; };
 		FFCE20B9271AEFF800E816F2 /* Actor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
 		FFCE20BF271D4EF100E816F2 /* LinkButtonDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButtonDelegate.swift; sourceTree = "<group>"; };
+		FFCE20C2271D608500E816F2 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		FFCE20C4271D60C200E816F2 /* WebLinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebLinkViewController.swift; sourceTree = "<group>"; };
+		FFCE20C6271D62DA00E816F2 /* WebLinkViewControllerStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WebLinkViewControllerStoryboard.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFCE20C3271D608500E816F2 /* WebKit.framework in Frameworks */,
 				FFCE20BD271D34EC00E816F2 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -64,6 +71,7 @@
 			children = (
 				FFA7750327193CCA00293F6B /* TrendMedia */,
 				FFA7750227193CCA00293F6B /* Products */,
+				FFCE20C1271D608500E816F2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -95,6 +103,7 @@
 				FFA7750827193CCA00293F6B /* ViewController.swift */,
 				FFA7751E27193F0C00293F6B /* SearchViewController.swift */,
 				FFCE20B3271A674800E816F2 /* ActorViewController.swift */,
+				FFCE20C4271D60C200E816F2 /* WebLinkViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -116,6 +125,7 @@
 				FFA7750F27193CCD00293F6B /* LaunchScreen.storyboard */,
 				FFCE20AF2719C0D400E816F2 /* SearchViewStoryboard.storyboard */,
 				FFCE20B5271A678D00E816F2 /* ActorViewControllerStoryboard.storyboard */,
+				FFCE20C6271D62DA00E816F2 /* WebLinkViewControllerStoryboard.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -145,6 +155,14 @@
 				FFCE20BF271D4EF100E816F2 /* LinkButtonDelegate.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		FFCE20C1271D608500E816F2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FFCE20C2271D608500E816F2 /* WebKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,6 +230,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFCE20B02719C0D500E816F2 /* SearchViewStoryboard.storyboard in Resources */,
+				FFCE20C7271D62DA00E816F2 /* WebLinkViewControllerStoryboard.storyboard in Resources */,
 				FFCE20B6271A678D00E816F2 /* ActorViewControllerStoryboard.storyboard in Resources */,
 				FFA7751127193CCD00293F6B /* LaunchScreen.storyboard in Resources */,
 				FFA7750E27193CCD00293F6B /* Assets.xcassets in Resources */,
@@ -227,6 +246,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFCE20C0271D4EF200E816F2 /* LinkButtonDelegate.swift in Sources */,
+				FFCE20C5271D60C200E816F2 /* WebLinkViewController.swift in Sources */,
 				FFA7751F27193F0C00293F6B /* SearchViewController.swift in Sources */,
 				FFCE20B8271A950600E816F2 /* ActorTableViewCell.swift in Sources */,
 				FFA7750927193CCA00293F6B /* ViewController.swift in Sources */,

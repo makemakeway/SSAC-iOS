@@ -9,5 +9,5 @@ import Foundation
 
 
 protocol LinkButtonDelegate: AnyObject {
-    func linkButtonClicked()
+    func linkButtonClicked(index: Int)
 }

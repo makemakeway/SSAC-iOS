@@ -31,13 +31,16 @@ class MovieTableViewCell: UITableViewCell {
     
     @IBOutlet weak var linkButton: UIButton!
     
-    weak var linkButtonDelegate: LinkButtonDelegate?
+    var linkButtonDelegate: LinkButtonDelegate?
+    
+    var index: Int = 0
     
     //MARK: Method
     
     @IBAction func linkButtonClicked(_ sender: UIButton) {
+        
         if let delegate = linkButtonDelegate {
-            delegate.linkButtonClicked()
+            delegate.linkButtonClicked(index: index)
         }
     }
     

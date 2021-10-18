@@ -428,7 +428,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         cell.footerView.addSubview(border)
         
         cell.linkButtonDelegate = self
-        cell.linkButton.layer.cornerRadius = cell.linkButton.frame.size.height / 2
+        cell.linkButton.layer.cornerRadius = cell.linkButton.frame.size.width / 2
+        cell.index = indexPath.row
+        
         
         cell.selectionStyle = .none
         
@@ -443,7 +445,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     //MARK: MOVE TO ActorViewController
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        let sb = UIStoryboard(name: "ActorViewControllerStoryboard", bundle: nil)
+        let sb = UIStoryboard.init(name: "ActorViewControllerStoryboard", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "ActorViewController") as! ActorViewController
         var movie = movies[indexPath.row]
         
@@ -462,9 +464,20 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension ViewController: LinkButtonDelegate {
-    func linkButtonClicked() {
+    
+    func linkButtonClicked(index: Int) {
         print("linkButton Clicked")
+        let sb = UIStoryboard.init(name: "WebLinkViewControllerStoryboard", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "WebLinkViewController") as! WebLinkViewController
+        
+        var title = movies[index].korTitle
+        
+        if !filteredMovies.isEmpty {
+            title = filteredMovies[index].korTitle
+        }
+        
+        vc.webViewTitleString = title!
+        
+        self.present(vc, animated: true, completion: nil)
     }
-    
-    
 }
