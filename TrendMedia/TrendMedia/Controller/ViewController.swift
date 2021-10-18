@@ -151,7 +151,8 @@ class ViewController: UIViewController {
                                      Actor(name: "카네코 노부야키",
                                            image: "person",
                                            role: "모자장수")],
-                           category: "드라마"))
+                           category: "드라마",
+                           imageURL: "https://occ-0-1723-92.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABXlt7Skny36UA9hDgsK0f_vScFeMVe1nCvHp9HhqiI5iIkK2BqUahsgOb7OQshh5JUFjPGRU3iHd8hIgBDtbZKvnxXs7.jpg?r=601"))
         
         movies.append(Movie(engTitle: "Home Town Cha-Cha-Cha",
                             korTitle: "갯마을 차차차",
@@ -179,7 +180,8 @@ class ViewController: UIViewController {
                                      Actor(name: "이상이",
                                            image: "person",
                                            role: "지성현")],
-                           category: "드라마"))
+                           category: "드라마",
+                           imageURL: "https://lh3.googleusercontent.com/proxy/zDvTH4whv_qrJx1c-APKgYJ94BJ1OcIEC2mspD2SdrbEGEWidkGh2Uc0tX6-atA_K3M9Llt0CMAaH60_7Dl5Ou2EUn6mrZnaB_u65AXuseSMzH0dtcSH-K_ngYYzCVdNurk54KoX--7h4J_5"))
         
         movies.append(Movie(engTitle: "Grey's Anatomy",
                             korTitle: "그레이 아나토미",
@@ -207,7 +209,8 @@ class ViewController: UIViewController {
                                      Actor(name: "저스틴 체임버스",
                                            image: "person",
                                            role: "알렉스 카레브")],
-                           category: "드라마"))
+                           category: "드라마",
+                           imageURL: "https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/WWGJF5L2L7RL4PQM3LPAU3ABXU.jpg"))
         
         movies.append(Movie(engTitle: "Squid Game",
                             korTitle: "오징어게임",
@@ -235,7 +238,8 @@ class ViewController: UIViewController {
                                      Actor(name: "허성태",
                                            image: "person",
                                            role: "장덕수")],
-                           category: "드라마"))
+                           category: "드라마",
+                           imageURL: "https://file.mk.co.kr/meet/neds/2021/09/image_readtop_2021_882356_16315096654783100.jpg"))
         
         movies.append(Movie(engTitle: "Avengers: Endgame",
                             korTitle: "어벤져스: 엔드게임",
@@ -263,7 +267,8 @@ class ViewController: UIViewController {
                                      Actor(name: "스칼렛 요한슨",
                                            image: "person",
                                            role: "블랙 위도우")],
-                           category: "영화"))
+                           category: "영화",
+                           imageURL: "https://www.gotit.co.kr/wp-content/uploads/2019/04/I-vaZIfXTIZuXzr4vVc_g4VfzafQ.jpg"))
         
         movies.append(Movie(engTitle: "Masquerade",
                             korTitle: "광해, 왕이 된 남자",
@@ -291,7 +296,8 @@ class ViewController: UIViewController {
                                      Actor(name: "김인권",
                                            image: "person",
                                            role: "도부장")],
-                           category: "영화"))
+                           category: "영화",
+                           imageURL: "https://t1.daumcdn.net/cfile/tistory/2522A83655AE5A891D"))
         
         movies.append(Movie(engTitle: "A Tale Dark and Grimm",
                             korTitle: "어 테일 다크 앤드 그림",
@@ -319,7 +325,8 @@ class ViewController: UIViewController {
                                      Actor(name: "도티",
                                            image: "person",
                                            role: "도티")],
-                           category: "서적"))
+                           category: "서적",
+                           imageURL: "https://www.slashfilm.com/img/gallery/henry-selick-directing-live-action-film-a-tale-dark-and-grimm/intro-import.jpg"))
     }
     
     func addTopBorder(with color: UIColor?, andWidth borderWidth: CGFloat, view: UIView) {
@@ -390,7 +397,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             movieData = filteredMovies[indexPath.row]
         }
         
-        
         cell.posterImage.image = UIImage(named: movieData.image!)
         
         cell.engTitle.text = movieData.engTitle
@@ -426,17 +432,20 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         return UIScreen.main.bounds.height * 0.6
     }
     
+    
+    //MARK: MOVE TO ActorViewController
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         let sb = UIStoryboard(name: "ActorViewControllerStoryboard", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "ActorViewController") as! ActorViewController
-        var actors = movies[indexPath.row].actors
+        var movie = movies[indexPath.row]
         
         
         if !filteredMovies.isEmpty {
-            actors = filteredMovies[indexPath.row].actors
+            movie = filteredMovies[indexPath.row]
         }
         
-        vc.actors = actors
+        vc.movieInfo = movie
+        
         self.navigationController?.pushViewController(vc, animated: true)
         
         return nil

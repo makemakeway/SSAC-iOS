@@ -18,6 +18,7 @@ struct Movie: Codable {
     var country: String?
     var actors: [Actor]
     var category: String?
+    var imageURL: String?
 }
 
 enum MediaCategories: Int {
