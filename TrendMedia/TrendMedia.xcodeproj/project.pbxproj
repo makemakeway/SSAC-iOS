@@ -22,6 +22,7 @@
 		FFCE20B6271A678D00E816F2 /* ActorViewControllerStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFCE20B5271A678D00E816F2 /* ActorViewControllerStoryboard.storyboard */; };
 		FFCE20B8271A950600E816F2 /* ActorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCE20B7271A950500E816F2 /* ActorTableViewCell.swift */; };
 		FFCE20BA271AEFF800E816F2 /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCE20B9271AEFF800E816F2 /* Actor.swift */; };
+		FFCE20BD271D34EC00E816F2 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = FFCE20BC271D34EC00E816F2 /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFCE20BD271D34EC00E816F2 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,6 +152,9 @@
 			dependencies = (
 			);
 			name = TrendMedia;
+			packageProductDependencies = (
+				FFCE20BC271D34EC00E816F2 /* Kingfisher */,
+			);
 			productName = TrendMedia;
 			productReference = FFA7750127193CCA00293F6B /* TrendMedia.app */;
 			productType = "com.apple.product-type.application";
@@ -178,6 +183,9 @@
 				Base,
 			);
 			mainGroup = FFA774F827193CCA00293F6B;
+			packageReferences = (
+				FFCE20BB271D34EC00E816F2 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = FFA7750227193CCA00293F6B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -436,6 +444,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FFCE20BB271D34EC00E816F2 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FFCE20BC271D34EC00E816F2 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FFCE20BB271D34EC00E816F2 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = FFA774F927193CCA00293F6B /* Project object */;
 }
