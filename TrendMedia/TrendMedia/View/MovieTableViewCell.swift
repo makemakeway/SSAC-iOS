@@ -11,6 +11,7 @@ class MovieTableViewCell: UITableViewCell {
     
     //MARK: Property
     
+    static let identifier = "MovieTableViewCell"
     
     @IBOutlet weak var containerView: UIView!
     
@@ -28,20 +29,26 @@ class MovieTableViewCell: UITableViewCell {
     
     @IBOutlet weak var ratingLabel: UILabel!
     
+    @IBOutlet weak var linkButton: UIButton!
+    
+    weak var linkButtonDelegate: LinkButtonDelegate?
     
     //MARK: Method
     
-    //MARK: LifeCycle
+    @IBAction func linkButtonClicked(_ sender: UIButton) {
+        if let delegate = linkButtonDelegate {
+            delegate.linkButtonClicked()
+        }
+    }
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
 
 }

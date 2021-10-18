@@ -101,15 +101,33 @@
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P8i-Sf-rQn">
+                                                            <rect key="frame" x="289" y="15" width="30" height="30"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="P8i-Sf-rQn" secondAttribute="height" multiplier="1:1" id="Coj-3Q-k5r"/>
+                                                            </constraints>
+                                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <state key="normal" title="Button"/>
+                                                            <buttonConfiguration key="configuration" style="plain" image="paperclip" catalog="system">
+                                                                <color key="baseForegroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </buttonConfiguration>
+                                                            <connections>
+                                                                <action selector="linkButtonClicked:" destination="dtz-2a-oFh" eventType="touchUpInside" id="BkR-n1-VFb"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstItem="UeA-aq-6l3" firstAttribute="top" secondItem="5r1-kC-5wa" secondAttribute="top" id="65G-G1-tcf"/>
+                                                        <constraint firstItem="P8i-Sf-rQn" firstAttribute="top" secondItem="5r1-kC-5wa" secondAttribute="top" constant="15" id="B5q-Lx-Tdr"/>
                                                         <constraint firstItem="86V-gv-YG5" firstAttribute="top" secondItem="UeA-aq-6l3" secondAttribute="bottom" constant="-30" id="DbG-4g-a5a"/>
                                                         <constraint firstAttribute="bottom" secondItem="Hf4-LJ-dUw" secondAttribute="bottom" constant="10" id="Dpw-IC-bUb"/>
                                                         <constraint firstItem="jyK-de-NU4" firstAttribute="top" secondItem="faO-pK-GS3" secondAttribute="bottom" constant="7.5" id="GgW-1a-19y"/>
+                                                        <constraint firstItem="P8i-Sf-rQn" firstAttribute="height" secondItem="UeA-aq-6l3" secondAttribute="height" multiplier="0.110497" id="GkT-AT-OZ3"/>
                                                         <constraint firstItem="faO-pK-GS3" firstAttribute="leading" secondItem="5r1-kC-5wa" secondAttribute="leading" constant="20" id="Gpq-jc-RqH"/>
                                                         <constraint firstItem="UeA-aq-6l3" firstAttribute="leading" secondItem="5r1-kC-5wa" secondAttribute="leading" id="IzF-fZ-KFQ"/>
+                                                        <constraint firstAttribute="trailing" secondItem="P8i-Sf-rQn" secondAttribute="trailing" constant="15" id="Lqr-O1-i05"/>
                                                         <constraint firstItem="faO-pK-GS3" firstAttribute="top" secondItem="UeA-aq-6l3" secondAttribute="bottom" constant="20" id="TsE-dY-lfD"/>
                                                         <constraint firstItem="Hf4-LJ-dUw" firstAttribute="top" secondItem="jyK-de-NU4" secondAttribute="bottom" priority="250" constant="10" id="aRI-iy-Yef"/>
                                                         <constraint firstItem="Hf4-LJ-dUw" firstAttribute="leading" secondItem="5r1-kC-5wa" secondAttribute="leading" constant="20" id="kaV-7U-XoO"/>
@@ -140,6 +158,7 @@
                                             <outlet property="footerView" destination="Hf4-LJ-dUw" id="Q3H-dv-rm9"/>
                                             <outlet property="genreLabel" destination="Oo4-2O-wc3" id="WeN-hA-GCV"/>
                                             <outlet property="korTitle" destination="faO-pK-GS3" id="2dr-hd-31T"/>
+                                            <outlet property="linkButton" destination="P8i-Sf-rQn" id="Fhk-3E-6dw"/>
                                             <outlet property="posterImage" destination="UeA-aq-6l3" id="XZc-rO-UWE"/>
                                             <outlet property="ratingLabel" destination="hzp-n2-OgQ" id="dgI-y6-BW6"/>
                                             <outlet property="releaseDate" destination="jyK-de-NU4" id="fQU-Pz-tTu"/>
@@ -247,6 +266,7 @@
         <image name="book" catalog="system" width="128" height="99"/>
         <image name="chevron.right" catalog="system" width="96" height="128"/>
         <image name="film" catalog="system" width="128" height="93"/>
+        <image name="paperclip" catalog="system" width="121" height="128"/>
         <image name="squid_game" width="350" height="515"/>
         <image name="tv" catalog="system" width="128" height="97"/>
         <systemColor name="labelColor">

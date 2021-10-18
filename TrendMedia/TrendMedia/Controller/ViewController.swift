@@ -349,7 +349,9 @@ class ViewController: UIViewController {
         self.present(vc, animated: true, completion: nil)
     }
     
-    
+    @objc func linkButtonPushed() {
+        print("link Button clicked")
+    }
     
     
     //MARK: LifeCycle
@@ -359,6 +361,9 @@ class ViewController: UIViewController {
         headerStackViewConfig()
         tableView.delegate = self
         tableView.dataSource = self
+        
+        
+        
         fetchMockData()
     }
     
@@ -377,7 +382,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MovieTableViewCell", for: indexPath) as? MovieTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MovieTableViewCell.identifier, for: indexPath) as? MovieTableViewCell else {
             return UITableViewCell()
         }
         
@@ -422,6 +427,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         border.frame = CGRect(x: 0, y: 0, width: cell.footerView.frame.width - 2, height: 1)
         cell.footerView.addSubview(border)
         
+        cell.linkButtonDelegate = self
+        cell.linkButton.layer.cornerRadius = cell.linkButton.frame.size.height / 2
+        
         cell.selectionStyle = .none
         
         return cell
@@ -450,5 +458,13 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         return nil
     }
+    
+}
+
+extension ViewController: LinkButtonDelegate {
+    func linkButtonClicked() {
+        print("linkButton Clicked")
+    }
+    
     
 }
