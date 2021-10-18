@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ActorViewController: UIViewController {
 
@@ -16,7 +17,15 @@ class ActorViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var actors: [Actor] = [Actor]()
+    @IBOutlet weak var movieBackgroundImageView: UIImageView!
+    
+    @IBOutlet weak var posterImageView: UIImageView!
+    
+    @IBOutlet weak var movieTitle: UILabel!
+    
+    @IBOutlet weak var opacityView: UIView!
+    
+    var movieInfo: Movie?
     
     lazy var backButtonCustomView: UIButton = {
         
@@ -39,6 +48,31 @@ class ActorViewController: UIViewController {
     
     //MARK: Method
     
+    func fetchHeaderView() {
+        guard let urlString = movieInfo?.imageURL else {
+            print("movieInfo에 URL이 없습니다.")
+            return
+        }
+        guard let url = URL(string: urlString) else {
+            print("URL 변환 실패")
+            return
+        }
+        guard let data = movieInfo else {
+            print("movie data missing")
+            return
+        }
+
+        
+        movieBackgroundImageView.kf.setImage(with: url) { _ in
+            self.movieTitle.text = data.engTitle!
+            self.posterImageView.image = UIImage(named: data.image!)
+        }
+        
+    }
+    
+    func headerOpacityConfig() {
+        opacityView.backgroundColor = UIColor(white: 0.3, alpha: 0.3)
+    }
     
     @objc func backButtonClicked(_ sender: UIBarButtonItem) {
         self.navigationController?.popViewController(animated: true)
@@ -52,14 +86,19 @@ class ActorViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        
+        fetchHeaderView()
+        movieTitle.textColor = .white
+        movieBackgroundImageView.contentMode = .scaleAspectFill
+        headerOpacityConfig()
     }
     
 }
 
 extension ActorViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return actors.count
+        guard let data = movieInfo?.actors else { return 0 }
+        
+        return data.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -67,7 +106,8 @@ extension ActorViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let data = actors[indexPath.row]
+        guard let data = movieInfo?.actors[indexPath.row] else { return UITableViewCell() }
+        
         
         cell.name.text = data.name!
         cell.name.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
@@ -78,6 +118,8 @@ extension ActorViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.profileImage.image = UIImage(systemName: data.image!)
         cell.profileImage.backgroundColor = .label
+        cell.profileImage.layer.cornerRadius = 10
+        
         
         cell.selectionStyle = .none
         

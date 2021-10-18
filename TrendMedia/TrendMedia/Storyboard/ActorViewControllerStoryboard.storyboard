@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="8rp-pN-qj5">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <rect key="frame" x="0.0" y="268" width="414" height="628"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ActorTableViewCell" rowHeight="156" id="ehI-TN-0Qy" customClass="ActorTableViewCell" customModule="TrendMedia" customModuleProvider="target">
@@ -68,17 +68,65 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aie-Kj-rFY">
+                                <rect key="frame" x="0.0" y="44" width="414" height="224"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NrQ-uT-4lV">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="224"/>
+                                    </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M77-Vs-eaa">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="224"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="psl-jn-ncm">
+                                        <rect key="frame" x="20" y="58.5" width="109" height="145.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="psl-jn-ncm" secondAttribute="height" multiplier="3:4" id="vqg-44-8RE"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V2c-um-Bci">
+                                        <rect key="frame" x="144" y="183.5" width="43.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="NrQ-uT-4lV" secondAttribute="bottom" id="4Ox-yG-2Rj"/>
+                                    <constraint firstItem="NrQ-uT-4lV" firstAttribute="leading" secondItem="Aie-Kj-rFY" secondAttribute="leading" id="4ao-yq-Glq"/>
+                                    <constraint firstItem="V2c-um-Bci" firstAttribute="bottom" secondItem="psl-jn-ncm" secondAttribute="bottom" id="5pX-Rr-SYD"/>
+                                    <constraint firstItem="M77-Vs-eaa" firstAttribute="top" secondItem="NrQ-uT-4lV" secondAttribute="top" id="Ntg-3J-80Y"/>
+                                    <constraint firstItem="psl-jn-ncm" firstAttribute="height" secondItem="NrQ-uT-4lV" secondAttribute="height" multiplier="0.65" id="PkE-Bk-3Nl"/>
+                                    <constraint firstAttribute="trailing" secondItem="NrQ-uT-4lV" secondAttribute="trailing" id="QOI-xH-qMS"/>
+                                    <constraint firstAttribute="bottom" secondItem="psl-jn-ncm" secondAttribute="bottom" constant="20" id="VdS-Vu-giz"/>
+                                    <constraint firstItem="M77-Vs-eaa" firstAttribute="trailing" secondItem="NrQ-uT-4lV" secondAttribute="trailing" id="c5x-Wx-Wve"/>
+                                    <constraint firstItem="M77-Vs-eaa" firstAttribute="bottom" secondItem="NrQ-uT-4lV" secondAttribute="bottom" id="gLr-1J-fFB"/>
+                                    <constraint firstItem="V2c-um-Bci" firstAttribute="leading" secondItem="psl-jn-ncm" secondAttribute="trailing" constant="15" id="kiS-3V-Cv8"/>
+                                    <constraint firstItem="M77-Vs-eaa" firstAttribute="leading" secondItem="NrQ-uT-4lV" secondAttribute="leading" id="pzC-be-SlH"/>
+                                    <constraint firstItem="psl-jn-ncm" firstAttribute="leading" secondItem="Aie-Kj-rFY" secondAttribute="leading" constant="20" id="y5q-DP-gZt"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="8rp-pN-qj5" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="Cwl-ZN-yJ5"/>
+                            <constraint firstItem="Aie-Kj-rFY" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.25" id="MUt-cq-wsp"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Aie-Kj-rFY" secondAttribute="trailing" id="XDf-D4-hyI"/>
+                            <constraint firstItem="8rp-pN-qj5" firstAttribute="top" secondItem="Aie-Kj-rFY" secondAttribute="bottom" id="aJV-uf-GDa"/>
+                            <constraint firstItem="Aie-Kj-rFY" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="dIb-tN-1Oa"/>
                             <constraint firstItem="8rp-pN-qj5" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="glt-us-rN9"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="8rp-pN-qj5" secondAttribute="trailing" id="jiX-FL-sT5"/>
                             <constraint firstAttribute="bottom" secondItem="8rp-pN-qj5" secondAttribute="bottom" id="jid-db-a4B"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="top" secondItem="NrQ-uT-4lV" secondAttribute="top" id="qze-nZ-s1D"/>
+                            <constraint firstItem="Aie-Kj-rFY" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="zIZ-MD-jDT"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="movieBackgroundImageView" destination="NrQ-uT-4lV" id="3Hv-QJ-ZjT"/>
+                        <outlet property="movieTitle" destination="V2c-um-Bci" id="JJQ-Bm-0pb"/>
+                        <outlet property="opacityView" destination="M77-Vs-eaa" id="iQ2-FX-hbx"/>
+                        <outlet property="posterImageView" destination="psl-jn-ncm" id="zog-B1-Wv1"/>
                         <outlet property="tableView" destination="8rp-pN-qj5" id="X1D-jH-Iaq"/>
                     </connections>
                 </viewController>
