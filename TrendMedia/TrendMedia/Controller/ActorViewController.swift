@@ -121,14 +121,13 @@ extension ActorViewController: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // 섹션이 0일 때
         if indexPath.section == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: StoryTableViewCell.identifier, for: indexPath) as? StoryTableViewCell else { return UITableViewCell() }
             cell.storyLabel.text = movieInfo?.story!
             cell.delegate = self
             let image = spreaded == true ? "chevron.up" : "chevron.down"
-            
             cell.spreadButton.setImage(UIImage(systemName: image), for: .normal)
-            
             return cell
         }
         
@@ -158,6 +157,8 @@ extension ActorViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        // 원하는 것이 줄거리 섹션의 높이를 조절하는 것이기 때문에 조건을 제한
         if indexPath.section == 0 && spreaded {
             return UITableView.automaticDimension
         }

@@ -10,6 +10,10 @@
 		FF3B2475271EA232007F4AE1 /* StoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B2473271EA232007F4AE1 /* StoryTableViewCell.swift */; };
 		FF3B2476271EA232007F4AE1 /* StoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF3B2474271EA232007F4AE1 /* StoryTableViewCell.xib */; };
 		FF3B2478271EAA2E007F4AE1 /* SpreadButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B2477271EAA2E007F4AE1 /* SpreadButtonDelegate.swift */; };
+		FF3B247A271EBD87007F4AE1 /* BooksViewControllerStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF3B2479271EBD87007F4AE1 /* BooksViewControllerStoryboard.storyboard */; };
+		FF3B247C271EBDA5007F4AE1 /* BooksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B247B271EBDA5007F4AE1 /* BooksViewController.swift */; };
+		FF3B247F271EBE68007F4AE1 /* BooksCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B247D271EBE68007F4AE1 /* BooksCollectionViewCell.swift */; };
+		FF3B2480271EBE68007F4AE1 /* BooksCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF3B247E271EBE68007F4AE1 /* BooksCollectionViewCell.xib */; };
 		FFA7750527193CCA00293F6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA7750427193CCA00293F6B /* AppDelegate.swift */; };
 		FFA7750727193CCA00293F6B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA7750627193CCA00293F6B /* SceneDelegate.swift */; };
 		FFA7750927193CCA00293F6B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA7750827193CCA00293F6B /* ViewController.swift */; };
@@ -36,6 +40,10 @@
 		FF3B2473271EA232007F4AE1 /* StoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryTableViewCell.swift; sourceTree = "<group>"; };
 		FF3B2474271EA232007F4AE1 /* StoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoryTableViewCell.xib; sourceTree = "<group>"; };
 		FF3B2477271EAA2E007F4AE1 /* SpreadButtonDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadButtonDelegate.swift; sourceTree = "<group>"; };
+		FF3B2479271EBD87007F4AE1 /* BooksViewControllerStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BooksViewControllerStoryboard.storyboard; sourceTree = "<group>"; };
+		FF3B247B271EBDA5007F4AE1 /* BooksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksViewController.swift; sourceTree = "<group>"; };
+		FF3B247D271EBE68007F4AE1 /* BooksCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksCollectionViewCell.swift; sourceTree = "<group>"; };
+		FF3B247E271EBE68007F4AE1 /* BooksCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BooksCollectionViewCell.xib; sourceTree = "<group>"; };
 		FFA7750127193CCA00293F6B /* TrendMedia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrendMedia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFA7750427193CCA00293F6B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FFA7750627193CCA00293F6B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +118,7 @@
 				FFA7751E27193F0C00293F6B /* SearchViewController.swift */,
 				FFCE20B3271A674800E816F2 /* ActorViewController.swift */,
 				FFCE20C4271D60C200E816F2 /* WebLinkViewController.swift */,
+				FF3B247B271EBDA5007F4AE1 /* BooksViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -132,6 +141,7 @@
 				FFCE20AF2719C0D400E816F2 /* SearchViewStoryboard.storyboard */,
 				FFCE20B5271A678D00E816F2 /* ActorViewControllerStoryboard.storyboard */,
 				FFCE20C6271D62DA00E816F2 /* WebLinkViewControllerStoryboard.storyboard */,
+				FF3B2479271EBD87007F4AE1 /* BooksViewControllerStoryboard.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -153,6 +163,8 @@
 				FFCE20B7271A950500E816F2 /* ActorTableViewCell.swift */,
 				FF3B2473271EA232007F4AE1 /* StoryTableViewCell.swift */,
 				FF3B2474271EA232007F4AE1 /* StoryTableViewCell.xib */,
+				FF3B247D271EBE68007F4AE1 /* BooksCollectionViewCell.swift */,
+				FF3B247E271EBE68007F4AE1 /* BooksCollectionViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -242,7 +254,9 @@
 				FF3B2476271EA232007F4AE1 /* StoryTableViewCell.xib in Resources */,
 				FFCE20C7271D62DA00E816F2 /* WebLinkViewControllerStoryboard.storyboard in Resources */,
 				FFCE20B6271A678D00E816F2 /* ActorViewControllerStoryboard.storyboard in Resources */,
+				FF3B2480271EBE68007F4AE1 /* BooksCollectionViewCell.xib in Resources */,
 				FFA7751127193CCD00293F6B /* LaunchScreen.storyboard in Resources */,
+				FF3B247A271EBD87007F4AE1 /* BooksViewControllerStoryboard.storyboard in Resources */,
 				FFA7750E27193CCD00293F6B /* Assets.xcassets in Resources */,
 				FFA7750C27193CCA00293F6B /* Main.storyboard in Resources */,
 			);
@@ -260,6 +274,7 @@
 				FFA7751F27193F0C00293F6B /* SearchViewController.swift in Sources */,
 				FFCE20B8271A950600E816F2 /* ActorTableViewCell.swift in Sources */,
 				FFA7750927193CCA00293F6B /* ViewController.swift in Sources */,
+				FF3B247C271EBDA5007F4AE1 /* BooksViewController.swift in Sources */,
 				FFA775222719546000293F6B /* MovieTableViewCell.swift in Sources */,
 				FFA7750527193CCA00293F6B /* AppDelegate.swift in Sources */,
 				FFCE20B4271A674800E816F2 /* ActorViewController.swift in Sources */,
@@ -267,6 +282,7 @@
 				FF3B2475271EA232007F4AE1 /* StoryTableViewCell.swift in Sources */,
 				FFCE20B22719DE1100E816F2 /* MovieDetailTableViewCell.swift in Sources */,
 				FF3B2478271EAA2E007F4AE1 /* SpreadButtonDelegate.swift in Sources */,
+				FF3B247F271EBE68007F4AE1 /* BooksCollectionViewCell.swift in Sources */,
 				FFA7750727193CCA00293F6B /* SceneDelegate.swift in Sources */,
 				FFCE20BA271AEFF800E816F2 /* Actor.swift in Sources */,
 			);

@@ -75,7 +75,6 @@ class ViewController: UIViewController {
                 print("카테고리 해제")
             }
             
-            
         case 1:
             dramaButtonPushed.toggle()
             filmButtonPushed = false
@@ -94,21 +93,27 @@ class ViewController: UIViewController {
             }
             
         case 2:
-            bookButtonPushed.toggle()
-            filmButtonPushed = false
-            dramaButtonPushed = false
+//            bookButtonPushed.toggle()
+//            filmButtonPushed = false
+//            dramaButtonPushed = false
+//
+//            if bookButtonPushed {
+//                self.filteredMovies = movies.filter({ $0.category! == "서적" })
+//                print("서적 카테고리")
+//                switchButtonImage(filmButton, "film")
+//                switchButtonImage(dramaButton, "tv")
+//                switchButtonImage(bookButton, "book.fill")
+//            } else {
+//                self.filteredMovies.removeAll()
+//                switchButtonImage(bookButton, "book")
+//                print("카테고리 해제")
+//            }
+            let sb = UIStoryboard.init(name: "BooksViewControllerStoryboard", bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: "BooksViewController") as! BooksViewController
+            vc.data = movies
+            self.navigationController?.pushViewController(vc, animated: true)
             
-            if bookButtonPushed {
-                self.filteredMovies = movies.filter({ $0.category! == "서적" })
-                print("서적 카테고리")
-                switchButtonImage(filmButton, "film")
-                switchButtonImage(dramaButton, "tv")
-                switchButtonImage(bookButton, "book.fill")
-            } else {
-                self.filteredMovies.removeAll()
-                switchButtonImage(bookButton, "book")
-                print("카테고리 해제")
-            }
+            
         default:
             return
         }
