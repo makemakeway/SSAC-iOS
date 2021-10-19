@@ -36,6 +36,24 @@ class WebLinkViewController: UIViewController {
         webViewTitle.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
     }
     
+    @IBAction func goBack(_ sender: UIBarButtonItem) {
+        if webView.canGoBack {
+            webView.goBack()
+        }
+    }
+    
+    @IBAction func goForward(_ sender: UIBarButtonItem) {
+        if webView.canGoForward {
+            webView.goForward()
+        }
+    }
+    
+    
+    @IBAction func reloadPage(_ sender: UIBarButtonItem) {
+        webView.reload()
+    }
+    
+    
     //MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
