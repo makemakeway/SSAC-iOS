@@ -64,35 +64,33 @@ class DrinkWaterViewController: UIViewController {
     
     // 물 마시기 버튼을 눌렀을 때
     @IBAction func drinkWater(_ sender: UIButton) {
-        guard let water = drinkTextField.text else {
+        guard let water = Int(drinkTextField.text!) else {
+            makeAlert(message: "마신 물의 양을 입력해주세요.")
             return
         }
-        if water.isEmpty {
-            let alert = UIAlertController(title: nil, message: "마신 물의 양을 입력해주세요.", preferredStyle: .alert)
-            let okButton = UIAlertAction(title: "확인", style: .default, handler: nil)
-            alert.addAction(okButton)
-            present(alert, animated: true, completion: nil)
-        }
-        else if Int(water) == nil {
-            let alert = UIAlertController(title: nil, message: "숫자만 입력가능합니다.", preferredStyle: .alert)
-            let okButton = UIAlertAction(title: "확인", style: .default, handler: nil)
-            
-            alert.addAction(okButton)
-            present(alert, animated: true, completion: nil)
-        }
-        else {
-            
-            let total = totalWater + Int(water)!
-            
-            self.totalWater = total
-            UserDefaults.standard.set(total, forKey: "todayWater")
-            UserDefaults.standard.synchronize()
-            
-            self.fetchTodayWater()
-            self.progressUpdate()
-            self.feelingLabelUpdate()
-            self.imageUpdate()
-        }
+        let total = totalWater + water
+        
+        self.totalWater = total
+        UserDefaults.standard.set(total, forKey: "todayWater")
+        UserDefaults.standard.synchronize()
+        
+        self.fetchTodayWater()
+        self.progressUpdate()
+        self.feelingLabelUpdate()
+        self.imageUpdate()
+        
+    }
+    
+    @IBAction func textLengthCheck(_ sender: UITextField) {
+        checkMaxLength(textField: drinkTextField, maxLength: 4)
+    }
+    
+    
+    func makeAlert(message: String) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        let okButton = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alert.addAction(okButton)
+        present(alert, animated: true, completion: nil)
     }
     
     func headerLabelsConfig() {
@@ -111,28 +109,30 @@ class DrinkWaterViewController: UIViewController {
     
     // 목표에 따라 이미지 뷰의 이미지 변경
     func imageUpdate() {
-        if Int((progress * 100).rounded()) < 30 {
+        let progress = Int((progress * 100).rounded())
+        
+        if progress < 30 {
             self.mainImage.image = UIImage(named: "1-1")
         }
-        else if Int((progress * 100).rounded()) < 40 {
+        else if progress < 40 {
             self.mainImage.image = UIImage(named: "1-2")
         }
-        else if Int((progress * 100).rounded()) < 50 {
+        else if progress < 50 {
             self.mainImage.image = UIImage(named: "1-3")
         }
-        else if Int((progress * 100).rounded()) < 60 {
+        else if progress < 60 {
             self.mainImage.image = UIImage(named: "1-4")
         }
-        else if Int((progress * 100).rounded()) < 70 {
+        else if progress < 70 {
             self.mainImage.image = UIImage(named: "1-5")
         }
-        else if Int((progress * 100).rounded()) < 80 {
+        else if progress < 80 {
             self.mainImage.image = UIImage(named: "1-6")
         }
-        else if Int((progress * 100).rounded()) < 90 {
+        else if progress < 90 {
             self.mainImage.image = UIImage(named: "1-7")
         }
-        else if Int((progress * 100).rounded()) < 100 {
+        else if progress < 100 {
             self.mainImage.image = UIImage(named: "1-8")
         }
         else {
@@ -154,15 +154,16 @@ class DrinkWaterViewController: UIViewController {
     
     
     func feelingLabelUpdate() {
-        if Int((progress * 100).rounded()) == 0 {
+        let progress = Int((progress * 100).rounded())
+        if  progress == 0 {
             feelingLabel.text = "목이 마르지 않으신가요?"
             feelingLabel.textColor = .white
         }
-        else if Int((progress * 100).rounded()) < 50 {
+        else if progress < 50 {
             feelingLabel.text = "잘하셨어요!"
             feelingLabel.textColor = .white
         }
-        else if Int((progress * 100).rounded()) < 100 {
+        else if progress < 100 {
             feelingLabel.text = "훌륭해요!"
             feelingLabel.textColor = .white
         }
@@ -213,6 +214,13 @@ class DrinkWaterViewController: UIViewController {
         self.mainImage.layer.removeAllAnimations()
         self.mainImage.transform = .identity
     }
+    
+    func checkMaxLength(textField: UITextField!, maxLength: Int) {
+        if drinkTextField.text!.count > maxLength {
+            drinkTextField.deleteBackward()
+        }
+    }
+
     
     //MARK: Objc func
     
