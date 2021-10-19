@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import MapKit
 
 class ActorViewController: UIViewController {
 
@@ -26,6 +27,8 @@ class ActorViewController: UIViewController {
     @IBOutlet weak var opacityView: UIView!
     
     var movieInfo: Movie?
+    
+    var spreaded: Bool = false
     
     lazy var backButtonCustomView: UIButton = {
         
@@ -86,6 +89,12 @@ class ActorViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.rowHeight = UITableView.automaticDimension
+        
+        let nib = UINib(nibName: StoryTableViewCell.identifier, bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: StoryTableViewCell.identifier)
+        
+        
         fetchHeaderView()
         movieTitle.textColor = .white
         movieBackgroundImageView.contentMode = .scaleAspectFill
@@ -95,13 +104,35 @@ class ActorViewController: UIViewController {
 }
 
 extension ActorViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let data = movieInfo?.actors else { return 0 }
         
+        if section == 0 {
+            return 1
+        }
+        
+        guard let data = movieInfo?.actors else { return 0 }
         return data.count
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 0 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: StoryTableViewCell.identifier, for: indexPath) as? StoryTableViewCell else { return UITableViewCell() }
+            cell.storyLabel.text = movieInfo?.story!
+            cell.delegate = self
+            let image = spreaded == true ? "chevron.up" : "chevron.down"
+            
+            cell.spreadButton.setImage(UIImage(systemName: image), for: .normal)
+            
+            return cell
+        }
+        
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ActorTableViewCell", for: indexPath) as? ActorTableViewCell else {
             return UITableViewCell()
         }
@@ -127,6 +158,10 @@ extension ActorViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 && spreaded {
+            return UITableView.automaticDimension
+        }
+        
         return UIScreen.main.bounds.height * 0.125
     }
     
@@ -135,4 +170,12 @@ extension ActorViewController: UITableViewDelegate, UITableViewDataSource {
         return nil
     }
     
+}
+
+
+extension ActorViewController: SpreadButtonDelegate {
+    func spreadAndFold() {
+        spreaded.toggle()
+        tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
+    }
 }

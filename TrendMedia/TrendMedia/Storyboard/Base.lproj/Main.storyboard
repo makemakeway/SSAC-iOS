@@ -102,14 +102,15 @@
                                                             </subviews>
                                                         </stackView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P8i-Sf-rQn">
-                                                            <rect key="frame" x="289" y="15" width="30" height="30"/>
+                                                            <rect key="frame" x="283.5" y="15" width="35.5" height="35.5"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="P8i-Sf-rQn" secondAttribute="height" multiplier="1:1" id="Coj-3Q-k5r"/>
                                                             </constraints>
                                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <state key="normal" title="Button"/>
-                                                            <buttonConfiguration key="configuration" style="plain" image="paperclip" catalog="system">
+                                                            <buttonConfiguration key="configuration" style="plain">
+                                                                <imageReference key="image" image="paperclip" catalog="system" symbolScale="medium"/>
                                                                 <color key="baseForegroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </buttonConfiguration>
                                                             <connections>
@@ -124,7 +125,7 @@
                                                         <constraint firstItem="86V-gv-YG5" firstAttribute="top" secondItem="UeA-aq-6l3" secondAttribute="bottom" constant="-30" id="DbG-4g-a5a"/>
                                                         <constraint firstAttribute="bottom" secondItem="Hf4-LJ-dUw" secondAttribute="bottom" constant="10" id="Dpw-IC-bUb"/>
                                                         <constraint firstItem="jyK-de-NU4" firstAttribute="top" secondItem="faO-pK-GS3" secondAttribute="bottom" constant="7.5" id="GgW-1a-19y"/>
-                                                        <constraint firstItem="P8i-Sf-rQn" firstAttribute="height" secondItem="UeA-aq-6l3" secondAttribute="height" multiplier="0.110497" id="GkT-AT-OZ3"/>
+                                                        <constraint firstItem="P8i-Sf-rQn" firstAttribute="height" secondItem="UeA-aq-6l3" secondAttribute="height" multiplier="0.13" id="GkT-AT-OZ3"/>
                                                         <constraint firstItem="faO-pK-GS3" firstAttribute="leading" secondItem="5r1-kC-5wa" secondAttribute="leading" constant="20" id="Gpq-jc-RqH"/>
                                                         <constraint firstItem="UeA-aq-6l3" firstAttribute="leading" secondItem="5r1-kC-5wa" secondAttribute="leading" id="IzF-fZ-KFQ"/>
                                                         <constraint firstAttribute="trailing" secondItem="P8i-Sf-rQn" secondAttribute="trailing" constant="15" id="Lqr-O1-i05"/>

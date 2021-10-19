@@ -470,10 +470,10 @@ extension ViewController: LinkButtonDelegate {
         let sb = UIStoryboard.init(name: "WebLinkViewControllerStoryboard", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "WebLinkViewController") as! WebLinkViewController
         
-        var title = movies[index].korTitle
+        var title = movies[index].engTitle
         
         if !filteredMovies.isEmpty {
-            title = filteredMovies[index].korTitle
+            title = filteredMovies[index].engTitle
         }
         
         vc.webViewTitleString = title!

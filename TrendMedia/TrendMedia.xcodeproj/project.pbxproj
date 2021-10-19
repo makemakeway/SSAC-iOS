@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FF3B2475271EA232007F4AE1 /* StoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B2473271EA232007F4AE1 /* StoryTableViewCell.swift */; };
+		FF3B2476271EA232007F4AE1 /* StoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF3B2474271EA232007F4AE1 /* StoryTableViewCell.xib */; };
+		FF3B2478271EAA2E007F4AE1 /* SpreadButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B2477271EAA2E007F4AE1 /* SpreadButtonDelegate.swift */; };
 		FFA7750527193CCA00293F6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA7750427193CCA00293F6B /* AppDelegate.swift */; };
 		FFA7750727193CCA00293F6B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA7750627193CCA00293F6B /* SceneDelegate.swift */; };
 		FFA7750927193CCA00293F6B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA7750827193CCA00293F6B /* ViewController.swift */; };
@@ -30,6 +33,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FF3B2473271EA232007F4AE1 /* StoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryTableViewCell.swift; sourceTree = "<group>"; };
+		FF3B2474271EA232007F4AE1 /* StoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoryTableViewCell.xib; sourceTree = "<group>"; };
+		FF3B2477271EAA2E007F4AE1 /* SpreadButtonDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadButtonDelegate.swift; sourceTree = "<group>"; };
 		FFA7750127193CCA00293F6B /* TrendMedia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrendMedia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFA7750427193CCA00293F6B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FFA7750627193CCA00293F6B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -121,8 +127,8 @@
 		FFA7751A27193CE500293F6B /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
-				FFA7750A27193CCA00293F6B /* Main.storyboard */,
 				FFA7750F27193CCD00293F6B /* LaunchScreen.storyboard */,
+				FFA7750A27193CCA00293F6B /* Main.storyboard */,
 				FFCE20AF2719C0D400E816F2 /* SearchViewStoryboard.storyboard */,
 				FFCE20B5271A678D00E816F2 /* ActorViewControllerStoryboard.storyboard */,
 				FFCE20C6271D62DA00E816F2 /* WebLinkViewControllerStoryboard.storyboard */,
@@ -145,6 +151,8 @@
 				FFA775212719545F00293F6B /* MovieTableViewCell.swift */,
 				FFCE20B12719DE1100E816F2 /* MovieDetailTableViewCell.swift */,
 				FFCE20B7271A950500E816F2 /* ActorTableViewCell.swift */,
+				FF3B2473271EA232007F4AE1 /* StoryTableViewCell.swift */,
+				FF3B2474271EA232007F4AE1 /* StoryTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -153,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				FFCE20BF271D4EF100E816F2 /* LinkButtonDelegate.swift */,
+				FF3B2477271EAA2E007F4AE1 /* SpreadButtonDelegate.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -230,6 +239,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFCE20B02719C0D500E816F2 /* SearchViewStoryboard.storyboard in Resources */,
+				FF3B2476271EA232007F4AE1 /* StoryTableViewCell.xib in Resources */,
 				FFCE20C7271D62DA00E816F2 /* WebLinkViewControllerStoryboard.storyboard in Resources */,
 				FFCE20B6271A678D00E816F2 /* ActorViewControllerStoryboard.storyboard in Resources */,
 				FFA7751127193CCD00293F6B /* LaunchScreen.storyboard in Resources */,
@@ -254,7 +264,9 @@
 				FFA7750527193CCA00293F6B /* AppDelegate.swift in Sources */,
 				FFCE20B4271A674800E816F2 /* ActorViewController.swift in Sources */,
 				FFA7751D27193D5500293F6B /* Movie.swift in Sources */,
+				FF3B2475271EA232007F4AE1 /* StoryTableViewCell.swift in Sources */,
 				FFCE20B22719DE1100E816F2 /* MovieDetailTableViewCell.swift in Sources */,
+				FF3B2478271EAA2E007F4AE1 /* SpreadButtonDelegate.swift in Sources */,
 				FFA7750727193CCA00293F6B /* SceneDelegate.swift in Sources */,
 				FFCE20BA271AEFF800E816F2 /* Actor.swift in Sources */,
 			);
