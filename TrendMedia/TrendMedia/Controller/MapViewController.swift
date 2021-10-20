@@ -29,12 +29,7 @@ class MapViewController: UIViewController {
         TheaterLocation(type: "CGV", location: "CGV 용산 아이파크몰", latitude: 37.53149302830903, longitude: 126.9654030486416)
     ]
     
-    var filteredAnnotations = [TheaterLocation]() {
-        didSet {
-            fetchData()
-        }
-    }
-    
+    var filteredAnnotations = [TheaterLocation]()
     var locataionManager: CLLocationManager = CLLocationManager()
     
     var locationCoordinator: CLLocationCoordinate2D? {
@@ -68,27 +63,33 @@ class MapViewController: UIViewController {
     }
     
     func filteringAnnotaions(type: String) {
+        self.filteredAnnotations.removeAll()
         self.filteredAnnotations = mapAnnotations.filter({ $0.type == type })
+        self.mapKitView.removeAnnotations(self.mapKitView.annotations)
+        self.addAnnotations()
     }
     
-    func addAnnoation(data: TheaterLocation) {
+    func addAnnotation(data: TheaterLocation) {
         let annotaion = MKPointAnnotation()
         annotaion.coordinate = CLLocationCoordinate2D(latitude: data.latitude!, longitude: data.longitude!)
         annotaion.title = data.location!
         self.mapKitView.addAnnotation(annotaion)
     }
     
-    func fetchData() {
+
+    
+    func addAnnotations() {
         if filteredAnnotations.isEmpty {
             for data in mapAnnotations {
-                addAnnoation(data: data)
+                addAnnotation(data: data)
             }
         } else {
             for data in filteredAnnotations {
-                addAnnoation(data: data)
+                addAnnotation(data: data)
             }
         }
     }
+    
     
     func setLocation(latitude: Double, longitude: Double){
         self.mapKitView.region.center = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
@@ -178,16 +179,25 @@ class MapViewController: UIViewController {
         
         let cgvButton = UIAlertAction(title: "CGV", style: .default) { _ in
             self.filteringAnnotaions(type: "CGV")
-            print(self.filteredAnnotations)
         }
-        let megaBoxButton = UIAlertAction(title: "메가박스", style: .default, handler: nil)
-        let lotteCinemaButton = UIAlertAction(title: "롯데시네마", style: .default, handler: nil)
-        let cancelButton = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        let megaBoxButton = UIAlertAction(title: "메가박스", style: .default) { _ in
+            self.filteringAnnotaions(type: "메가박스")
+        }
+        let lotteCinemaButton = UIAlertAction(title: "롯데시네마", style: .default) { _ in
+            self.filteringAnnotaions(type: "롯데시네마")
+        }
+        let entireButton = UIAlertAction(title: "전체보기", style: .default) { _ in
+            self.filteredAnnotations.removeAll()
+            self.mapKitView.removeAnnotations(self.mapKitView.annotations)
+            self.addAnnotations()
+        }
         
+        let cancelButton = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
         alert.addAction(cgvButton)
         alert.addAction(megaBoxButton)
         alert.addAction(lotteCinemaButton)
+        alert.addAction(entireButton)
         alert.addAction(cancelButton)
         present(alert, animated: true, completion: nil)
     }
@@ -201,7 +211,7 @@ class MapViewController: UIViewController {
         mapKitView.delegate = self
         
         mapKitView.region.span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-        fetchData()
+        addAnnotations()
         self.navigationItem.rightBarButtonItem = filterButton
     }
     
