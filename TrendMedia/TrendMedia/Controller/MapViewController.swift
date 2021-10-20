@@ -29,9 +29,19 @@ class MapViewController: UIViewController {
         TheaterLocation(type: "CGV", location: "CGV 용산 아이파크몰", latitude: 37.53149302830903, longitude: 126.9654030486416)
     ]
     
-    var filteredAnnotations = [TheaterLocation]()
+    var filteredAnnotations = [TheaterLocation]() {
+        didSet {
+            fetchData()
+        }
+    }
     
     var locataionManager: CLLocationManager = CLLocationManager()
+    
+    var locationCoordinator: CLLocationCoordinate2D? {
+        didSet {
+            setLocation(latitude: locationCoordinator!.latitude, longitude: locationCoordinator!.longitude)
+        }
+    }
     
     var locality: String = UserDefaults.standard.string(forKey: "location") ?? "" {
         didSet {
@@ -42,13 +52,47 @@ class MapViewController: UIViewController {
     
     @IBOutlet weak var mapKitView: MKMapView!
     
+    @IBOutlet weak var refreshButton: UIButton!
+    
     //MARK: Method
+    
+    @IBAction func refreshButtonClicked(_ sender: UIButton) {
+        checkUsersLocationServicesAutorization()
+    }
+    
+    
+    func refreshButtonConfig() {
+        refreshButton.backgroundColor = .systemIndigo
+        refreshButton.tintColor = .white
+        refreshButton.layer.cornerRadius = refreshButton.frame.size.width / 2
+    }
+    
+    func filteringAnnotaions(type: String) {
+        self.filteredAnnotations = mapAnnotations.filter({ $0.type == type })
+    }
     
     func addAnnoation(data: TheaterLocation) {
         let annotaion = MKPointAnnotation()
         annotaion.coordinate = CLLocationCoordinate2D(latitude: data.latitude!, longitude: data.longitude!)
         annotaion.title = data.location!
         self.mapKitView.addAnnotation(annotaion)
+    }
+    
+    func fetchData() {
+        if filteredAnnotations.isEmpty {
+            for data in mapAnnotations {
+                addAnnoation(data: data)
+            }
+        } else {
+            for data in filteredAnnotations {
+                addAnnoation(data: data)
+            }
+        }
+    }
+    
+    func setLocation(latitude: Double, longitude: Double){
+        self.mapKitView.region.center = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        self.mapKitView.region.span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
     }
     
     
@@ -76,11 +120,12 @@ class MapViewController: UIViewController {
             locataionManager.desiredAccuracy = kCLLocationAccuracyBest
             locataionManager.startUpdatingLocation()
         case .restricted, .denied:
+            setLocation(latitude: 37.56674435790457, longitude: 126.9784350966443)
             print("제한됨. 설정으로 이동")
-        case .authorizedAlways:
-            print("authorizedAlways")
-        case .authorizedWhenInUse:
-            print("authorizedWhenInUse")
+        case .authorizedAlways, .authorizedWhenInUse:
+            print("이용가능")
+            self.locataionManager.startUpdatingLocation()
+            
         @unknown default:
             print("unknown")
         }
@@ -129,17 +174,34 @@ class MapViewController: UIViewController {
     //MARK: Objc Func
     
     @objc func filterButtonClicked(_ sender: UIBarButtonItem) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
+        let cgvButton = UIAlertAction(title: "CGV", style: .default) { _ in
+            self.filteringAnnotaions(type: "CGV")
+            print(self.filteredAnnotations)
+        }
+        let megaBoxButton = UIAlertAction(title: "메가박스", style: .default, handler: nil)
+        let lotteCinemaButton = UIAlertAction(title: "롯데시네마", style: .default, handler: nil)
+        let cancelButton = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        
+        alert.addAction(cgvButton)
+        alert.addAction(megaBoxButton)
+        alert.addAction(lotteCinemaButton)
+        alert.addAction(cancelButton)
+        present(alert, animated: true, completion: nil)
     }
     
     
     //MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        refreshButtonConfig()
         locataionManager.delegate = self
         mapKitView.delegate = self
         
-        
+        mapKitView.region.span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        fetchData()
         self.navigationItem.rightBarButtonItem = filterButton
     }
     
@@ -152,9 +214,8 @@ class MapViewController: UIViewController {
 extension MapViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let coordinate = locations.last?.coordinate {
-            print(coordinate.latitude)
-            print(coordinate.longitude)
             getCurrentAddress(location: CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude))
+            self.locationCoordinator = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
             locataionManager.stopUpdatingLocation()
         }
     }

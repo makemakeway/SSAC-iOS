@@ -19,18 +19,33 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="rgK-UF-bZZ">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D1e-uz-cMV">
+                                <rect key="frame" x="361.5" y="64" width="32.5" height="32.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="D1e-uz-cMV" secondAttribute="height" multiplier="1:1" id="nyL-GM-Vi9"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="arrow.clockwise" catalog="system"/>
+                                <connections>
+                                    <action selector="refreshButtonClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="HNL-pq-CTl"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="D1e-uz-cMV" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="9EH-rZ-HBV"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="rgK-UF-bZZ" secondAttribute="trailing" id="ByV-X6-qV0"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="rgK-UF-bZZ" secondAttribute="bottom" id="Czg-bC-KBw"/>
+                            <constraint firstItem="D1e-uz-cMV" firstAttribute="height" secondItem="rgK-UF-bZZ" secondAttribute="height" multiplier="0.04" id="LWu-wF-w29"/>
                             <constraint firstItem="rgK-UF-bZZ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="QJ3-Rl-nBm"/>
                             <constraint firstItem="rgK-UF-bZZ" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="Ybq-w3-Fdw"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="D1e-uz-cMV" secondAttribute="trailing" constant="20" id="nSq-9E-cgm"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="mapKitView" destination="rgK-UF-bZZ" id="zRW-AW-MOR"/>
+                        <outlet property="refreshButton" destination="D1e-uz-cMV" id="N4J-dr-aWP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -39,6 +54,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrow.clockwise" catalog="system" width="115" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
