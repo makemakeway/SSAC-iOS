@@ -14,6 +14,8 @@
 		FF3B247C271EBDA5007F4AE1 /* BooksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B247B271EBDA5007F4AE1 /* BooksViewController.swift */; };
 		FF3B247F271EBE68007F4AE1 /* BooksCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B247D271EBE68007F4AE1 /* BooksCollectionViewCell.swift */; };
 		FF3B2480271EBE68007F4AE1 /* BooksCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF3B247E271EBE68007F4AE1 /* BooksCollectionViewCell.xib */; };
+		FF3B2482271FD758007F4AE1 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B2481271FD758007F4AE1 /* MapViewController.swift */; };
+		FF3B2484271FD7CA007F4AE1 /* MapViewControllerStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF3B2483271FD7CA007F4AE1 /* MapViewControllerStoryboard.storyboard */; };
 		FFA7750527193CCA00293F6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA7750427193CCA00293F6B /* AppDelegate.swift */; };
 		FFA7750727193CCA00293F6B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA7750627193CCA00293F6B /* SceneDelegate.swift */; };
 		FFA7750927193CCA00293F6B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA7750827193CCA00293F6B /* ViewController.swift */; };
@@ -44,6 +46,8 @@
 		FF3B247B271EBDA5007F4AE1 /* BooksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksViewController.swift; sourceTree = "<group>"; };
 		FF3B247D271EBE68007F4AE1 /* BooksCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksCollectionViewCell.swift; sourceTree = "<group>"; };
 		FF3B247E271EBE68007F4AE1 /* BooksCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BooksCollectionViewCell.xib; sourceTree = "<group>"; };
+		FF3B2481271FD758007F4AE1 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		FF3B2483271FD7CA007F4AE1 /* MapViewControllerStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MapViewControllerStoryboard.storyboard; sourceTree = "<group>"; };
 		FFA7750127193CCA00293F6B /* TrendMedia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrendMedia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFA7750427193CCA00293F6B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FFA7750627193CCA00293F6B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -119,6 +123,7 @@
 				FFCE20B3271A674800E816F2 /* ActorViewController.swift */,
 				FFCE20C4271D60C200E816F2 /* WebLinkViewController.swift */,
 				FF3B247B271EBDA5007F4AE1 /* BooksViewController.swift */,
+				FF3B2481271FD758007F4AE1 /* MapViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -142,6 +147,7 @@
 				FFCE20B5271A678D00E816F2 /* ActorViewControllerStoryboard.storyboard */,
 				FFCE20C6271D62DA00E816F2 /* WebLinkViewControllerStoryboard.storyboard */,
 				FF3B2479271EBD87007F4AE1 /* BooksViewControllerStoryboard.storyboard */,
+				FF3B2483271FD7CA007F4AE1 /* MapViewControllerStoryboard.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -255,6 +261,7 @@
 				FFCE20C7271D62DA00E816F2 /* WebLinkViewControllerStoryboard.storyboard in Resources */,
 				FFCE20B6271A678D00E816F2 /* ActorViewControllerStoryboard.storyboard in Resources */,
 				FF3B2480271EBE68007F4AE1 /* BooksCollectionViewCell.xib in Resources */,
+				FF3B2484271FD7CA007F4AE1 /* MapViewControllerStoryboard.storyboard in Resources */,
 				FFA7751127193CCD00293F6B /* LaunchScreen.storyboard in Resources */,
 				FF3B247A271EBD87007F4AE1 /* BooksViewControllerStoryboard.storyboard in Resources */,
 				FFA7750E27193CCD00293F6B /* Assets.xcassets in Resources */,
@@ -285,6 +292,7 @@
 				FF3B247F271EBE68007F4AE1 /* BooksCollectionViewCell.swift in Sources */,
 				FFA7750727193CCA00293F6B /* SceneDelegate.swift in Sources */,
 				FFCE20BA271AEFF800E816F2 /* Actor.swift in Sources */,
+				FF3B2482271FD758007F4AE1 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

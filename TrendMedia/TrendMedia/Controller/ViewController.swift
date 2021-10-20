@@ -24,6 +24,12 @@ class ViewController: UIViewController {
         return button
     }()
     
+    lazy var mapButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(image: UIImage(systemName: "map"), style: .plain, target: self, action: #selector(mapButtonClicked(_:)))
+        
+        return button
+    }()
+    
     let dateFormatter: DateFormatter = {
         let df = DateFormatter()
         df.dateFormat = "yyyy-MM-dd"
@@ -354,6 +360,12 @@ class ViewController: UIViewController {
         self.present(vc, animated: true, completion: nil)
     }
     
+    @objc func mapButtonClicked(_ sender: UIBarButtonItem) {
+        let sb = UIStoryboard.init(name: "MapViewControllerStoryboard", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     @objc func linkButtonPushed() {
         print("link Button clicked")
     }
@@ -363,6 +375,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.rightBarButtonItem = searchButton
+        self.navigationItem.setLeftBarButtonItems([mapButton], animated: true)
         headerStackViewConfig()
         tableView.delegate = self
         tableView.dataSource = self
