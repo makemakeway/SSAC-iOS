@@ -38,10 +38,10 @@ class MapViewController: UIViewController {
         }
     }
     
-    var locality: String = UserDefaults.standard.string(forKey: "location") ?? "" {
+    var locationAddress: String = UserDefaults.standard.string(forKey: "location") ?? "" {
         didSet {
-            self.navigationItem.title = locality
-            UserDefaults.standard.set(locality, forKey: "location")
+            self.navigationItem.title = locationAddress
+            UserDefaults.standard.set(locationAddress, forKey: "location")
         }
     }
     
@@ -51,8 +51,41 @@ class MapViewController: UIViewController {
     
     //MARK: Method
     
+    func makeAlert(title: String?, message: String?, buttonTitle1: String, buttonTitle2: String, completion: @escaping ()->()) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okButton = UIAlertAction(title: buttonTitle1, style: .default) { _ in
+            completion()
+        }
+        let cancelButton = UIAlertAction(title: buttonTitle2, style: .default, handler: nil)
+        
+        alert.addAction(cancelButton)
+        alert.addAction(okButton)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     @IBAction func refreshButtonClicked(_ sender: UIButton) {
-        checkUsersLocationServicesAutorization()
+        let auth: CLAuthorizationStatus
+        
+        if #available(iOS 14.0, *) {
+            auth = locataionManager.authorizationStatus
+        } else {
+            auth = CLLocationManager.authorizationStatus()
+        }
+        
+        if auth == .denied || auth == .restricted {
+            makeAlert(title: "위치정보 권한 필요",
+                      message: "서비스 제공을 위해 위치정보가 필요합니다.",
+                      buttonTitle1: "설정하러 가기!!",
+                      buttonTitle2: "응 안해~~") {
+                guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            }
+            
+        } else {
+            checkUsersLocationServicesAutorization()
+        }
     }
     
     
@@ -61,6 +94,7 @@ class MapViewController: UIViewController {
         refreshButton.tintColor = .white
         refreshButton.layer.cornerRadius = refreshButton.frame.size.width / 2
     }
+    
     
     func filteringAnnotaions(type: String) {
         self.filteredAnnotations.removeAll()
@@ -76,7 +110,6 @@ class MapViewController: UIViewController {
         self.mapKitView.addAnnotation(annotaion)
     }
     
-
     
     func addAnnotations() {
         if filteredAnnotations.isEmpty {
@@ -153,23 +186,21 @@ class MapViewController: UIViewController {
                 print("주소 설정 불가능")
                 return
             }
-            
             if let administrativeArea = place.administrativeArea {
                 print(administrativeArea)
             }
             if let locality = place.locality {
-                self.locality = locality
-                print(self.locality)
+                self.locationAddress = locality
+                print(self.locationAddress)
             }
             if let subLocality = place.subLocality {
-                self.locality += " \(subLocality)"
+                self.locationAddress += " \(subLocality)"
                 print(subLocality)
             }
             if let subThoroughfare = place.subThoroughfare {
                 print(subThoroughfare)
             }
         }
-        
     }
     
     //MARK: Objc Func
@@ -211,13 +242,14 @@ class MapViewController: UIViewController {
         mapKitView.delegate = self
         
         mapKitView.region.span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        mapKitView.showsUserLocation = true
         addAnnotations()
         self.navigationItem.rightBarButtonItem = filterButton
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationItem.title = locality
+        self.navigationItem.title = locationAddress
     }
 }
 
