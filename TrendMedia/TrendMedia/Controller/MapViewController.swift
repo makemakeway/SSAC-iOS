@@ -110,6 +110,7 @@ class MapViewController: UIViewController {
         self.mapKitView.addAnnotation(annotaion)
     }
     
+
     
     func addAnnotations() {
         if filteredAnnotations.isEmpty {
@@ -206,7 +207,7 @@ class MapViewController: UIViewController {
     //MARK: Objc Func
     
     @objc func filterButtonClicked(_ sender: UIBarButtonItem) {
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         let cgvButton = UIAlertAction(title: "CGV", style: .default) { _ in
             self.filteringAnnotaions(type: "CGV")
@@ -225,12 +226,12 @@ class MapViewController: UIViewController {
         
         let cancelButton = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
-        alert.addAction(cgvButton)
-        alert.addAction(megaBoxButton)
-        alert.addAction(lotteCinemaButton)
-        alert.addAction(entireButton)
-        alert.addAction(cancelButton)
-        present(alert, animated: true, completion: nil)
+        sheet.addAction(cgvButton)
+        sheet.addAction(megaBoxButton)
+        sheet.addAction(lotteCinemaButton)
+        sheet.addAction(entireButton)
+        sheet.addAction(cancelButton)
+        present(sheet, animated: true, completion: nil)
     }
     
     
