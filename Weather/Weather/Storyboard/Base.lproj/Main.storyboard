@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QIZ-DA-mWc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QIZ-DA-mWc">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,24 +15,74 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KoJ-Uc-yzW">
-                                <rect key="frame" x="20" y="108" width="374" height="29"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="현재 위치는.." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KoJ-Uc-yzW">
+                                <rect key="frame" x="20" y="108" width="374" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="vpR-9w-DS9"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="현재 온도는.." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dwF-4n-DxM">
+                                <rect key="frame" x="20" y="178" width="374" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Kgt-An-bFZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="현재 풍속은.." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jdz-fb-qfd">
+                                <rect key="frame" x="20" y="248" width="374" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="MvD-pd-hfw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="현재 습도는.." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uRG-DC-GCg">
+                                <rect key="frame" x="20" y="318" width="374" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="OIy-0J-Gvy"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vne-Ur-N1n">
+                                <rect key="frame" x="20" y="388" width="374" height="269"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.5" green="0.72155485139999997" blue="0.6263417832" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="KoJ-Uc-yzW" secondAttribute="trailing" constant="20" id="6FF-zV-T38"/>
+                            <constraint firstItem="vne-Ur-N1n" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.3" id="8TN-ga-DNp"/>
+                            <constraint firstItem="vne-Ur-N1n" firstAttribute="trailing" secondItem="uRG-DC-GCg" secondAttribute="trailing" id="EBN-Td-C5C"/>
+                            <constraint firstItem="jdz-fb-qfd" firstAttribute="top" secondItem="dwF-4n-DxM" secondAttribute="bottom" constant="20" id="GPF-tG-AbB"/>
+                            <constraint firstItem="vne-Ur-N1n" firstAttribute="top" secondItem="uRG-DC-GCg" secondAttribute="bottom" constant="20" id="OKG-NK-nsq"/>
+                            <constraint firstItem="uRG-DC-GCg" firstAttribute="leading" secondItem="jdz-fb-qfd" secondAttribute="leading" id="QfJ-YB-WcW"/>
+                            <constraint firstItem="uRG-DC-GCg" firstAttribute="top" secondItem="jdz-fb-qfd" secondAttribute="bottom" constant="20" id="X8n-6G-Hvn"/>
                             <constraint firstItem="KoJ-Uc-yzW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="aCZ-Bc-lCu"/>
+                            <constraint firstItem="dwF-4n-DxM" firstAttribute="leading" secondItem="KoJ-Uc-yzW" secondAttribute="leading" id="bH7-tN-eam"/>
+                            <constraint firstItem="jdz-fb-qfd" firstAttribute="leading" secondItem="dwF-4n-DxM" secondAttribute="leading" id="g2h-MD-qR2"/>
                             <constraint firstItem="KoJ-Uc-yzW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="h1p-kj-7pw"/>
+                            <constraint firstItem="dwF-4n-DxM" firstAttribute="top" secondItem="KoJ-Uc-yzW" secondAttribute="bottom" constant="20" id="jo8-Sc-fY4"/>
+                            <constraint firstItem="vne-Ur-N1n" firstAttribute="leading" secondItem="uRG-DC-GCg" secondAttribute="leading" id="qh5-Ev-mGq"/>
+                            <constraint firstItem="jdz-fb-qfd" firstAttribute="trailing" secondItem="dwF-4n-DxM" secondAttribute="trailing" id="tka-7U-Ax1"/>
+                            <constraint firstItem="uRG-DC-GCg" firstAttribute="trailing" secondItem="jdz-fb-qfd" secondAttribute="trailing" id="txc-vx-ZHt"/>
+                            <constraint firstItem="dwF-4n-DxM" firstAttribute="trailing" secondItem="KoJ-Uc-yzW" secondAttribute="trailing" id="zQ8-nd-KdW"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="wwT-N0-3bv"/>
                     <connections>
+                        <outlet property="currentTempLabel" destination="dwF-4n-DxM" id="UGG-pp-Y3Q"/>
+                        <outlet property="humidityLabel" destination="uRG-DC-GCg" id="Xd2-G2-XU0"/>
                         <outlet property="locationLabel" destination="KoJ-Uc-yzW" id="Nmy-vg-m4f"/>
+                        <outlet property="weatherImage" destination="vne-Ur-N1n" id="kcJ-IQ-NUV"/>
+                        <outlet property="windSpeedLabel" destination="jdz-fb-qfd" id="iuF-oq-xP5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -59,9 +108,4 @@
             <point key="canvasLocation" x="131.8840579710145" y="109.82142857142857"/>
         </scene>
     </scenes>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>
