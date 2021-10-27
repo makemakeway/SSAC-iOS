@@ -6,10 +6,19 @@
 //
 
 import UIKit
+import SwiftyJSON
+import Kingfisher
 
 class ViewController: UIViewController {
     
     var movies = [Movie]()
+    
+    var mediaData = [MovieModel]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
     var filteredMovies = [Movie]() {
         didSet {
             tableView.reloadData()
@@ -99,21 +108,6 @@ class ViewController: UIViewController {
             }
             
         case 2:
-//            bookButtonPushed.toggle()
-//            filmButtonPushed = false
-//            dramaButtonPushed = false
-//
-//            if bookButtonPushed {
-//                self.filteredMovies = movies.filter({ $0.category! == "서적" })
-//                print("서적 카테고리")
-//                switchButtonImage(filmButton, "film")
-//                switchButtonImage(dramaButton, "tv")
-//                switchButtonImage(bookButton, "book.fill")
-//            } else {
-//                self.filteredMovies.removeAll()
-//                switchButtonImage(bookButton, "book")
-//                print("카테고리 해제")
-//            }
             let sb = UIStoryboard.init(name: "BooksViewControllerStoryboard", bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "BooksViewController") as! BooksViewController
             vc.data = movies
@@ -380,9 +374,23 @@ class ViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        
-        
-        fetchMockData()
+        MovieAPIManager.shared.fetchMovieData(dayOrWeek: .week, category: .tv) { code, json in
+            let movies = json["results"].arrayValue
+            for movie in movies {
+                let data = MovieModel(original_language: movie["original_language"].stringValue,
+                                      release_date: movie["release_date"].stringValue,
+                                      overview: movie["overview"].stringValue,
+                                      genre_ids: [movie["genre_ids"].intValue],
+                                      vote_average: movie["vote_average"].doubleValue,
+                                      media_type: movie["media_type"].stringValue,
+                                      poster_path: movie["poster_path"].stringValue,
+                                      backdrop_path: movie["backdrop_path"].stringValue,
+                                      origin_country: [movie["origin_country"].stringValue],
+                                      name: movie["name"].stringValue,
+                                      original_name: movie["original_name"].stringValue)
+                self.mediaData.append(data)
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -396,7 +404,7 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return filteredMovies.isEmpty ? movies.count : filteredMovies.count
+        return mediaData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -414,30 +422,23 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         cell.posterImage.layer.cornerRadius = 10
         cell.posterImage.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         
-        var movieData = movies[indexPath.row]
+        let movieData = mediaData[indexPath.row]
+        let urlString = "https://image.tmdb.org/t/p/w500\(movieData.poster_path ?? "")"
         
-        if !filteredMovies.isEmpty {
-            movieData = filteredMovies[indexPath.row]
-        }
+        cell.posterImage.kf.setImage(with: URL(string: urlString), placeholder: UIImage(systemName: "star"))
         
-        cell.posterImage.image = UIImage(named: movieData.image!)
-        
-        cell.engTitle.text = movieData.engTitle
+        cell.engTitle.text = movieData.name
         cell.engTitle.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
     
-        cell.korTitle.text = movieData.korTitle
+        cell.korTitle.text = movieData.original_name
         cell.korTitle.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         
         
         cell.genreLabel.text = ""
-        for genre in movieData.genre {
-            cell.genreLabel.text! += "#" + genre + " "
-        }
         
-        let dateString = dateFormatter.string(from: movieData.releaseDate!)
-        cell.releaseDate.text = dateString
+        cell.releaseDate.text = movieData.release_date ?? ""
 
-        cell.ratingLabel.text = String(movieData.rate!)
+        cell.ratingLabel.text = String(format: "%.1f", movieData.vote_average ?? 0.0)
         
         let border = UIView()
         border.backgroundColor = .label
@@ -465,17 +466,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         let sb = UIStoryboard.init(name: "ActorViewControllerStoryboard", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "ActorViewController") as! ActorViewController
-        var movie = movies[indexPath.row]
-        
-        
-        if !filteredMovies.isEmpty {
-            movie = filteredMovies[indexPath.row]
-        }
-        
-        vc.movieInfo = movie
+        var movie = mediaData[indexPath.row]
         
         self.navigationController?.pushViewController(vc, animated: true)
-        
         return nil
     }
     
@@ -488,13 +481,9 @@ extension ViewController: LinkButtonDelegate {
         let sb = UIStoryboard.init(name: "WebLinkViewControllerStoryboard", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "WebLinkViewController") as! WebLinkViewController
         
-        var title = movies[index].engTitle
+        guard let title = mediaData[index].name else { return }
         
-        if !filteredMovies.isEmpty {
-            title = filteredMovies[index].engTitle
-        }
-        
-        vc.webViewTitleString = title!
+        vc.webViewTitleString = title
         
         self.present(vc, animated: true, completion: nil)
     }

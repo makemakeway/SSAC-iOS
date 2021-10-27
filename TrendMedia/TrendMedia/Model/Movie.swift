@@ -20,9 +20,3 @@ struct Movie: Codable {
     var category: String?
     var imageURL: String?
 }
-
-enum MediaCategories: Int {
-    case drama = 0
-    case movie
-    case book
-}

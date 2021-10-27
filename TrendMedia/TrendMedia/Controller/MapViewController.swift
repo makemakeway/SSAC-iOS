@@ -157,6 +157,15 @@ class MapViewController: UIViewController {
         case .restricted, .denied:
             setLocation(latitude: 37.56674435790457, longitude: 126.9784350966443)
             print("제한됨. 설정으로 이동")
+            self.makeAlert(title: "위치정보 권한 필요",
+                      message: "서비스 제공을 위해 위치정보가 필요합니다.",
+                      buttonTitle1: "설정하러 가기!!",
+                      buttonTitle2: "응 안해~~") {
+                guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            }
         case .authorizedAlways, .authorizedWhenInUse:
             print("이용가능")
             self.locataionManager.startUpdatingLocation()

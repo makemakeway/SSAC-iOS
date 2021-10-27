@@ -6,12 +6,15 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class SearchViewController: UIViewController {
     
     
     //MARK: Property
     
+    var movieData = [MovieData]()
     var movies = [Movie]()
     var searchResult = [Movie]() {
         didSet {
@@ -57,6 +60,45 @@ class SearchViewController: UIViewController {
         searchBar.autocorrectionType = .no
     }
     
+    func fetchMovieData() {
+        guard let searchText = searchBar.text, !searchText.isEmpty else {
+            return
+        }
+        
+        guard let query = searchText.addingPercentEncoding(withAllowedCharacters: .afURLQueryAllowed) else {
+            return
+        }
+        
+        let url = "https://openapi.naver.com/v1/search/movie.json?query=\(query)&display=10&start=1"
+        
+        let header: HTTPHeaders = [
+            "X-Naver-Client-Id": "lmgRVJ52MggB1oBFxsdg",
+            "X-Naver-Client-Secret": "7c3CdQ6YiR"
+        ]
+        
+        AF.request(url, method: .get, headers: header).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                
+                for item in json["items"].arrayValue {
+                    let value = item["title"].stringValue.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
+                    let image = item["image"].stringValue
+                    let link = item["link"].stringValue
+                    let rating = item["userRating"].stringValue
+                    let sub = item["subTitle"].stringValue
+                    
+                    let data = MovieData(title: value, image: image, link: link, rating: rating, subTitle: sub)
+                    self.movieData.append(data)
+                }
+                print(self.movieData)
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     
     //MARK: LifeCycle
     override func viewDidLoad() {
@@ -72,6 +114,8 @@ class SearchViewController: UIViewController {
         let gesture = UITapGestureRecognizer()
         gesture.delegate = self
         view.addGestureRecognizer(gesture)
+        
+        fetchMovieData()
     }
     
 }
@@ -145,6 +189,7 @@ extension SearchViewController: UISearchBarDelegate {
             alert.addAction(okButton)
             present(alert, animated: true, completion: nil)
         }
+        fetchMovieData()
         searchBar.resignFirstResponder()
     }
     

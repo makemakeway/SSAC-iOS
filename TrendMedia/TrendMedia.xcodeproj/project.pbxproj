@@ -17,6 +17,12 @@
 		FF3B2482271FD758007F4AE1 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B2481271FD758007F4AE1 /* MapViewController.swift */; };
 		FF3B2484271FD7CA007F4AE1 /* MapViewControllerStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF3B2483271FD7CA007F4AE1 /* MapViewControllerStoryboard.storyboard */; };
 		FF3B2486271FDC8E007F4AE1 /* TheaterLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3B2485271FDC8E007F4AE1 /* TheaterLocation.swift */; };
+		FF9C916E27279DEF007D96BF /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = FF9C916D27279DEF007D96BF /* SwiftyJSON */; };
+		FF9C917127279DFD007D96BF /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = FF9C917027279DFD007D96BF /* Alamofire */; };
+		FF9C91732727A879007D96BF /* MovieData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9C91722727A879007D96BF /* MovieData.swift */; };
+		FF9C91E227294175007D96BF /* MovieAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9C91E127294175007D96BF /* MovieAPIManager.swift */; };
+		FF9C91E4272941DA007D96BF /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9C91E3272941DA007D96BF /* API.swift */; };
+		FF9C91E6272957A7007D96BF /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9C91E5272957A7007D96BF /* MovieModel.swift */; };
 		FFA7750527193CCA00293F6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA7750427193CCA00293F6B /* AppDelegate.swift */; };
 		FFA7750727193CCA00293F6B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA7750627193CCA00293F6B /* SceneDelegate.swift */; };
 		FFA7750927193CCA00293F6B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA7750827193CCA00293F6B /* ViewController.swift */; };
@@ -50,6 +56,10 @@
 		FF3B2481271FD758007F4AE1 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		FF3B2483271FD7CA007F4AE1 /* MapViewControllerStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MapViewControllerStoryboard.storyboard; sourceTree = "<group>"; };
 		FF3B2485271FDC8E007F4AE1 /* TheaterLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheaterLocation.swift; sourceTree = "<group>"; };
+		FF9C91722727A879007D96BF /* MovieData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieData.swift; sourceTree = "<group>"; };
+		FF9C91E127294175007D96BF /* MovieAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAPIManager.swift; sourceTree = "<group>"; };
+		FF9C91E3272941DA007D96BF /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		FF9C91E5272957A7007D96BF /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
 		FFA7750127193CCA00293F6B /* TrendMedia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrendMedia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFA7750427193CCA00293F6B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FFA7750627193CCA00293F6B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +88,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF9C916E27279DEF007D96BF /* SwiftyJSON in Frameworks */,
+				FF9C917127279DFD007D96BF /* Alamofire in Frameworks */,
 				FFCE20C3271D608500E816F2 /* WebKit.framework in Frameworks */,
 				FFCE20BD271D34EC00E816F2 /* Kingfisher in Frameworks */,
 			);
@@ -86,6 +98,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FF9C91E02729414E007D96BF /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				FF9C91E127294175007D96BF /* MovieAPIManager.swift */,
+				FF9C91E3272941DA007D96BF /* API.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		FFA774F827193CCA00293F6B = {
 			isa = PBXGroup;
 			children = (
@@ -106,6 +127,7 @@
 		FFA7750327193CCA00293F6B /* TrendMedia */ = {
 			isa = PBXGroup;
 			children = (
+				FF9C91E02729414E007D96BF /* Service */,
 				FFCE20BE271D4ECB00E816F2 /* Protocol */,
 				FFA775202719544100293F6B /* View */,
 				FFA7751B27193D3B00293F6B /* Model */,
@@ -160,6 +182,8 @@
 				FFA7751C27193D5500293F6B /* Movie.swift */,
 				FFCE20B9271AEFF800E816F2 /* Actor.swift */,
 				FF3B2485271FDC8E007F4AE1 /* TheaterLocation.swift */,
+				FF9C91722727A879007D96BF /* MovieData.swift */,
+				FF9C91E5272957A7007D96BF /* MovieModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -213,6 +237,8 @@
 			name = TrendMedia;
 			packageProductDependencies = (
 				FFCE20BC271D34EC00E816F2 /* Kingfisher */,
+				FF9C916D27279DEF007D96BF /* SwiftyJSON */,
+				FF9C917027279DFD007D96BF /* Alamofire */,
 			);
 			productName = TrendMedia;
 			productReference = FFA7750127193CCA00293F6B /* TrendMedia.app */;
@@ -244,6 +270,8 @@
 			mainGroup = FFA774F827193CCA00293F6B;
 			packageReferences = (
 				FFCE20BB271D34EC00E816F2 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				FF9C916C27279DEF007D96BF /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				FF9C916F27279DFD007D96BF /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = FFA7750227193CCA00293F6B /* Products */;
 			projectDirPath = "";
@@ -288,13 +316,17 @@
 				FFA775222719546000293F6B /* MovieTableViewCell.swift in Sources */,
 				FFA7750527193CCA00293F6B /* AppDelegate.swift in Sources */,
 				FFCE20B4271A674800E816F2 /* ActorViewController.swift in Sources */,
+				FF9C91732727A879007D96BF /* MovieData.swift in Sources */,
 				FFA7751D27193D5500293F6B /* Movie.swift in Sources */,
 				FF3B2475271EA232007F4AE1 /* StoryTableViewCell.swift in Sources */,
 				FFCE20B22719DE1100E816F2 /* MovieDetailTableViewCell.swift in Sources */,
+				FF9C91E4272941DA007D96BF /* API.swift in Sources */,
 				FF3B2478271EAA2E007F4AE1 /* SpreadButtonDelegate.swift in Sources */,
 				FF3B247F271EBE68007F4AE1 /* BooksCollectionViewCell.swift in Sources */,
+				FF9C91E6272957A7007D96BF /* MovieModel.swift in Sources */,
 				FF3B2486271FDC8E007F4AE1 /* TheaterLocation.swift in Sources */,
 				FFA7750727193CCA00293F6B /* SceneDelegate.swift in Sources */,
+				FF9C91E227294175007D96BF /* MovieAPIManager.swift in Sources */,
 				FFCE20BA271AEFF800E816F2 /* Actor.swift in Sources */,
 				FF3B2482271FD758007F4AE1 /* MapViewController.swift in Sources */,
 			);
@@ -518,6 +550,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		FF9C916C27279DEF007D96BF /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
+			requirement = {
+				kind = exactVersion;
+				version = 5.0.0;
+			};
+		};
+		FF9C916F27279DFD007D96BF /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		FFCE20BB271D34EC00E816F2 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -529,6 +577,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		FF9C916D27279DEF007D96BF /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF9C916C27279DEF007D96BF /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+		FF9C917027279DFD007D96BF /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF9C916F27279DFD007D96BF /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
 		FFCE20BC271D34EC00E816F2 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FFCE20BB271D34EC00E816F2 /* XCRemoteSwiftPackageReference "Kingfisher" */;
