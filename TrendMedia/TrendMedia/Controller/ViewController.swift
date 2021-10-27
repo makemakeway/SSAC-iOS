@@ -13,11 +13,9 @@ class ViewController: UIViewController {
     
     var movies = [Movie]()
     
-    var mediaData = [MovieModel]() {
-        didSet {
-            tableView.reloadData()
-        }
-    }
+    var currentPage = 1
+    
+    var mediaData = [MovieModel]()
     
     var filteredMovies = [Movie]() {
         didSet {
@@ -364,17 +362,8 @@ class ViewController: UIViewController {
         print("link Button clicked")
     }
     
-    
-    //MARK: LifeCycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.navigationItem.rightBarButtonItem = searchButton
-        self.navigationItem.setLeftBarButtonItems([mapButton], animated: true)
-        headerStackViewConfig()
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        MovieAPIManager.shared.fetchMovieData(dayOrWeek: .week, category: .tv) { code, json in
+    func addData() {
+        MovieAPIManager.shared.fetchMovieData(dayOrWeek: .week, category: .tv, page: currentPage) { code, json in
             let movies = json["results"].arrayValue
             for movie in movies {
                 let data = MovieModel(original_language: movie["original_language"].stringValue,
@@ -390,7 +379,22 @@ class ViewController: UIViewController {
                                       original_name: movie["original_name"].stringValue)
                 self.mediaData.append(data)
             }
+            self.tableView.reloadData()
         }
+    }
+    
+    
+    //MARK: LifeCycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.navigationItem.rightBarButtonItem = searchButton
+        self.navigationItem.setLeftBarButtonItems([mapButton], animated: true)
+        headerStackViewConfig()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.prefetchDataSource = self
+        addData()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -466,12 +470,29 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         let sb = UIStoryboard.init(name: "ActorViewControllerStoryboard", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "ActorViewController") as! ActorViewController
-        var movie = mediaData[indexPath.row]
+//        let movie = mediaData[indexPath.row]
+        
         
         self.navigationController?.pushViewController(vc, animated: true)
         return nil
     }
     
+}
+
+// MARK: TableView Pagenation
+extension ViewController: UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        for indexPath in indexPaths {
+            if indexPath.row == mediaData.count - 1 {
+                currentPage += 1
+                addData()
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
+        
+    }
 }
 
 extension ViewController: LinkButtonDelegate {
