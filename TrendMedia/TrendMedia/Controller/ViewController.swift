@@ -16,7 +16,9 @@ class ViewController: UIViewController {
     var totalData = 0
     
     var mediaData = [MovieModel]()
+    var genres: [Int:String] = [:]
 
+    
 
     //MARK: Property
     lazy var searchButton: UIBarButtonItem = {
@@ -71,8 +73,6 @@ class ViewController: UIViewController {
             dramaButtonPushed = false
             bookButtonPushed = false
             
-            self.mediaData.removeAll()
-            
             if filmButtonPushed {
                 switchButtonImage(filmButton, "film.fill")
                 switchButtonImage(dramaButton, "tv")
@@ -114,6 +114,27 @@ class ViewController: UIViewController {
         button.setImage(UIImage(systemName: image), for: .normal)
     }
     
+    func addGenreDictionary() {
+        MovieAPIManager.shared.fetchGenres(mediaType: "tv") { json in
+            let genres = json["genres"].arrayValue
+            
+            for genre in genres {
+                let id = genre["id"].intValue
+                let name = genre["name"].stringValue
+                self.genres.updateValue(name, forKey: id)
+            }
+        }
+        MovieAPIManager.shared.fetchGenres(mediaType: "movie") { json in
+            let genres = json["genres"].arrayValue
+            for genre in genres {
+                let id = genre["id"].intValue
+                let name = genre["name"].stringValue
+                self.genres.updateValue(name, forKey: id)
+            }
+        }
+        
+    }
+    
     func addTopBorder(with color: UIColor?, andWidth borderWidth: CGFloat, view: UIView) {
         let border = UIView()
         border.backgroundColor = color
@@ -133,7 +154,7 @@ class ViewController: UIViewController {
                                       first_air_date: movie["first_air_date"].stringValue,
                                       overview: movie["overview"].stringValue,
                                       original_title: movie["original_title"].stringValue,
-                                      genre_ids: [movie["genre_ids"].intValue],
+                                      genre_ids: movie["genre_ids"].arrayValue.map({ $0.intValue }),
                                       vote_average: movie["vote_average"].doubleValue,
                                       media_type: movie["media_type"].stringValue,
                                       poster_path: movie["poster_path"].stringValue,
@@ -175,6 +196,7 @@ class ViewController: UIViewController {
     //MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        addGenreDictionary()
         self.navigationItem.rightBarButtonItem = searchButton
         self.navigationItem.setLeftBarButtonItems([mapButton], animated: true)
         headerStackViewConfig()
@@ -183,13 +205,16 @@ class ViewController: UIViewController {
         tableView.prefetchDataSource = self
         
         addData()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
     }
 
-
+    override func viewDidAppear(_ animated: Bool) {
+        
+    }
 }
 
 //MARK: Extension
@@ -236,12 +261,14 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             print("default")
         }
         
-        
-        
-        
         cell.genreLabel.text = ""
         
-        
+        for genre in movieData.genre_ids {
+            if let text = self.genres[genre] {
+                cell.genreLabel.text! += "#" + text + " "
+            }
+            
+        }
 
         cell.ratingLabel.text = String(format: "%.1f", movieData.vote_average ?? 0.0)
         

@@ -47,4 +47,18 @@ class MovieAPIManager {
         }
     }
     
+    func fetchGenres(mediaType: String,result: @escaping (JSON)->()) {
+        let url = "https://api.themoviedb.org/3/genre/\(mediaType)/list?api_key=\(API.THE_MOVIE_DATABASE_API)&language=ko-KR"
+        
+        AF.request(url).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                result(json)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
 }

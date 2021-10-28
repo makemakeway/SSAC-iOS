@@ -15,7 +15,7 @@ struct MovieModel {
     var first_air_date: String?
     var overview: String?
     var original_title: String?
-    var genre_ids: [Int]?
+    var genre_ids: [Int]
     var vote_average: Double?
     var media_type: String?
     var poster_path: String?
