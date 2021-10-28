@@ -8,6 +8,7 @@
 import UIKit
 import Kingfisher
 import MapKit
+import SwiftyJSON
 
 class ActorViewController: UIViewController {
 
@@ -26,7 +27,10 @@ class ActorViewController: UIViewController {
     
     @IBOutlet weak var opacityView: UIView!
     
-    var movieInfo: Movie?
+    var movieInfo: MovieModel?
+    
+    var casts = [Actor]()
+    var crews = [Crew]()
     
     var spreaded: Bool = false
     
@@ -52,23 +56,58 @@ class ActorViewController: UIViewController {
     //MARK: Method
     
     func fetchHeaderView() {
-        guard let urlString = movieInfo?.imageURL else {
-            print("movieInfo에 URL이 없습니다.")
-            return
-        }
-        guard let url = URL(string: urlString) else {
-            print("URL 변환 실패")
-            return
-        }
         guard let data = movieInfo else {
             print("movie data missing")
             return
         }
+        guard let backgroundPosterImagePath = data.backdrop_path, let posterImagePath = data.poster_path else {
+            print("data에 이미지 경로가 없습니다.")
+            return
+        }
+        guard let backgroundPosterImagePathUrl = URL(string: EndPoint.MEDIA_IMAGE_URL + backgroundPosterImagePath), let posterImagePathUrl = URL(string: EndPoint.MEDIA_IMAGE_URL + posterImagePath) else {
+            print("URL 변환 실패")
+            return
+        }
+        guard let title = data.name else {
+            print("data에 이름이 없습니다.")
+            return
+        }
 
+        self.movieTitle.text = title
         
-        movieBackgroundImageView.kf.setImage(with: url) { _ in
-            self.movieTitle.text = data.engTitle!
-            self.posterImageView.image = UIImage(named: data.image!)
+        movieBackgroundImageView.kf.setImage(with: backgroundPosterImagePathUrl)
+        posterImageView.kf.setImage(with: posterImagePathUrl)
+    }
+    
+    func fetchMovieCreditData() {
+        guard let movieInfo = movieInfo else {
+            print("no data")
+            return
+        }
+
+        MovieAPIManager.shared.fetchMovieCredit(category: movieInfo.media_type!, id: movieInfo.id!) { code, json in
+            
+            let actors = json["cast"].arrayValue
+            let crews = json["crew"].arrayValue
+            
+            for actor in actors {
+                let actor = Actor(id: actor["id"].intValue,
+                                 name: actor["name"].stringValue,
+                                 image: actor["profile_path"].stringValue,
+                                 character: actor["character"].stringValue,
+                                 credit_id: actor["credit_id"].stringValue)
+                self.casts.append(actor)
+            }
+            for crew in crews {
+                let crew = Crew(id: crew["id"].intValue,
+                                name: crew["name"].stringValue,
+                                profile_path: crew["profile_path"].stringValue,
+                                job: crew["job"].stringValue,
+                                credit_id: crew["credit_id"].stringValue)
+                self.crews.append(crew)
+            }
+            
+            self.tableView.reloadData()
         }
         
     }
@@ -94,11 +133,14 @@ class ActorViewController: UIViewController {
         let nib = UINib(nibName: StoryTableViewCell.identifier, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: StoryTableViewCell.identifier)
         
+        fetchMovieCreditData()
+    
         
         fetchHeaderView()
         movieTitle.textColor = .white
         movieBackgroundImageView.contentMode = .scaleAspectFill
         headerOpacityConfig()
+        
     }
     
 }
@@ -109,53 +151,81 @@ extension ActorViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if section == 0 {
+        switch section {
+        case 0:
             return 1
+        case 1:
+            return self.casts.count
+        case 2:
+            return self.crews.count
+        default:
+            return 0
         }
-        
-        guard let data = movieInfo?.actors else { return 0 }
-        return data.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // 섹션이 0일 때
-        if indexPath.section == 0 {
+         
+        
+        switch indexPath.section {
+        case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: StoryTableViewCell.identifier, for: indexPath) as? StoryTableViewCell else { return UITableViewCell() }
-            cell.storyLabel.text = movieInfo?.story!
+            cell.storyLabel.text = movieInfo?.overview!
             cell.delegate = self
             let image = spreaded == true ? "chevron.up" : "chevron.down"
             cell.spreadButton.setImage(UIImage(systemName: image), for: .normal)
             return cell
+        case 1:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ActorTableViewCell", for: indexPath) as? ActorTableViewCell else {
+                return UITableViewCell()
+            }
+            
+            let data = self.casts[indexPath.row]
+            cell.name.text = data.name
+            cell.name.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+
+            cell.role.text = data.character
+            cell.role.font = UIFont.systemFont(ofSize: 14)
+            cell.role.textColor = .gray
+
+            cell.profileImage.kf.setImage(with: URL(string: EndPoint.MEDIA_IMAGE_URL + data.image))
+            cell.profileImage.backgroundColor = .label
+            cell.profileImage.layer.cornerRadius = 10
+            
+            cell.selectionStyle = .none
+            
+            return cell
+        case 2:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ActorTableViewCell", for: indexPath) as? ActorTableViewCell else {
+                return UITableViewCell()
+            }
+            
+            let data = self.crews[indexPath.row]
+            cell.name.text = data.name
+            cell.name.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+
+            cell.role.text = data.job
+            cell.role.font = UIFont.systemFont(ofSize: 14)
+            cell.role.textColor = .gray
+
+            cell.profileImage.kf.setImage(with: URL(string: EndPoint.MEDIA_IMAGE_URL + data.profile_path))
+            cell.profileImage.backgroundColor = .label
+            cell.profileImage.layer.cornerRadius = 10
+            
+            cell.selectionStyle = .none
+            
+            return cell
+        default:
+            print("default")
         }
         
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ActorTableViewCell", for: indexPath) as? ActorTableViewCell else {
-            return UITableViewCell()
-        }
         
-        guard let data = movieInfo?.actors[indexPath.row] else { return UITableViewCell() }
-        
-        
-        cell.name.text = data.name!
-        cell.name.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-        
-        cell.role.text = data.role!
-        cell.role.font = UIFont.systemFont(ofSize: 14)
-        cell.role.textColor = .gray
-        
-        cell.profileImage.image = UIImage(systemName: data.image!)
-        cell.profileImage.backgroundColor = .label
-        cell.profileImage.layer.cornerRadius = 10
-        
-        
-        cell.selectionStyle = .none
-        
-        return cell
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -171,6 +241,19 @@ extension ActorViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         print(indexPath)
         return nil
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return nil
+        case 1:
+            return "배우"
+        case 2:
+            return "제작진"
+        default:
+            return "오류"
+        }
     }
     
 }

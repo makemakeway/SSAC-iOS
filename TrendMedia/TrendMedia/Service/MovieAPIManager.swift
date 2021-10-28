@@ -16,7 +16,7 @@ class MovieAPIManager {
     static let shared = MovieAPIManager()
     func fetchMovieData(dayOrWeek: DayOrWeek, category: MediaCategory, page: Int, result: @escaping (Int, JSON)->() ) {
         
-        let url = "https://api.themoviedb.org/3/trending/\(category.rawValue)/\(dayOrWeek.rawValue)?api_key=\(API.THE_MOVIE_DATABASE_API)&page=\(page)"
+        let url = "https://api.themoviedb.org/3/trending/\(category.rawValue)/\(dayOrWeek.rawValue)?api_key=\(API.THE_MOVIE_DATABASE_API)&page=\(page)&language=ko-KR"
         
         AF.request(url).validate(statusCode: 200...500).responseJSON { response in
             switch response.result {
@@ -32,10 +32,19 @@ class MovieAPIManager {
         }
     }
     
-    func fetchMovieImage(imageUrl: String, imageView: UIImageView) {
-        let urlString = "https://image.tmdb.org/t/p/original\(imageUrl)"
-        guard let url = URL(string: urlString) else { return }
+    func fetchMovieCredit(category: String, id: Int, result: @escaping (Int, JSON) -> ()) {
+        let url = "https://api.themoviedb.org/3/\(category)/\(id)/credits?api_key=\(API.THE_MOVIE_DATABASE_API)&language=ko-KR"
         
-        imageView.kf.setImage(with: url, placeholder: UIImage(systemName: "star"))
+        AF.request(url).validate(statusCode: 200...500).responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                let code = response.response?.statusCode ?? 500
+                result(code, json)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
+    
 }

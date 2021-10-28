@@ -9,7 +9,17 @@ import Foundation
 
 
 struct Actor: Codable {
-    var name: String?
-    var image: String?
-    var role: String?
+    var id: Int
+    var name: String
+    var image: String
+    var character: String
+    var credit_id: String
+}
+
+struct Crew {
+    var id: Int
+    var name: String
+    var profile_path: String
+    var job: String
+    var credit_id: String
 }

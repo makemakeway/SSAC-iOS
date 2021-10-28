@@ -8,6 +8,7 @@
 import Foundation
 
 struct MovieModel {
+    var id: Int?
     var original_language: String?
     var release_date: String?
     var overview: String?
@@ -31,4 +32,5 @@ enum MediaCategory: String {
     case movie = "movie"
     case tv = "tv"
     case all = "all"
+    case people = "people"
 }
