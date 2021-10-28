@@ -14,7 +14,6 @@ class BooksViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var data = [Movie]()
     var backgroundColors = [UIColor.blue,
                             UIColor.systemPink,
                             UIColor.systemTeal,
@@ -56,7 +55,7 @@ class BooksViewController: UIViewController {
 
 extension BooksViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data.count
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -70,10 +69,10 @@ extension BooksViewController: UICollectionViewDelegate, UICollectionViewDataSou
         cell.ratingLabel.textColor = .white
         cell.ratingLabel.font = UIFont.systemFont(ofSize: 12, weight: .medium)
         
-        let data = data[indexPath.item]
-        cell.titleLabel.text = data.engTitle
-        cell.ratingLabel.text = String(data.rate!)
-        cell.posterImage.image = UIImage(named: data.image!)
+//        let data = data[indexPath.item]
+//        cell.titleLabel.text = data.engTitle
+//        cell.ratingLabel.text = String(data.rate!)
+//        cell.posterImage.image = UIImage(named: data.image!)
         
         return cell
     }

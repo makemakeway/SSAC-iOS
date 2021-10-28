@@ -68,12 +68,19 @@ class ActorViewController: UIViewController {
             print("URL 변환 실패")
             return
         }
-        guard let title = data.name else {
+        guard let name = data.name , let title = data.title else {
             print("data에 이름이 없습니다.")
             return
         }
 
-        self.movieTitle.text = title
+        switch self.movieInfo?.media_type {
+        case "movie":
+            self.movieTitle.text = title
+        case "tv":
+            self.movieTitle.text = name
+        default:
+            self.movieTitle.text = title
+        }
         
         movieBackgroundImageView.kf.setImage(with: backgroundPosterImagePathUrl)
         posterImageView.kf.setImage(with: posterImagePathUrl)
@@ -253,6 +260,19 @@ extension ActorViewController: UITableViewDelegate, UITableViewDataSource {
             return "제작진"
         default:
             return "오류"
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch section {
+        case 0:
+            return 0
+        case 1:
+            return 60
+        case 2:
+            return 60
+        default:
+            return 0
         }
     }
     

@@ -11,18 +11,12 @@ import Kingfisher
 
 class ViewController: UIViewController {
     
-    var movies = [Movie]()
     
     var currentPage = 1
     var totalData = 0
     
     var mediaData = [MovieModel]()
-    
-    var filteredMovies = [Movie]() {
-        didSet {
-            tableView.reloadData()
-        }
-    }
+
 
     //MARK: Property
     lazy var searchButton: UIBarButtonItem = {
@@ -77,14 +71,14 @@ class ViewController: UIViewController {
             dramaButtonPushed = false
             bookButtonPushed = false
             
+            self.mediaData.removeAll()
+            
             if filmButtonPushed {
-                self.filteredMovies = movies.filter({ $0.category! == "영화" })
                 switchButtonImage(filmButton, "film.fill")
                 switchButtonImage(dramaButton, "tv")
                 switchButtonImage(bookButton, "book")
                 print("영화 카테고리")
             } else {
-                self.filteredMovies.removeAll()
                 switchButtonImage(filmButton, "film")
                 print("카테고리 해제")
             }
@@ -95,21 +89,19 @@ class ViewController: UIViewController {
             bookButtonPushed = false
             
             if dramaButtonPushed {
-                self.filteredMovies = movies.filter({ $0.category! == "드라마" })
                 print("드라마 카테고리")
                 switchButtonImage(filmButton, "film")
                 switchButtonImage(dramaButton, "tv.fill")
                 switchButtonImage(bookButton, "book")
             } else {
-                self.filteredMovies.removeAll()
                 switchButtonImage(dramaButton, "tv")
                 print("카테고리 해제")
             }
-            
+//            
         case 2:
             let sb = UIStoryboard.init(name: "BooksViewControllerStoryboard", bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "BooksViewController") as! BooksViewController
-            vc.data = movies
+            
             self.navigationController?.pushViewController(vc, animated: true)
             
             
@@ -131,13 +123,16 @@ class ViewController: UIViewController {
     }
     
     func addData() {
-        MovieAPIManager.shared.fetchMovieData(dayOrWeek: .week, category: .tv, page: currentPage) { code, json in
+        MovieAPIManager.shared.fetchMovieData(dayOrWeek: .week, category: .all, page: currentPage) { code, json in
             let movies = json["results"].arrayValue
             for movie in movies {
                 let data = MovieModel(id: movie["id"].intValue,
+                                      title: movie["title"].stringValue,
                                       original_language: movie["original_language"].stringValue,
                                       release_date: movie["release_date"].stringValue,
+                                      first_air_date: movie["first_air_date"].stringValue,
                                       overview: movie["overview"].stringValue,
+                                      original_title: movie["original_title"].stringValue,
                                       genre_ids: [movie["genre_ids"].intValue],
                                       vote_average: movie["vote_average"].doubleValue,
                                       media_type: movie["media_type"].stringValue,
@@ -157,7 +152,7 @@ class ViewController: UIViewController {
     @objc func searchButtonClicked(_ sender: UIBarButtonItem) {
         let sb = UIStoryboard.init(name: "SearchViewStoryboard", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "SearchViewController") as! SearchViewController
-        vc.movies = self.movies
+//        vc.movies = self.movies
         
         vc.modalPresentationStyle = .fullScreen
         
@@ -221,20 +216,32 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         let movieData = mediaData[indexPath.row]
         let urlString = EndPoint.MEDIA_IMAGE_URL + (movieData.poster_path ?? "")
-        
-        
         cell.posterImage.kf.setImage(with: URL(string: urlString), placeholder: UIImage(systemName: "star"))
         
-        cell.engTitle.text = movieData.original_name
-        cell.engTitle.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-    
-        cell.korTitle.text = movieData.name
-        cell.korTitle.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        
+        switch movieData.media_type {
+        case "movie":
+            cell.engTitle.text = movieData.original_title
+            cell.engTitle.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+            cell.korTitle.text = movieData.title
+            cell.korTitle.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+            cell.releaseDate.text = movieData.release_date!
+        case "tv":
+            cell.engTitle.text = movieData.original_name
+            cell.engTitle.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+            cell.korTitle.text = movieData.name
+            cell.korTitle.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+            cell.releaseDate.text = movieData.first_air_date!
+        default:
+            print("default")
+        }
+        
+        
         
         
         cell.genreLabel.text = ""
         
-        cell.releaseDate.text = movieData.release_date ?? ""
+        
 
         cell.ratingLabel.text = String(format: "%.1f", movieData.vote_average ?? 0.0)
         

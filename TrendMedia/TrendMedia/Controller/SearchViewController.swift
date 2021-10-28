@@ -14,13 +14,6 @@ class SearchViewController: UIViewController {
     
     //MARK: Property
     
-    var movieData = [MovieData]()
-    var movies = [Movie]()
-    var searchResult = [Movie]() {
-        didSet {
-            tableView.reloadData()
-        }
-    }
     var searchTimer: Timer?
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -40,8 +33,8 @@ class SearchViewController: UIViewController {
     //MARK: Method
     
     func searchStart() {
-        searchResult = movies.filter( { ($0.korTitle! + $0.engTitle!).lowercased().contains(searchBar.text!)} )
-        print(searchResult)
+//        searchResult = movies.filter( { ($0.korTitle! + $0.engTitle!).lowercased().contains(searchBar.text!)} )
+//        print(searchResult)
     }
     
     @IBAction func backButtonClicked(_ sender: UIButton) {
@@ -80,18 +73,18 @@ class SearchViewController: UIViewController {
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
+                print(json)
                 
-                for item in json["items"].arrayValue {
-                    let value = item["title"].stringValue.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
-                    let image = item["image"].stringValue
-                    let link = item["link"].stringValue
-                    let rating = item["userRating"].stringValue
-                    let sub = item["subTitle"].stringValue
-                    
-                    let data = MovieData(title: value, image: image, link: link, rating: rating, subTitle: sub)
-                    self.movieData.append(data)
-                }
-                print(self.movieData)
+//                for item in json["items"].arrayValue {
+//                    let value = item["title"].stringValue.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
+//                    let image = item["image"].stringValue
+//                    let link = item["link"].stringValue
+//                    let rating = item["userRating"].stringValue
+//                    let sub = item["subTitle"].stringValue
+//
+//
+//                }
+                
                 
             case .failure(let error):
                 print(error)
@@ -123,7 +116,7 @@ class SearchViewController: UIViewController {
 //MARK: Extension
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.searchBar.text!.isEmpty ? movies.count : searchResult.count
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -131,24 +124,21 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
     
-        var movie = movies[indexPath.row]
+//        var movie = movies[indexPath.row]
         
-        if !searchResult.isEmpty {
-            movie = searchResult[indexPath.row]
-        }
         
-        cell.title.text = "\(movie.korTitle!)(\(movie.engTitle!))"
-        cell.title.textColor = .white
-        
-        cell.poster.image = UIImage(named: movie.image!)
-        
-        cell.story.text = movie.story!
-        
-        cell.releaseDate.text = dateFormatter.string(from: movie.releaseDate!) + " | "  + "\(movie.country!)"
-        
-        cell.backgroundColor = UIColor(named: "AccentColor")
-        
-        cell.selectionStyle = .none
+//        cell.title.text = "\(movie.korTitle!)(\(movie.engTitle!))"
+//        cell.title.textColor = .white
+//
+//        cell.poster.image = UIImage(named: movie.image!)
+//
+//        cell.story.text = movie.story!
+//
+//        cell.releaseDate.text = dateFormatter.string(from: movie.releaseDate!) + " | "  + "\(movie.country!)"
+//
+//        cell.backgroundColor = UIColor(named: "AccentColor")
+//
+//        cell.selectionStyle = .none
         
         return cell
     }
@@ -175,20 +165,13 @@ extension SearchViewController: UISearchBarDelegate {
         self.searchTimer?.invalidate()
         self.searchTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { timer in
             self.searchStart()
-            if self.searchResult.isEmpty {
-                print("검색 결과 없음")
-            }
+            
         })
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.searchStart()
-        if self.searchResult.isEmpty && !searchBar.text!.isEmpty {
-            let alert = UIAlertController(title: nil, message: "검색 결과가 없습니다.", preferredStyle: .alert)
-            let okButton = UIAlertAction(title: "확인", style: .default, handler: nil)
-            alert.addAction(okButton)
-            present(alert, animated: true, completion: nil)
-        }
+        
         fetchMovieData()
         searchBar.resignFirstResponder()
     }

@@ -9,8 +9,10 @@ import Foundation
 
 struct MovieModel {
     var id: Int?
+    var title: String?
     var original_language: String?
     var release_date: String?
+    var first_air_date: String?
     var overview: String?
     var original_title: String?
     var genre_ids: [Int]?
