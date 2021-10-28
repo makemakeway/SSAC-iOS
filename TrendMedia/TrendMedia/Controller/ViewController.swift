@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     
     var mediaData = [MovieModel]()
     var genres: [Int:String] = [:]
-
+    var videoKey = ""
     
 
     //MARK: Property
@@ -168,6 +168,8 @@ class ViewController: UIViewController {
         }
     }
     
+    
+    
     //MARK: Objc func
     
     @objc func searchButtonClicked(_ sender: UIBarButtonItem) {
@@ -197,15 +199,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addGenreDictionary()
+        addData()
         self.navigationItem.rightBarButtonItem = searchButton
         self.navigationItem.setLeftBarButtonItems([mapButton], animated: true)
         headerStackViewConfig()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.prefetchDataSource = self
-        
-        addData()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -240,7 +240,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         cell.posterImage.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         
         let movieData = mediaData[indexPath.row]
-        let urlString = EndPoint.MEDIA_IMAGE_URL + (movieData.poster_path ?? "")
+        let urlString = EndPoint.MEDIA_IMAGE_URL + (movieData.poster_path)
         cell.posterImage.kf.setImage(with: URL(string: urlString), placeholder: UIImage(systemName: "star"))
         
         
@@ -331,10 +331,25 @@ extension ViewController: LinkButtonDelegate {
         let sb = UIStoryboard.init(name: "WebLinkViewControllerStoryboard", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "WebLinkViewController") as! WebLinkViewController
         
-        guard let title = mediaData[index].name else { return }
+        MovieAPIManager.shared.fetchVideoInfo(category: mediaData[index].media_type, mediaId: mediaData[index].id) { json in
+            var videoKey = ""
+            let result = json["results"].arrayValue
+            videoKey = result[0]["key"].stringValue
+            vc.linkKey = videoKey
+            print(vc.linkKey)
+        }
         
-        vc.webViewTitleString = title
-        
+        switch mediaData[index].media_type {
+        case "tv":
+            guard let title = mediaData[index].name else { return }
+            vc.webViewTitleString = title
+        case "movie":
+            guard let title = mediaData[index].title else { return }
+            vc.webViewTitleString = title
+        default:
+            print("person?")
+        }
+
         self.present(vc, animated: true, completion: nil)
     }
 }

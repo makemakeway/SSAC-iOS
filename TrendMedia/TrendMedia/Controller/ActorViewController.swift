@@ -60,11 +60,8 @@ class ActorViewController: UIViewController {
             print("movie data missing")
             return
         }
-        guard let backgroundPosterImagePath = data.backdrop_path, let posterImagePath = data.poster_path else {
-            print("data에 이미지 경로가 없습니다.")
-            return
-        }
-        guard let backgroundPosterImagePathUrl = URL(string: EndPoint.MEDIA_IMAGE_URL + backgroundPosterImagePath), let posterImagePathUrl = URL(string: EndPoint.MEDIA_IMAGE_URL + posterImagePath) else {
+        
+        guard let backgroundPosterImagePathUrl = URL(string: EndPoint.MEDIA_IMAGE_URL + data.backdrop_path), let posterImagePathUrl = URL(string: EndPoint.MEDIA_IMAGE_URL + data.poster_path) else {
             print("URL 변환 실패")
             return
         }
@@ -92,7 +89,7 @@ class ActorViewController: UIViewController {
             return
         }
 
-        MovieAPIManager.shared.fetchMovieCredit(category: movieInfo.media_type!, id: movieInfo.id!) { code, json in
+        MovieAPIManager.shared.fetchMovieCredit(category: movieInfo.media_type, id: movieInfo.id) { code, json in
             
             let actors = json["cast"].arrayValue
             let crews = json["crew"].arrayValue
@@ -181,7 +178,7 @@ extension ActorViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.section {
         case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: StoryTableViewCell.identifier, for: indexPath) as? StoryTableViewCell else { return UITableViewCell() }
-            cell.storyLabel.text = movieInfo?.overview!
+            cell.storyLabel.text = movieInfo?.overview
             cell.delegate = self
             let image = spreaded == true ? "chevron.up" : "chevron.down"
             cell.spreadButton.setImage(UIImage(systemName: image), for: .normal)

@@ -17,16 +17,19 @@ class WebLinkViewController: UIViewController {
     @IBOutlet weak var webView: WKWebView!
     
     var webViewTitleString: String = ""
-    
+    var linkKey = "" {
+        didSet {
+            loadUrl()
+        }
+    }
     
     //MARK: Method
     
     func loadUrl() {
-        guard let url = URL(string: "https://google.co.kr") else {
+        guard let url = URL(string: "https://www.youtube.com/watch?v=\(linkKey)") else {
             return
         }
         let req = URLRequest(url: url)
-        
         webView.load(req)
         
     }
@@ -57,8 +60,6 @@ class WebLinkViewController: UIViewController {
     //MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        loadUrl()
         titleConfig()
         webView.uiDelegate = self
         webView.navigationDelegate = self
