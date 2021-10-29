@@ -13,12 +13,11 @@ class ViewController: UIViewController {
     
     
     var currentPage = 1
-    var totalData = 0
     
     var mediaData = [MovieModel]()
     var genres: [Int:String] = [:]
     var videoKey = ""
-    
+    var totalResult = 0
 
     //MARK: Property
     lazy var searchButton: UIBarButtonItem = {
@@ -144,28 +143,39 @@ class ViewController: UIViewController {
     }
     
     func addData() {
-        MovieAPIManager.shared.fetchMovieData(dayOrWeek: .week, category: .all, page: currentPage) { code, json in
-            let movies = json["results"].arrayValue
-            for movie in movies {
-                let data = MovieModel(id: movie["id"].intValue,
-                                      title: movie["title"].stringValue,
-                                      original_language: movie["original_language"].stringValue,
-                                      release_date: movie["release_date"].stringValue,
-                                      first_air_date: movie["first_air_date"].stringValue,
-                                      overview: movie["overview"].stringValue,
-                                      original_title: movie["original_title"].stringValue,
-                                      genre_ids: movie["genre_ids"].arrayValue.map({ $0.intValue }),
-                                      vote_average: movie["vote_average"].doubleValue,
-                                      media_type: movie["media_type"].stringValue,
-                                      poster_path: movie["poster_path"].stringValue,
-                                      backdrop_path: movie["backdrop_path"].stringValue,
-                                      origin_country: [movie["origin_country"].stringValue],
-                                      name: movie["name"].stringValue,
-                                      original_name: movie["original_name"].stringValue)
-                self.mediaData.append(data)
+        
+        DispatchQueue.global().async { [weak self] in
+            guard let page = self?.currentPage else {
+                return
             }
-            self.tableView.reloadData()
+            MovieAPIManager.shared.fetchMovieData(dayOrWeek: .week, category: .all, page: page) { code, json in
+                self?.totalResult = json["total_results"].intValue
+                let movies = json["results"].arrayValue
+                for movie in movies {
+                    let data = MovieModel(id: movie["id"].intValue,
+                                          title: movie["title"].stringValue,
+                                          original_language: movie["original_language"].stringValue,
+                                          release_date: movie["release_date"].stringValue,
+                                          first_air_date: movie["first_air_date"].stringValue,
+                                          overview: movie["overview"].stringValue,
+                                          original_title: movie["original_title"].stringValue,
+                                          genre_ids: movie["genre_ids"].arrayValue.map({ $0.intValue }),
+                                          vote_average: movie["vote_average"].doubleValue,
+                                          media_type: movie["media_type"].stringValue,
+                                          poster_path: movie["poster_path"].stringValue,
+                                          backdrop_path: movie["backdrop_path"].stringValue,
+                                          origin_country: [movie["origin_country"].stringValue],
+                                          name: movie["name"].stringValue,
+                                          original_name: movie["original_name"].stringValue)
+                    self?.mediaData.append(data)
+                }
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
+                
+            }
         }
+        
     }
     
     
@@ -175,7 +185,7 @@ class ViewController: UIViewController {
     @objc func searchButtonClicked(_ sender: UIBarButtonItem) {
         let sb = UIStoryboard.init(name: "SearchViewStoryboard", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "SearchViewController") as! SearchViewController
-//        vc.movies = self.movies
+
         
         vc.modalPresentationStyle = .fullScreen
         
@@ -310,13 +320,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 // MARK: TableView Pagenation
 extension ViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        for indexPath in indexPaths {
-            if indexPath.row == mediaData.count - 1 {
-                currentPage += 1
-                addData()
-            }
-            print(indexPath)
-        }
+        indexPaths.forEach({ if $0.row == mediaData.count - 1 && mediaData.count < totalResult {
+            currentPage += 1
+            addData()
+        }})
     }
     
     func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {

@@ -8,6 +8,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import Kingfisher
 
 class SearchViewController: UIViewController {
     
@@ -15,27 +16,26 @@ class SearchViewController: UIViewController {
     //MARK: Property
     
     var searchTimer: Timer?
+    var startPage = 1 {
+        didSet {
+            print("current Page = \(startPage)")
+        }
+    }
+    var totalPage = 0
+    
+    var mediaData = [MovieModel]() {
+        didSet {
+            print("mediaData Count: \(mediaData.count)")
+        }
+    }
     
     @IBOutlet weak var searchBar: UISearchBar!
     
     @IBOutlet weak var tableView: UITableView!
     
-    let dateFormatter: DateFormatter = {
-        let df = DateFormatter()
-        df.dateFormat = "yyyy-MM-dd"
-        df.locale = Locale(identifier: "ko-KR")
-        df.timeZone = TimeZone(identifier: "KST")
-        
-        return df
-    }()
-    
     
     //MARK: Method
     
-    func searchStart() {
-//        searchResult = movies.filter( { ($0.korTitle! + $0.engTitle!).lowercased().contains(searchBar.text!)} )
-//        print(searchResult)
-    }
     
     @IBAction func backButtonClicked(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
@@ -54,42 +54,50 @@ class SearchViewController: UIViewController {
     }
     
     func fetchMovieData() {
+        
+        
         guard let searchText = searchBar.text, !searchText.isEmpty else {
+            makeAlert(title: nil, message: "검색하고 싶은 영화를 입력해주세요.", buttonTitle1: "확인")
             return
         }
         
-        guard let query = searchText.addingPercentEncoding(withAllowedCharacters: .afURLQueryAllowed) else {
-            return
-        }
-        
-        let url = "https://openapi.naver.com/v1/search/movie.json?query=\(query)&display=10&start=1"
-        
-        let header: HTTPHeaders = [
-            "X-Naver-Client-Id": "lmgRVJ52MggB1oBFxsdg",
-            "X-Naver-Client-Secret": "7c3CdQ6YiR"
-        ]
-        
-        AF.request(url, method: .get, headers: header).validate().responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                let json = JSON(value)
-                print(json)
+        MovieAPIManager.shared.fetchSearchResult(searchText: searchText, page: startPage) {
+            self.totalPage = $0["total_pages"].intValue
+            let results = $0["results"].arrayValue
+            results.forEach({
+                if $0["media_type"].stringValue == "tv" || $0["media_type"].stringValue == "movie" {
+                    let result = MovieModel(id: $0["id"].intValue,
+                                            title: $0["title"].stringValue,
+                                            original_language: $0["original_language"].stringValue,
+                                            release_date: $0["release_date"].stringValue,
+                                            first_air_date: $0["first_air_date"].stringValue,
+                                            overview: $0["overview"].stringValue,
+                                            original_title: $0["original_title"].stringValue,
+                                            genre_ids: [],
+                                            media_type: $0["media_type"].stringValue,
+                                            poster_path: $0["poster_path"].stringValue,
+                                            backdrop_path: $0["backdrop_path"].stringValue,
+                                            origin_country: [],
+                                            name: $0["name"].stringValue,
+                                            original_name: $0["original_name"].stringValue)
+                    self.mediaData.append(result)
+                }
                 
-//                for item in json["items"].arrayValue {
-//                    let value = item["title"].stringValue.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
-//                    let image = item["image"].stringValue
-//                    let link = item["link"].stringValue
-//                    let rating = item["userRating"].stringValue
-//                    let sub = item["subTitle"].stringValue
-//
-//
-//                }
-                
-                
-            case .failure(let error):
-                print(error)
+            })
+            
+            DispatchQueue.main.async { [weak self] in
+                self?.tableView.reloadData()
             }
         }
+        
+        
+    }
+    
+    func makeAlert(title: String?, message: String?, buttonTitle1: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okButton = UIAlertAction(title: buttonTitle1, style: .default)
+        alert.addAction(okButton)
+        self.present(alert, animated: true, completion: nil)
     }
     
     
@@ -100,6 +108,7 @@ class SearchViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.prefetchDataSource = self
         tableView.backgroundColor = UIColor(named: "AccentColor")
         
         searchBar.delegate = self
@@ -108,7 +117,11 @@ class SearchViewController: UIViewController {
         gesture.delegate = self
         view.addGestureRecognizer(gesture)
         
-        fetchMovieData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.searchBar.becomeFirstResponder()
     }
     
 }
@@ -116,7 +129,7 @@ class SearchViewController: UIViewController {
 //MARK: Extension
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return mediaData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -124,21 +137,29 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
     
-//        var movie = movies[indexPath.row]
+        let movie = mediaData[indexPath.row]
+        
+        DispatchQueue.main.async {
+            switch movie.media_type {
+            case "movie":
+                cell.title.text = "\(movie.title!)(\(movie.original_title!))"
+                cell.releaseDate.text = movie.release_date! + " | "  + "\(movie.original_language!)"
+            case "tv":
+                cell.title.text = "\(movie.name!)(\(movie.original_name!))"
+                cell.releaseDate.text = movie.first_air_date! + " | "  + "\(movie.original_language!)"
+            default:
+                print("error")
+            }
+            
+            cell.title.textColor = .white
+            cell.poster.kf.setImage(with: URL(string: EndPoint.MEDIA_IMAGE_URL + movie.poster_path), placeholder: UIImage(systemName: "star"))
+            cell.poster.backgroundColor = .black
+            cell.story.text = movie.overview
+            cell.backgroundColor = UIColor(named: "AccentColor")
+            cell.selectionStyle = .none
+        }
         
         
-//        cell.title.text = "\(movie.korTitle!)(\(movie.engTitle!))"
-//        cell.title.textColor = .white
-//
-//        cell.poster.image = UIImage(named: movie.image!)
-//
-//        cell.story.text = movie.story!
-//
-//        cell.releaseDate.text = dateFormatter.string(from: movie.releaseDate!) + " | "  + "\(movie.country!)"
-//
-//        cell.backgroundColor = UIColor(named: "AccentColor")
-//
-//        cell.selectionStyle = .none
         
         return cell
     }
@@ -154,26 +175,44 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         return nil
     }
     
-    
+}
+
+extension SearchViewController: UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        indexPaths.forEach({
+            if $0.row == self.mediaData.count - 1 && self.startPage < self.totalPage {
+                self.startPage += 1
+                print("fetch new page")
+                fetchMovieData()
+            }
+        })
+    }
 }
 
 //MARK: SearchBar delegate
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        // 텍스트를 입력했다가 모두 지웠을 떄, 타이머 무효화
+        if searchBar.text!.isEmpty {
+            self.searchTimer?.invalidate()
+            return
+        }
         
+        // 타이핑을 계속 입력할 수 있으므로, 타이머를 무효화 시키고 새로운 타이머를 맞춰준다.
         self.searchTimer?.invalidate()
-        self.searchTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { timer in
-            self.searchStart()
-            
+        self.searchTimer = Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false, block: { timer in
+            self.mediaData.removeAll()
+            self.startPage = 1
+            self.fetchMovieData()
         })
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        self.searchStart()
-        
+        // 서치바에서 리턴을 한 경우이므로, 현재 모든 데이터들을 지워주고 페이지를 첫 페이지로 바꾼 뒤, 새롭게 데이터를 받는다.
+        self.mediaData.removeAll()
+        self.startPage = 1
         fetchMovieData()
-        searchBar.resignFirstResponder()
     }
     
 }
